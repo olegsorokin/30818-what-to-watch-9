@@ -47,7 +47,7 @@ function Main({limit, promoFilm}: CatalogProps): JSX.Element {
           </symbol>
           <symbol id="pause" viewBox="0 0 14 21">
             <symbol id="play-s" viewBox="0 0 19 19">
-              <path fillRule="evenodd" clipRule="evenodd" d="M0 0L19 9.5L0 19V0Z" fill="#EEE5B5"/>
+              <path fillRule="evenodd" clipRule="evenodd" d="M0 0L19 9.5L0 19V0Z" fill="#EEE5B5" />
             </symbol>
             <title>Artboard</title>
             <desc>Created with Sketch.</desc>
@@ -65,7 +65,7 @@ function Main({limit, promoFilm}: CatalogProps): JSX.Element {
 
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={promoFilm.title}/>
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={promoFilm.title} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -82,7 +82,7 @@ function Main({limit, promoFilm}: CatalogProps): JSX.Element {
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
               </div>
             </li>
             <li className="user-block__item">
@@ -164,7 +164,7 @@ function Main({limit, promoFilm}: CatalogProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {[...Array(limit).keys()].map((n) => <FilmCard key={n}/>)}
+            {[...Array(limit).keys()].map((n) => <FilmCard key={n} />)}
           </div>
 
           <div className="catalog__more">

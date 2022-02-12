@@ -14,7 +14,7 @@ type AppProps = {
 }
 
 function App({limit, promoFilm}: AppProps): JSX.Element {
-  return <Main limit={limit} promoFilm={promoFilm}/>;
+  return <Main limit={limit} promoFilm={promoFilm} />;
 }
 
 export default App;
