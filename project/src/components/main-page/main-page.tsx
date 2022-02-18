@@ -1,6 +1,6 @@
-import FilmCard from '../film-card/film-card';
+import { FilmCard } from '../film-card/film-card';
 import { Film } from '../app/app';
-import Logo from '../logo/logo';
+import { Logo } from '../logo/logo';
 
 type Props = {
   limit: number,
@@ -195,4 +195,4 @@ function MainPage({
   );
 }
 
-export default MainPage;
+export { MainPage };

@@ -1,4 +1,4 @@
-import Logo from '../logo/logo';
+import { Logo } from '../logo/logo';
 
 function Film(): JSX.Element {
   return (
@@ -239,4 +239,4 @@ function Film(): JSX.Element {
   );
 }
 
-export default Film;
+export { Film };

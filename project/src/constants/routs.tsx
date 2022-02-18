@@ -1,4 +1,4 @@
-export enum AppRoute {
+enum AppRoute {
   Main = '/',
   SignIn = '/login',
   MyList = '/mylist',
@@ -6,3 +6,5 @@ export enum AppRoute {
   AddReview = '/films/:id/review',
   Player = '/player/:id'
 }
+
+export { AppRoute };

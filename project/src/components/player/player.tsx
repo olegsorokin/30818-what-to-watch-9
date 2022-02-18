@@ -109,4 +109,4 @@ function Player(): JSX.Element {
   );
 }
 
-export default Player;
+export { Player };

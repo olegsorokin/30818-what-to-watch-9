@@ -1,4 +1,4 @@
-import Logo from '../logo/logo';
+import { Logo } from '../logo/logo';
 
 function AddReview(): JSX.Element {
   return (
@@ -167,4 +167,4 @@ function AddReview(): JSX.Element {
   );
 }
 
-export default AddReview;
+export { AddReview };

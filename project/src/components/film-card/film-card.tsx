@@ -18,4 +18,4 @@ function FilmCard(): JSX.Element {
   );
 }
 
-export default FilmCard;
+export { FilmCard };
