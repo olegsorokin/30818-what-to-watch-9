@@ -1,13 +1,14 @@
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
 import MyList from '../my-list/my-list';
 import Film from '../film/film';
 import AddReview from '../add-review/add-review';
 import Player from '../player/player';
-import Error from '../error/error';
 import PrivateRoute from '../private-route/private-route';
+import NotFoundPage from '../not-found-page/not-found-page';
+import { AppRoute } from '../../constants/routs';
+import { AuthorizationStatus } from '../../constants/auth';
 
 export type Film = {
   title: string,
@@ -64,7 +65,7 @@ function App({ limit, promoFilm }: Props): JSX.Element {
         </Route>
         <Route
           path="*"
-          element={<Error />}
+          element={<NotFoundPage />}
         />
       </Routes>
     </BrowserRouter>
