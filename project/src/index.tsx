@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app';
+import { App } from './components/app/app';
 
 const LIMIT = 20;
 
@@ -15,7 +15,7 @@ const appSettings = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App limit={appSettings.limit} promoFilm={appSettings.promo}/>
+    <App limit={appSettings.limit} promoFilm={appSettings.promo} />
   </React.StrictMode>,
   document.getElementById('root'),
 );
