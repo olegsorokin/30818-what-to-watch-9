@@ -9,6 +9,7 @@ import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
+import { Films } from '../../types/film';
 
 export type Film = {
   title: string,
@@ -18,10 +19,11 @@ export type Film = {
 
 type Props = {
   limit: number,
-  promoFilm: Film
+  promoFilm: Film,
+  films: Films
 }
 
-function App({ limit, promoFilm }: Props): JSX.Element {
+function App({ limit, promoFilm, films }: Props): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>

@@ -10,3 +10,5 @@ export type Review = {
   rating: number,
   details: Details,
 };
+
+export type Reviews = Review[];
