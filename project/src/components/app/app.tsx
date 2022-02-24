@@ -11,6 +11,9 @@ import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
 import { Films } from '../../types/film';
 import { Promo } from '../../types/promo';
+import { FilmReviews } from '../film-reviews/film-reviews';
+import { reviews } from '../../mocks/reviews';
+import { FilmDetails } from '../film-details/film-details';
 
 type Props = {
   limit: number,
@@ -37,8 +40,8 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <MyList />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <MyList films={films} />
               </PrivateRoute>
             }
           />
@@ -53,6 +56,14 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
             <Route
               path={AppRoute.AddReview}
               element={<AddReview />}
+            />
+            <Route
+              path={AppRoute.FilmReviews}
+              element={<FilmReviews reviews={reviews} />}
+            />
+            <Route
+              path={AppRoute.FilmDetails}
+              element={<FilmDetails />}
             />
           </Route>
           <Route
