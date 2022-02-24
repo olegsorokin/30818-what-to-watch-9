@@ -1,4 +1,12 @@
-function Player(): JSX.Element {
+import { Video } from '../../types/film';
+
+type Props = {
+  video: Video
+}
+
+function Player({ video }: Props): JSX.Element {
+  const { src, poster } = video;
+
   return (
     <>
       <div className="visually-hidden">
@@ -74,7 +82,7 @@ function Player(): JSX.Element {
       </div>
 
       <div className="player">
-        <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+        <video src={src} className="player__video" poster={poster}></video>
 
         <button type="button" className="player__exit">Exit</button>
 

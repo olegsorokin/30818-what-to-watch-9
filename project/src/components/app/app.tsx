@@ -68,7 +68,7 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
           </Route>
           <Route
             path={AppRoute.Player}
-            element={<Player />}
+            element={<Player video={films[0].video} />}
           />
         </Route>
         <Route

@@ -1,5 +1,6 @@
 export type Video = {
   src: string,
+  poster: string,
 };
 
 export type Poster = {
