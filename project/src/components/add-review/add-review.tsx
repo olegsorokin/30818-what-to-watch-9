@@ -1,5 +1,7 @@
 import { Logo } from '../logo/logo';
 import { Film } from '../../types/film';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../constants/routs';
 
 type Props = {
   film: Film
@@ -91,10 +93,10 @@ function AddReview({ film }: Props): JSX.Element {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="film-page.html" className="breadcrumbs__link">{title}</a>
+                  <Link to={AppRoute.Film} className="breadcrumbs__link">{title}</Link>
                 </li>
                 <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link">Add review</a>
+                  <Link to={AppRoute.AddReview} className="breadcrumbs__link">Add review</Link>
                 </li>
               </ul>
             </nav>

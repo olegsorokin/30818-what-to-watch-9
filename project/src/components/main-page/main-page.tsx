@@ -2,6 +2,8 @@ import { Logo } from '../logo/logo';
 import { Promo } from '../../types/promo';
 import { FilmList } from '../film-list/film-list';
 import { Films } from '../../types/film';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../constants/routs';
 
 type Props = {
   limit: number,
@@ -146,34 +148,34 @@ function MainPage({
 
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">All genres</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Comedies</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Crime</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Documentary</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Dramas</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Horror</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Kids & Family</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Romance</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Sci-Fi</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <Link to={AppRoute.Main} className="catalog__genres-link">Thrillers</Link>
             </li>
           </ul>
 
@@ -185,7 +187,7 @@ function MainPage({
         </section>
 
         <footer className="page-footer">
-          <Logo />
+          <Logo isLight />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../constants/routs';
 import { Film } from '../../types/film';
 
 type Props = {
@@ -21,7 +22,7 @@ function FilmCard({ film, onHover }: Props): JSX.Element {
         />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>
+        <Link className="small-film-card__link" to={AppRoute.Film}>
           {title}
         </Link>
       </h3>

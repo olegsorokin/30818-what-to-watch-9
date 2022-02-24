@@ -1,3 +1,7 @@
+import { Logo } from '../logo/logo';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../constants/routs';
+
 function FilmDetails(): JSX.Element {
   return (
     <>
@@ -85,13 +89,7 @@ function FilmDetails(): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
+            <Logo />
 
             <ul className="user-block">
               <li className="user-block__item">
@@ -126,7 +124,7 @@ function FilmDetails(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to={AppRoute.AddReview} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -147,13 +145,13 @@ function FilmDetails(): JSX.Element {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Overview</a>
+                    <Link to={AppRoute.Film} className="film-nav__link">Overview</Link>
                   </li>
                   <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Details</a>
+                    <Link to={AppRoute.FilmDetails} className="film-nav__link">Details</Link>
                   </li>
                   <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
+                    <Link to={AppRoute.FilmReviews} className="film-nav__link">Reviews</Link>
                   </li>
                 </ul>
               </nav>
@@ -218,9 +216,9 @@ function FilmDetails(): JSX.Element {
                 />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">
+                <Link to={AppRoute.Film} className="small-film-card__link">
                   Fantastic Beasts: The Crimes of Grindelwald
-                </a>
+                </Link>
               </h3>
             </article>
 
@@ -229,7 +227,7 @@ function FilmDetails(): JSX.Element {
                 <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
+                <Link to={AppRoute.Film} className="small-film-card__link">Bohemian Rhapsody</Link>
               </h3>
             </article>
 
@@ -238,7 +236,7 @@ function FilmDetails(): JSX.Element {
                 <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Macbeth</a>
+                <Link to={AppRoute.Film} className="small-film-card__link">Macbeth</Link>
               </h3>
             </article>
 
@@ -247,20 +245,14 @@ function FilmDetails(): JSX.Element {
                 <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
               </div>
               <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
+                <Link to={AppRoute.Film} className="small-film-card__link">Aviator</Link>
               </h3>
             </article>
           </div>
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo isLight />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
