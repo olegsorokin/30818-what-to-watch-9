@@ -1,6 +1,7 @@
 import { FilmCard } from '../film-card/film-card';
 import { Logo } from '../logo/logo';
 import { Promo } from '../../types/promo';
+import { films } from '../../mocks/films';
 
 type Props = {
   limit: number,
@@ -175,7 +176,7 @@ function MainPage({
           </ul>
 
           <div className="catalog__films-list">
-            {[...Array(limit).keys()].map((n) => <FilmCard key={n} />)}
+            {films.map((film) => <FilmCard key={film.id} film={film} />)}
           </div>
 
           <div className="catalog__more">

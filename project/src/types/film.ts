@@ -3,7 +3,7 @@ export type Video = {
 };
 
 export type Poster = {
-  stc: string,
+  src: string,
   width: number,
   height: number,
 };

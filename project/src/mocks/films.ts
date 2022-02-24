@@ -10,7 +10,7 @@ const films: Film[] = [
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
     poster: {
-      stc: 'img/the-grand-budapest-hotel-poster.jpg',
+      src: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
     },
@@ -49,7 +49,7 @@ const films: Film[] = [
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
     poster: {
-      stc: 'img/the-grand-budapest-hotel-poster.jpg',
+      src: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
     },
@@ -88,7 +88,7 @@ const films: Film[] = [
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
     poster: {
-      stc: 'img/the-grand-budapest-hotel-poster.jpg',
+      src: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
     },
@@ -127,7 +127,7 @@ const films: Film[] = [
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
     poster: {
-      stc: 'img/the-grand-budapest-hotel-poster.jpg',
+      src: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
     },
@@ -166,7 +166,7 @@ const films: Film[] = [
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
     poster: {
-      stc: 'img/the-grand-budapest-hotel-poster.jpg',
+      src: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
     },
@@ -205,7 +205,7 @@ const films: Film[] = [
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
     poster: {
-      stc: 'img/the-grand-budapest-hotel-poster.jpg',
+      src: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
     },
@@ -244,7 +244,7 @@ const films: Film[] = [
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
     poster: {
-      stc: 'img/the-grand-budapest-hotel-poster.jpg',
+      src: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
     },
@@ -283,7 +283,7 @@ const films: Film[] = [
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
     poster: {
-      stc: 'img/the-grand-budapest-hotel-poster.jpg',
+      src: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
     },
