@@ -12,12 +12,6 @@ import { AuthorizationStatus } from '../../constants/auth';
 import { Films } from '../../types/film';
 import { Promo } from '../../types/promo';
 
-export type Film = {
-  title: string,
-  genre: string,
-  released: number
-}
-
 type Props = {
   limit: number,
   promoFilm: Promo,

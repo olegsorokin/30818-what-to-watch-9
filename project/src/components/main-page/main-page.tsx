@@ -1,7 +1,7 @@
-import { FilmCard } from '../film-card/film-card';
 import { Logo } from '../logo/logo';
 import { Promo } from '../../types/promo';
 import { films } from '../../mocks/films';
+import { FilmList } from '../film-list/film-list';
 
 type Props = {
   limit: number,
@@ -175,9 +175,7 @@ function MainPage({
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {films.map((film) => <FilmCard key={film.id} film={film} />)}
-          </div>
+          <FilmList films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
