@@ -1,6 +1,12 @@
 import { Logo } from '../logo/logo';
+import { Film } from '../../types/film';
 
-function AddReview(): JSX.Element {
+type Props = {
+  film: Film
+}
+
+function AddReview({ film }: Props): JSX.Element {
+  const { title, poster: { src, width, height } } = film;
   return (
     <>
       <div className="visually-hidden">
@@ -74,7 +80,7 @@ function AddReview(): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__header">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -85,7 +91,7 @@ function AddReview(): JSX.Element {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                  <a href="film-page.html" className="breadcrumbs__link">{title}</a>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -107,8 +113,10 @@ function AddReview(): JSX.Element {
 
           <div className="film-card__poster film-card__poster--small">
             <img
-              src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
-              height="327"
+              src={src}
+              alt={`${title} poster`}
+              width={width}
+              height={height}
             />
           </div>
         </div>
