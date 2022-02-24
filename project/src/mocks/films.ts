@@ -9,11 +9,10 @@ const films: Film[] = [
     video: {
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
-    img: {
+    poster: {
       stc: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
-      alt: 'The Grand Budapest Hotel poster',
     },
     rating: {
       score: 8.9,
@@ -49,11 +48,10 @@ const films: Film[] = [
     video: {
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
-    img: {
+    poster: {
       stc: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
-      alt: 'The Grand Budapest Hotel poster',
     },
     rating: {
       score: 8.9,
@@ -89,11 +87,10 @@ const films: Film[] = [
     video: {
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
-    img: {
+    poster: {
       stc: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
-      alt: 'The Grand Budapest Hotel poster',
     },
     rating: {
       score: 8.9,
@@ -129,11 +126,10 @@ const films: Film[] = [
     video: {
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
-    img: {
+    poster: {
       stc: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
-      alt: 'The Grand Budapest Hotel poster',
     },
     rating: {
       score: 8.9,
@@ -169,11 +165,10 @@ const films: Film[] = [
     video: {
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
-    img: {
+    poster: {
       stc: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
-      alt: 'The Grand Budapest Hotel poster',
     },
     rating: {
       score: 8.9,
@@ -209,11 +204,10 @@ const films: Film[] = [
     video: {
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
-    img: {
+    poster: {
       stc: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
-      alt: 'The Grand Budapest Hotel poster',
     },
     rating: {
       score: 8.9,
@@ -249,11 +243,10 @@ const films: Film[] = [
     video: {
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
-    img: {
+    poster: {
       stc: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
-      alt: 'The Grand Budapest Hotel poster',
     },
     rating: {
       score: 8.9,
@@ -289,11 +282,10 @@ const films: Film[] = [
     video: {
       src: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     },
-    img: {
+    poster: {
       stc: 'img/the-grand-budapest-hotel-poster.jpg',
       width: 218,
       height: 327,
-      alt: 'The Grand Budapest Hotel poster',
     },
     rating: {
       score: 8.9,

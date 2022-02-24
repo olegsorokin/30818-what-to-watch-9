@@ -10,6 +10,7 @@ import { NotFoundPage } from '../not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
 import { Films } from '../../types/film';
+import { Promo } from '../../types/promo';
 
 export type Film = {
   title: string,
@@ -19,7 +20,7 @@ export type Film = {
 
 type Props = {
   limit: number,
-  promoFilm: Film,
+  promoFilm: Promo,
   films: Films
 }
 

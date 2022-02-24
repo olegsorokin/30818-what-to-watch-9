@@ -1,10 +1,10 @@
 import { FilmCard } from '../film-card/film-card';
-import { Film } from '../app/app';
 import { Logo } from '../logo/logo';
+import { Promo } from '../../types/promo';
 
 type Props = {
   limit: number,
-  promoFilm: Film
+  promoFilm: Promo
 }
 
 function MainPage({
@@ -12,7 +12,7 @@ function MainPage({
   promoFilm: {
     title,
     genre,
-    released,
+    year,
   },
 }: Props): JSX.Element {
   return (
@@ -115,7 +115,7 @@ function MainPage({
               <h2 className="film-card__title">{title}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{released}</span>
+                <span className="film-card__year">{year}</span>
               </p>
 
               <div className="film-card__buttons">

@@ -2,11 +2,10 @@ export type Video = {
   src: string,
 };
 
-export type Image = {
+export type Poster = {
   stc: string,
   width: number,
   height: number,
-  alt: string,
 };
 
 export type Rating = {
@@ -21,7 +20,7 @@ export type Film = {
   genre: string,
   year: number,
   video: Video,
-  img: Image,
+  poster: Poster,
   rating: Rating,
   description: string[],
   director: string,
