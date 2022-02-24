@@ -1,11 +1,12 @@
 import { Logo } from '../logo/logo';
 import { Promo } from '../../types/promo';
-import { films } from '../../mocks/films';
 import { FilmList } from '../film-list/film-list';
+import { Films } from '../../types/film';
 
 type Props = {
   limit: number,
-  promoFilm: Promo
+  promoFilm: Promo,
+  films: Films
 }
 
 function MainPage({
@@ -15,6 +16,7 @@ function MainPage({
     genre,
     year,
   },
+  films,
 }: Props): JSX.Element {
   return (
     <>
