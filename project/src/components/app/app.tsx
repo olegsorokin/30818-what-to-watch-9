@@ -51,7 +51,7 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
           >
             <Route
               index
-              element={<Film />}
+              element={<Film film={films[0]} />}
             />
             <Route
               path={AppRoute.AddReview}

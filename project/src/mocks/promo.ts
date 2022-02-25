@@ -13,6 +13,7 @@ const promo: Promo = {
     src: 'img/the-grand-budapest-hotel-poster.jpg',
     width: 218,
     height: 327,
+    background: 'img/bg-the-grand-budapest-hotel.jpg',
   },
   duration: 99,
 };

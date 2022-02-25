@@ -13,7 +13,7 @@ const STARS_COUNT = 10;
 const STARS_ARRAY = new Array(STARS_COUNT).fill(0).map((_, index) => String(STARS_COUNT - index));
 
 function AddReview({ film }: Props): JSX.Element {
-  const { title, poster: { src, width, height } } = film;
+  const { title, poster: { background, src, width, height } } = film;
   const [formData, setFormData] = useState({
     rating: DEFAULT_RATING,
     'review-text': '',
@@ -87,11 +87,15 @@ function AddReview({ film }: Props): JSX.Element {
             <desc>Created with Sketch.</desc>
             <g id="Artboard" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <polygon
-                id="Line" fill="#EEE5B5" fillRule="nonzero"
+                id="Line"
+                fill="#EEE5B5"
+                fillRule="nonzero"
                 points="0 -1.11910481e-13 4 -1.11910481e-13 4 21 0 21"
               />
               <polygon
-                id="Line" fill="#EEE5B5" fillRule="nonzero"
+                id="Line"
+                fill="#EEE5B5"
+                fillRule="nonzero"
                 points="10 -1.11910481e-13 14 -1.11910481e-13 14 21 10 21"
               />
             </g>
@@ -102,7 +106,7 @@ function AddReview({ film }: Props): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__header">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
+            <img src={background} alt={title} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>

@@ -7,6 +7,7 @@ export type Poster = {
   src: string,
   width: number,
   height: number,
+  background: string,
 };
 
 export type Rating = {
