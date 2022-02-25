@@ -20,13 +20,10 @@ function AddReview({ film }: Props): JSX.Element {
   });
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void => {
-    setFormData(Object.assign(
-      {},
-      formData,
-      {
-        [event.currentTarget.name]: event.currentTarget.value,
-      }),
-    );
+    setFormData({
+      ...formData,
+      [event.currentTarget.name]: event.currentTarget.value,
+    });
   };
 
   return (
