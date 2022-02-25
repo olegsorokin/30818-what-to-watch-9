@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/routs';
 import { Film } from '../../types/film';
