@@ -16,15 +16,19 @@ function AddReview({ film }: Props): JSX.Element {
   const { title, poster: { background, src, width, height } } = film;
   const [formData, setFormData] = useState({
     rating: DEFAULT_RATING,
-    'review-text': '',
+    reviewText: '',
   });
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void => {
+  function onSubmit(event: React.FormEvent<HTMLFormElement>): void {
+    event.preventDefault();
+  }
+
+  function onChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void {
     setFormData({
       ...formData,
       [event.currentTarget.name]: event.currentTarget.value,
     });
-  };
+  }
 
   return (
     <>
@@ -145,7 +149,7 @@ function AddReview({ film }: Props): JSX.Element {
         </div>
 
         <div className="add-review">
-          <form action="#" className="add-review__form">
+          <form onSubmit={onSubmit} className="add-review__form">
             <div className="rating">
               <div className="rating__stars">
                 {
@@ -170,9 +174,10 @@ function AddReview({ film }: Props): JSX.Element {
             <div className="add-review__text">
               <textarea
                 className="add-review__textarea"
-                name="review-text"
-                id="review-text"
+                name="reviewText"
+                id="reviewText"
                 placeholder="Review text"
+                value={formData.reviewText}
                 onChange={onChange}
               />
               <div className="add-review__submit">
