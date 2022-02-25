@@ -1,4 +1,4 @@
-import { Logo } from '../logo/logo';
+import { Logo } from '../../components/logo/logo';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/routs';
 import { Film as FilmType } from '../../types/film';

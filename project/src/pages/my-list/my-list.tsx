@@ -1,6 +1,12 @@
-import { Logo } from '../logo/logo';
+import { Logo } from '../../components/logo/logo';
+import { Films } from '../../types/film';
+import { FilmList } from '../../components/film-list/film-list';
 
-function SignIn(): JSX.Element {
+type Props = {
+  films: Films
+}
+
+function MyList({ films }: Props): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
@@ -21,8 +27,7 @@ function SignIn(): JSX.Element {
               fill="#FFF9D9" fillOpacity="0.7"
             />
             <path
-              fillRule="evenodd" clipRule="evenodd"
-              d="M27 23.8571V16H23.8571V23.8571H16V27H23.8571H27L27 23.8571Z"
+              fillRule="evenodd" clipRule="evenodd" d="M27 23.8571V16H23.8571V23.8571H16V27H23.8571H27L27 23.8571Z"
               fill="#FFF9D9" fillOpacity="0.7"
             />
             <path
@@ -63,32 +68,25 @@ function SignIn(): JSX.Element {
         <header className="page-header user-page__head">
           <Logo />
 
-          <h1 className="page-title user-page__title">Sign in</h1>
+          <h1 className="page-title user-page__title">My list</h1>
+
+          <ul className="user-block">
+            <li className="user-block__item">
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              </div>
+            </li>
+            <li className="user-block__item">
+              <a className="user-block__link">Sign out</a>
+            </li>
+          </ul>
         </header>
 
-        <div className="sign-in user-page__content">
-          <form action="#" className="sign-in__form">
-            <div className="sign-in__fields">
-              <div className="sign-in__field">
-                <input
-                  className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                  id="user-email"
-                />
-                <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
-              </div>
-              <div className="sign-in__field">
-                <input
-                  className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                  id="user-password"
-                />
-                <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
-              </div>
-            </div>
-            <div className="sign-in__submit">
-              <button className="sign-in__btn" type="submit">Sign in</button>
-            </div>
-          </form>
-        </div>
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
+
+          <FilmList films={films} />
+        </section>
 
         <footer className="page-footer">
           <Logo isLight />
@@ -102,4 +100,4 @@ function SignIn(): JSX.Element {
   );
 }
 
-export { SignIn };
+export { MyList };

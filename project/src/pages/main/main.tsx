@@ -1,6 +1,6 @@
-import { Logo } from '../logo/logo';
+import { Logo } from '../../components/logo/logo';
 import { Promo } from '../../types/promo';
-import { FilmList } from '../film-list/film-list';
+import { FilmList } from '../../components/film-list/film-list';
 import { Films } from '../../types/film';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/routs';
@@ -11,7 +11,7 @@ type Props = {
   films: Films
 }
 
-function MainPage({
+function Main({
   limit,
   promoFilm: {
     title,
@@ -198,4 +198,4 @@ function MainPage({
   );
 }
 
-export { MainPage };
+export { Main };
