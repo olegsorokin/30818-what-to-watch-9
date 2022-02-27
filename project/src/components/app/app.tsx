@@ -9,16 +9,15 @@ import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
-import { Films } from '../../types/film';
-import { Promo } from '../../types/promo';
 import { FilmReviews } from '../film-reviews/film-reviews';
 import { reviews } from '../../mocks/reviews';
+import { Film as FilmType } from '../../types/film';
 import { FilmDetails } from '../film-details/film-details';
 
 type Props = {
   limit: number,
-  promoFilm: Promo,
-  films: Films
+  promoFilm: FilmType,
+  films: FilmType[]
 }
 
 function App({ limit, promoFilm, films }: Props): JSX.Element {
@@ -59,11 +58,11 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
             />
             <Route
               path={AppRoute.FilmReviews}
-              element={<FilmReviews reviews={reviews} />}
+              element={<FilmReviews reviews={reviews} film={films[0]} />}
             />
             <Route
               path={AppRoute.FilmDetails}
-              element={<FilmDetails />}
+              element={<FilmDetails film={films[0]} />}
             />
           </Route>
           <Route

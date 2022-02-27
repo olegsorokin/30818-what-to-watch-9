@@ -4,10 +4,11 @@ import { Film } from '../../types/film';
 
 type Props = {
   film: Film,
+  isActive: boolean,
   onHover: (id: number) => void
 }
 
-function FilmCard({ film, onHover }: Props): JSX.Element {
+function FilmCard({ film, isActive, onHover }: Props): JSX.Element {
   const { id, poster, title } = film;
 
   return (

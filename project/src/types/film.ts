@@ -29,5 +29,3 @@ export type Film = {
   starring: string[],
   duration: number,
 };
-
-export type Films = Film[];
