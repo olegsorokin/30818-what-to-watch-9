@@ -4,6 +4,10 @@ import { Film } from '../../types/film';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/routs';
 import { IconSprite } from '../../components/icon-sprite/icon-sprite';
+import { useState } from 'react';
+import clsx from 'clsx';
+
+const DEFAULT_GENRE = 'All genres';
 
 type Props = {
   limit: number,
@@ -18,7 +22,7 @@ type Genre = {
 
 const genres: Genre[] = [
   {
-    name: 'All genres',
+    name: DEFAULT_GENRE,
     to: AppRoute.Main,
   },
   {
@@ -68,6 +72,12 @@ function Main({
   },
   films,
 }: Props): JSX.Element {
+  const [activeGenre, setActiveGenre] = useState(DEFAULT_GENRE);
+
+  function onChangeGenre(name: string): void {
+    setActiveGenre(name);
+  }
+
   return (
     <>
       <IconSprite />
@@ -137,8 +147,17 @@ function Main({
           <ul className="catalog__genres-list">
             {
               genres.map(({ name, to }) => (
-                <li key={name} className="catalog__genres-item catalog__genres-item--active">
-                  <Link to={to} className="catalog__genres-link">{name}</Link>
+                <li
+                  key={name}
+                  className={clsx('catalog__genres-item', activeGenre === name && 'catalog__genres-item--active')}
+                >
+                  <Link
+                    to={to}
+                    className="catalog__genres-link"
+                    onClick={() => onChangeGenre(name)}
+                  >
+                    {name}
+                  </Link>
                 </li>
               ))
             }
