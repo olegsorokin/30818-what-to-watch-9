@@ -8,7 +8,7 @@ const LIMIT = 20;
 const appSettings = {
   limit: LIMIT,
   promoFilm: films[0],
-  films: films,
+  films,
 };
 
 ReactDOM.render(
