@@ -11,13 +11,13 @@ import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
 import { FilmReviews } from '../film-reviews/film-reviews';
 import { reviews } from '../../mocks/reviews';
-import { Film as FilmType } from '../../types/film';
+import { Film as TFilm } from '../../types/film';
 import { FilmDetails } from '../film-details/film-details';
 
 type Props = {
   limit: number,
-  promoFilm: FilmType,
-  films: FilmType[]
+  promoFilm: TFilm,
+  films: TFilm[]
 }
 
 function App({ limit, promoFilm, films }: Props): JSX.Element {

@@ -1,4 +1,5 @@
-export { SymbolAdd } from './symbol-add';
-export { SymbolFullScreen } from './symbol-full-screen';
-export { SymbolInList } from './symbol-in-list';
-export { SymbolPause } from './symbol-pause';
+export { IconAdd } from './icon-add';
+export { IconFullScreen } from './icon-full-screen';
+export { IconInList } from './icon-in-list';
+export { IconPause } from './icon-pause';
+export { IconPlayS } from './icon-play-s';

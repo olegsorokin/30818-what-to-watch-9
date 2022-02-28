@@ -3,11 +3,9 @@ import { FilmList } from '../../components/film-list/film-list';
 import { Film } from '../../types/film';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/routs';
-import { IconSprite } from '../../components/icon-sprite/icon-sprite';
 import { useState } from 'react';
 import clsx from 'clsx';
-
-const DEFAULT_GENRE = 'All genres';
+import { IconAdd, IconPlayS } from '../../components/icon';
 
 type Props = {
   limit: number,
@@ -22,7 +20,7 @@ type Genre = {
 
 const genres: Genre[] = [
   {
-    name: DEFAULT_GENRE,
+    name: 'All genres',
     to: AppRoute.Main,
   },
   {
@@ -72,7 +70,7 @@ function Main({
   },
   films,
 }: Props): JSX.Element {
-  const [activeGenre, setActiveGenre] = useState(DEFAULT_GENRE);
+  const [activeGenre, setActiveGenre] = useState(genres[0].name);
 
   function onChangeGenre(name: string): void {
     setActiveGenre(name);
@@ -80,8 +78,6 @@ function Main({
 
   return (
     <>
-      <IconSprite />
-
       <section className="film-card">
         <div className="film-card__bg">
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
@@ -123,15 +119,11 @@ function Main({
 
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
+                  <IconPlayS />
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                  <IconAdd />
                   <span>My list</span>
                 </button>
               </div>
@@ -149,7 +141,7 @@ function Main({
               genres.map(({ name, to }) => (
                 <li
                   key={name}
-                  className={clsx('catalog__genres-item', activeGenre === name && 'catalog__genres-item--active')}
+                  className={clsx('catalog__genres-item', { 'catalog__genres-item--active': activeGenre === name })}
                 >
                   <Link
                     to={to}

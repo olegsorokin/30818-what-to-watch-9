@@ -1,6 +1,6 @@
-export function SymbolFullScreen(): JSX.Element {
+export function IconFullScreen(): JSX.Element {
   return (
-    <symbol id="full-screen" viewBox="0 0 27 27">
+    <svg viewBox="0 0 27 27" width="27" height="27">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -29,6 +29,6 @@ export function SymbolFullScreen(): JSX.Element {
         fill="#FFF9D9"
         fillOpacity="0.7"
       />
-    </symbol>
+    </svg>
   );
 }

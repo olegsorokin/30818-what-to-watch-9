@@ -1,8 +1,8 @@
-import { Review as ReviewType } from '../../types/review';
+import { Review as TReview } from '../../types/review';
 import { formatDate } from '../../utils/common';
 
 type Props = {
-  review: ReviewType
+  review: TReview
 }
 
 function Review({ review }: Props): JSX.Element {
