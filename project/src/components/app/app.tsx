@@ -1,27 +1,26 @@
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
-import { MainPage } from '../main-page/main-page';
-import { SignIn } from '../sign-in/sign-in';
-import { MyList } from '../my-list/my-list';
-import { Film } from '../film/film';
+import { Main } from '../../pages/main/main';
+import { SignIn } from '../../pages/sign-in/sign-in';
+import { MyList } from '../../pages/my-list/my-list';
+import { Film } from '../../pages/film/film';
 import { AddReview } from '../add-review/add-review';
 import { Player } from '../player/player';
 import { PrivateRoute } from '../private-route/private-route';
-import { NotFoundPage } from '../not-found-page/not-found-page';
+import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
-
-export type Film = {
-  title: string,
-  genre: string,
-  released: number
-}
+import { FilmReviews } from '../film-reviews/film-reviews';
+import { reviews } from '../../mocks/reviews';
+import { Film as TFilm } from '../../types/film';
+import { FilmDetails } from '../film-details/film-details';
 
 type Props = {
   limit: number,
-  promoFilm: Film
+  promoFilm: TFilm,
+  films: TFilm[]
 }
 
-function App({ limit, promoFilm }: Props): JSX.Element {
+function App({ limit, promoFilm, films }: Props): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -31,7 +30,7 @@ function App({ limit, promoFilm }: Props): JSX.Element {
         >
           <Route
             index
-            element={<MainPage limit={limit} promoFilm={promoFilm} />}
+            element={<Main limit={limit} promoFilm={promoFilm} films={films} />}
           />
           <Route
             path={AppRoute.SignIn}
@@ -40,8 +39,8 @@ function App({ limit, promoFilm }: Props): JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <MyList />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Unknown}>
+                <MyList films={films} />
               </PrivateRoute>
             }
           />
@@ -51,16 +50,24 @@ function App({ limit, promoFilm }: Props): JSX.Element {
           >
             <Route
               index
-              element={<Film />}
+              element={<Film film={films[0]} />}
             />
             <Route
               path={AppRoute.AddReview}
-              element={<AddReview />}
+              element={<AddReview film={films[0]} />}
+            />
+            <Route
+              path={AppRoute.FilmReviews}
+              element={<FilmReviews reviews={reviews} film={films[0]} />}
+            />
+            <Route
+              path={AppRoute.FilmDetails}
+              element={<FilmDetails film={films[0]} />}
             />
           </Route>
           <Route
             path={AppRoute.Player}
-            element={<Player />}
+            element={<Player video={films[0].video} />}
           />
         </Route>
         <Route
