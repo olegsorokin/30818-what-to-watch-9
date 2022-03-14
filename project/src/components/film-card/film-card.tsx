@@ -1,19 +1,44 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/routs';
 import { Film } from '../../types/film';
+import { VideoPlayer } from '../video-player/video-player';
+import { useEffect, useState } from 'react';
 
 type Props = {
   film: Film,
-  isActive: boolean,
-  onHover: (id: number) => void
 }
 
-function FilmCard({ film, isActive, onHover }: Props): JSX.Element {
-  const { id, poster, title } = film;
+function FilmCard({ film }: Props): JSX.Element {
+  const { poster, title, video } = film;
+  const [hovered, setHovered] = useState(false);
+  const [isPlaying, setPlaying] = useState(false);
+
+  useEffect(() => {
+    if (!hovered) {
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      setPlaying(true);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+      setPlaying(false);
+    };
+  }, [hovered]);
 
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={() => onHover(id)}>
+    <article
+      className="small-film-card catalog__films-card"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div className="small-film-card__image">
+        {
+          isPlaying &&
+            <VideoPlayer src={video.src} muted />
+        }
         <img
           src={poster.src}
           alt={title}
