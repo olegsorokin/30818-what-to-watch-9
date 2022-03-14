@@ -4,6 +4,8 @@ import { Film } from '../../types/film';
 import { VideoPlayer } from '../video-player/video-player';
 import { useEffect, useState } from 'react';
 
+const PLAYING_DELAY = 1000;
+
 type Props = {
   film: Film,
 }
@@ -20,7 +22,7 @@ function FilmCard({ film }: Props): JSX.Element {
 
     const timeoutId = setTimeout(() => {
       setPlaying(true);
-    }, 1000);
+    }, PLAYING_DELAY);
 
     return () => {
       clearTimeout(timeoutId);
