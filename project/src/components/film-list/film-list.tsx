@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Film } from '../../types/film';
 import { FilmCard } from '../film-card/film-card';
+
 
 type Props = {
   films: Film[]

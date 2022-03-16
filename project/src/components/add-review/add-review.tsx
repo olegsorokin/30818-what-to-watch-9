@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import { Logo } from '../logo/logo';
 import { Film } from '../../types/film';
 import { AppRoute } from '../../constants/routs';
+
 
 type Props = {
   film: Film

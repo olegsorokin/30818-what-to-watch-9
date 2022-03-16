@@ -1,4 +1,5 @@
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+
 import { Main } from '../../pages/main/main';
 import { SignIn } from '../../pages/sign-in/sign-in';
 import { MyList } from '../../pages/my-list/my-list';
@@ -13,6 +14,7 @@ import { FilmReviews } from '../film-reviews/film-reviews';
 import { reviews } from '../../mocks/reviews';
 import { Film as TFilm } from '../../types/film';
 import { FilmDetails } from '../film-details/film-details';
+
 
 type Props = {
   limit: number,

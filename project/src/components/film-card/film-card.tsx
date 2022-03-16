@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import { AppRoute } from '../../constants/routs';
 import { Film } from '../../types/film';
 import { VideoPlayer } from '../video-player/video-player';
-import { useEffect, useState } from 'react';
+
 
 const PLAYING_DELAY = 1000;
 
@@ -12,11 +14,19 @@ type Props = {
 
 function FilmCard({ film }: Props): JSX.Element {
   const { poster, title, video } = film;
-  const [hovered, setHovered] = useState(false);
+  const [isHovered, setHovered] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
 
+  function handleMouseEnter() {
+    setHovered(true);
+  }
+
+  function handleMouseLeave() {
+    setHovered(false);
+  }
+
   useEffect(() => {
-    if (!hovered) {
+    if (!isHovered) {
       return;
     }
 
@@ -28,13 +38,13 @@ function FilmCard({ film }: Props): JSX.Element {
       clearTimeout(timeoutId);
       setPlaying(false);
     };
-  }, [hovered]);
+  }, [isHovered]);
 
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="small-film-card__image">
         {

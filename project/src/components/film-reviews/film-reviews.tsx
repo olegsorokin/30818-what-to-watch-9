@@ -7,6 +7,7 @@ import { Film } from '../../types/film';
 import { SimilarFilms } from '../similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../icon';
 
+
 type Props = {
   reviews: TReview[],
   film: Film

@@ -2,6 +2,7 @@ import { Logo } from '../../components/logo/logo';
 import { Film } from '../../types/film';
 import { FilmList } from '../../components/film-list/film-list';
 
+
 type Props = {
   films: Film[]
 }
