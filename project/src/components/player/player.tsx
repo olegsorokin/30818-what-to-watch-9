@@ -1,6 +1,7 @@
 import { Video } from '../../types/film';
 import { IconFullScreen, IconPlayS } from '../icon';
 
+
 type Props = {
   video: Video
 }

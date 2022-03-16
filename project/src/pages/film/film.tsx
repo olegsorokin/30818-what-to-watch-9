@@ -1,9 +1,11 @@
-import { Logo } from '../../components/logo/logo';
 import { Link } from 'react-router-dom';
+
+import { Logo } from '../../components/logo/logo';
 import { AppRoute } from '../../constants/routs';
 import { Film as TFilm } from '../../types/film';
 import { SimilarFilms } from '../../components/similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../../components/icon';
+
 
 type Props = {
   film: TFilm

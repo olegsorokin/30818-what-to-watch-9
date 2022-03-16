@@ -1,11 +1,13 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
+
 import { Logo } from '../../components/logo/logo';
 import { FilmList } from '../../components/film-list/film-list';
 import { Film } from '../../types/film';
-import { Link } from 'react-router-dom';
 import { AppRoute } from '../../constants/routs';
-import { useState } from 'react';
-import clsx from 'clsx';
 import { IconAdd, IconPlayS } from '../../components/icon';
+
 
 type Props = {
   limit: number,

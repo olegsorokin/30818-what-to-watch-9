@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import { Logo } from '../logo/logo';
 import { AppRoute } from '../../constants/routs';
 import { Film } from '../../types/film';
 import { formatDuration, isLastItem } from '../../utils/common';
 import { SimilarFilms } from '../similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../icon';
+
 
 type Props = {
   film: Film

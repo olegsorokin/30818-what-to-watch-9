@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import { Film } from '../../types/film';
 import { FilmCard } from '../film-card/film-card';
+
 
 type Props = {
   films: Film[]
 }
 
 function FilmList({ films }: Props): JSX.Element {
-  const [activeFilmId, setActiveFilmId] = useState(NaN);
-
-  function hoverHandler(filmId: number): void {
-    setActiveFilmId(filmId);
-  }
-
   return (
     <div className="catalog__films-list">
       {
@@ -20,8 +16,6 @@ function FilmList({ films }: Props): JSX.Element {
           <FilmCard
             key={film.id}
             film={film}
-            isActive={film.id === activeFilmId}
-            onHover={hoverHandler}
           />
         ))
       }

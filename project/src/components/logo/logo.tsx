@@ -1,6 +1,8 @@
-import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
+
 import { AppRoute } from '../../constants/routs';
+
 
 type Props = {
   isLight?: boolean
