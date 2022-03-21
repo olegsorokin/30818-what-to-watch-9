@@ -107,7 +107,7 @@ function Film({ film, reviews }: Props): JSX.Element {
       </section>
 
       <div className="page-content">
-        <SimilarFilms />
+        <SimilarFilms genre={genre} />
 
         <footer className="page-footer">
           <Logo isLight />
