@@ -9,8 +9,8 @@ import { IconAdd, IconPlayS } from '../../components/icon';
 import { Tab, Tabs } from '../../components/tabs';
 import { FilmDetails } from '../../components/film-details/film-details';
 import { FilmReviews } from '../../components/film-reviews/film-reviews';
-import { reviews } from '../../mocks/reviews';
 import { FilmOverview } from '../../components/film-overview/film-overview';
+import { Review } from '../../types/review';
 
 enum FilmTab {
   Overview = 'Overview',
@@ -19,10 +19,11 @@ enum FilmTab {
 }
 
 type Props = {
-  film: TFilm
+  film: TFilm,
+  reviews: Review[]
 }
 
-function Film({ film }: Props): JSX.Element {
+function Film({ film, reviews }: Props): JSX.Element {
   const {
     title,
     genre,

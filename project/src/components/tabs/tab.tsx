@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import React from 'react';
+import clsx from 'clsx';
 
 const ACTIVE_TAB_CLASS = 'film-nav__item--active';
 

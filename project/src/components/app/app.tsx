@@ -11,6 +11,7 @@ import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
 import { Film as TFilm } from '../../types/film';
+import { reviews } from '../../mocks/reviews';
 
 type Props = {
   limit: number,
@@ -48,7 +49,7 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
           >
             <Route
               index
-              element={<Film film={films[0]} />}
+              element={<Film film={films[0]} reviews={reviews} />}
             />
             <Route
               path={AppRoute.AddReview}
