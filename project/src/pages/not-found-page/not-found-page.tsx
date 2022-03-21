@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 
 import { AppRoute } from '../../constants/routs';
 
-
 function NotFoundPage() {
   return (
     <>

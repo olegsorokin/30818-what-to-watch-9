@@ -1,7 +1,6 @@
 import { FilmList } from '../film-list/film-list';
 import { films } from '../../mocks/films';
 
-
 function SimilarFilms(): JSX.Element {
   return (
     <section className="catalog catalog--like-this">

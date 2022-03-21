@@ -1,7 +1,6 @@
 import { Review as TReview } from '../../types/review';
 import { formatDate } from '../../utils/common';
 
-
 type Props = {
   review: TReview
 }

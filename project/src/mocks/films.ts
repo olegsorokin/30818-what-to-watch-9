@@ -1,6 +1,5 @@
 import { Film } from '../types/film';
 
-
 const films: Film[] = [
   {
     id: 1,

@@ -5,7 +5,6 @@ import { Logo } from '../logo/logo';
 import { Film } from '../../types/film';
 import { AppRoute } from '../../constants/routs';
 
-
 type Props = {
   film: Film
 }
