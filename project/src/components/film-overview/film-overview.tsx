@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Film } from '../../types/film';
 
+const MAX_STARS = 3;
+
 type Props = {
   film: Film
 }
@@ -35,7 +37,7 @@ function FilmOverview({ film }: Props): JSX.Element {
 
         <p className="film-card__starring">
           <strong>
-            Starring: {starring.slice(0, 3).join(', ')} and other
+            Starring: {starring.slice(0, MAX_STARS).join(', ')} and other
           </strong>
         </p>
       </div>

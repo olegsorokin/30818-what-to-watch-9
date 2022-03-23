@@ -1,12 +1,24 @@
-import { PropsWithChildren } from 'react';
+import { Tab } from './tab';
 
-type Props = PropsWithChildren<object>
+type Tab = {
+  title: string,
+}
 
-function Tabs({ children }: Props): JSX.Element {
+type Props = {
+  tabs: Tab[],
+  active: string,
+  onChange: (s: string) => void,
+}
+
+function Tabs({ tabs, onChange, active }: Props): JSX.Element {
   return (
     <nav className="film-nav film-card__nav">
       <ul className="film-nav__list">
-        {children}
+        {
+          tabs.map(({ title }) => (
+            <Tab key={title} title={title} isActive={active === title} onChange={onChange} />
+          ))
+        }
       </ul>
     </nav>
   );

@@ -1,7 +1,5 @@
-import React from 'react';
+import { SyntheticEvent } from 'react';
 import clsx from 'clsx';
-
-const ACTIVE_TAB_CLASS = 'film-nav__item--active';
 
 type Props = {
   title: string,
@@ -10,13 +8,13 @@ type Props = {
 }
 
 function Tab({ title, isActive, onChange }: Props): JSX.Element {
-  const handleClick = (evt: React.SyntheticEvent) => {
+  const handleClick = (evt: SyntheticEvent) => {
     evt.preventDefault();
     onChange(title);
   };
 
   return (
-    <li key={title} className={clsx('film-nav__item', isActive && ACTIVE_TAB_CLASS)}>
+    <li key={title} className={clsx('film-nav__item', isActive && 'film-nav__item--active')}>
       <a href="#" onClick={handleClick} className="film-nav__link">{title}</a>
     </li>
   );

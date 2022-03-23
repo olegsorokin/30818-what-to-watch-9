@@ -6,7 +6,7 @@ import { AppRoute } from '../../constants/routs';
 import { Film as TFilm } from '../../types/film';
 import { SimilarFilms } from '../../components/similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../../components/icon';
-import { Tab, Tabs } from '../../components/tabs';
+import { Tabs } from '../../components/tabs';
 import { FilmDetails } from '../../components/film-details/film-details';
 import { FilmReviews } from '../../components/film-reviews/film-reviews';
 import { FilmOverview } from '../../components/film-overview/film-overview';
@@ -22,6 +22,12 @@ type Props = {
   film: TFilm,
   reviews: Review[]
 }
+
+const tabs = [
+  { title: FilmTab.Overview },
+  { title: FilmTab.Details },
+  { title: FilmTab.Reviews },
+];
 
 function Film({ film, reviews }: Props): JSX.Element {
   const {
@@ -92,11 +98,7 @@ function Film({ film, reviews }: Props): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <Tabs>
-                <Tab title={FilmTab.Overview} isActive={active === FilmTab.Overview} onChange={setActive} />
-                <Tab title={FilmTab.Details} isActive={active === FilmTab.Details} onChange={setActive} />
-                <Tab title={FilmTab.Reviews} isActive={active === FilmTab.Reviews} onChange={setActive} />
-              </Tabs>
+              <Tabs tabs={tabs} active={active} onChange={setActive} />
 
               {active === FilmTab.Overview && <FilmOverview film={film} />}
               {active === FilmTab.Details && <FilmDetails film={film} />}
