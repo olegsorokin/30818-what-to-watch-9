@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 
 import { Film } from '../../types/film';
 import { formatDuration, isLastItem } from '../../utils/common';
@@ -13,9 +13,9 @@ type StarWithBrProps = {
 
 function StarWithBr({ star }: StarWithBrProps): JSX.Element {
   return (
-    <React.Fragment>
+    <Fragment>
       {`${star}, `}<br />
-    </React.Fragment>
+    </Fragment>
   );
 }
 
@@ -41,7 +41,7 @@ function FilmDetails({ film }: Props): JSX.Element {
             {
               starring.map((star, index) => (
                 isLastItem(starring.length, index) ?
-                  <React.Fragment key={star}>{star}</React.Fragment> :
+                  <Fragment key={star}>{star}</Fragment> :
                   <StarWithBr key={star} star={star} />
               ))
             }

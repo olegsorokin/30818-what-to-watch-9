@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 
 import { App } from './components/app/app';
@@ -13,10 +13,10 @@ const appSettings = {
 };
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <App
       {...appSettings}
     />
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root'),
 );
