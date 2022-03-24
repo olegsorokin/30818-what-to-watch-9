@@ -1,9 +1,8 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 
 import { App } from './components/app/app';
 import { films } from './mocks/films';
-
 
 const LIMIT = 20;
 
@@ -14,10 +13,10 @@ const appSettings = {
 };
 
 ReactDOM.render(
-  <React.StrictMode>
+  <StrictMode>
     <App
       {...appSettings}
     />
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root'),
 );

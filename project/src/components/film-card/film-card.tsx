@@ -5,7 +5,6 @@ import { AppRoute } from '../../constants/routs';
 import { Film } from '../../types/film';
 import { VideoPlayer } from '../video-player/video-player';
 
-
 const PLAYING_DELAY = 1000;
 
 type Props = {

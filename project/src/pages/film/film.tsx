@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Logo } from '../../components/logo/logo';
@@ -5,23 +6,38 @@ import { AppRoute } from '../../constants/routs';
 import { Film as TFilm } from '../../types/film';
 import { SimilarFilms } from '../../components/similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../../components/icon';
+import { Tabs } from '../../components/tabs';
+import { FilmDetails } from '../../components/film-details/film-details';
+import { FilmReviews } from '../../components/film-reviews/film-reviews';
+import { FilmOverview } from '../../components/film-overview/film-overview';
+import { Review } from '../../types/review';
 
-
-type Props = {
-  film: TFilm
+enum FilmTab {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
 }
 
-function Film({ film }: Props): JSX.Element {
+type Props = {
+  film: TFilm,
+  reviews: Review[]
+}
+
+const tabs = [
+  { title: FilmTab.Overview },
+  { title: FilmTab.Details },
+  { title: FilmTab.Reviews },
+];
+
+function Film({ film, reviews }: Props): JSX.Element {
   const {
     title,
     genre,
     year,
     poster: { background, src, width, height },
-    rating: { score, level, count },
-    description,
-    director,
-    starring,
   } = film;
+
+  const [active, setActive] = useState<string>(FilmTab.Overview);
 
   return (
     <>
@@ -82,50 +98,18 @@ function Film({ film }: Props): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link to={AppRoute.Film} className="film-nav__link">Overview</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to={AppRoute.FilmDetails} className="film-nav__link">Details</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to={AppRoute.FilmReviews} className="film-nav__link">Reviews</Link>
-                  </li>
-                </ul>
-              </nav>
+              <Tabs tabs={tabs} active={active} onChange={setActive} />
 
-              <div className="film-rating">
-                <div className="film-rating__score">{score}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{level}</span>
-                  <span className="film-rating__count">{count} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                {
-                  description.map((item) => (
-                    <p key={item}>{item}</p>
-                  ))
-                }
-
-                <p className="film-card__director"><strong>Director: {director}</strong></p>
-
-                <p className="film-card__starring">
-                  <strong>
-                    Starring: {starring.slice(0, 3).join(', ')} and other
-                  </strong>
-                </p>
-              </div>
+              {active === FilmTab.Overview && <FilmOverview film={film} />}
+              {active === FilmTab.Details && <FilmDetails film={film} />}
+              {active === FilmTab.Reviews && <FilmReviews reviews={reviews} />}
             </div>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <SimilarFilms />
+        <SimilarFilms genre={genre} />
 
         <footer className="page-footer">
           <Logo isLight />

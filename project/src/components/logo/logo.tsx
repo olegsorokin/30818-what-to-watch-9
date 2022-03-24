@@ -3,7 +3,6 @@ import clsx from 'clsx';
 
 import { AppRoute } from '../../constants/routs';
 
-
 type Props = {
   isLight?: boolean
 }

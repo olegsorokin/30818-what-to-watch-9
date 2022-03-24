@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState, FormEvent, Fragment, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Logo } from '../logo/logo';
 import { Film } from '../../types/film';
 import { AppRoute } from '../../constants/routs';
-
 
 type Props = {
   film: Film
@@ -21,11 +20,11 @@ function AddReview({ film }: Props): JSX.Element {
     reviewText: '',
   });
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>): void {
+  function onSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
   }
 
-  function onChange(event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>): void {
+  function onChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void {
     const { name, value } = event.currentTarget;
     setFormData({
       ...formData,
@@ -84,7 +83,7 @@ function AddReview({ film }: Props): JSX.Element {
             <div className="rating__stars">
               {
                 STARS_ARRAY.map((item) => (
-                  <React.Fragment key={`star-${item}`}>
+                  <Fragment key={`star-${item}`}>
                     <input
                       className="rating__input"
                       id={`star-${item}`}
@@ -95,7 +94,7 @@ function AddReview({ film }: Props): JSX.Element {
                       onChange={onChange}
                     />
                     <label className="rating__label" htmlFor={`star-${item}`}>Rating {item}</label>
-                  </React.Fragment>
+                  </Fragment>
                 ))
               }
             </div>

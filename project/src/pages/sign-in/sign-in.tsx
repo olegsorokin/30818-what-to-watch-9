@@ -1,6 +1,5 @@
 import { Logo } from '../../components/logo/logo';
 
-
 function SignIn(): JSX.Element {
   return (
     <div className="user-page">

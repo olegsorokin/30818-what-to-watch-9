@@ -8,7 +8,6 @@ import { Film } from '../../types/film';
 import { AppRoute } from '../../constants/routs';
 import { IconAdd, IconPlayS } from '../../components/icon';
 
-
 type Props = {
   limit: number,
   promoFilm: Film,
