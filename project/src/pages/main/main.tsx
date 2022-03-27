@@ -5,62 +5,14 @@ import clsx from 'clsx';
 import { Logo } from '../../components/logo/logo';
 import { FilmList } from '../../components/film-list/film-list';
 import { Film } from '../../types/film';
-import { AppRoute } from '../../constants/routs';
 import { IconAdd, IconPlayS } from '../../components/icon';
+import { genres } from '../../constants/genres';
 
 type Props = {
   limit: number,
   promoFilm: Film,
   films: Film[]
 }
-
-type Genre = {
-  name: string,
-  to: string,
-}
-
-const genres: Genre[] = [
-  {
-    name: 'All genres',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Comedies',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Crime',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Documentary',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Dramas',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Horror',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Kids & Family',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Romance',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Sci-Fi',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Thrillers',
-    to: AppRoute.Main,
-  },
-];
 
 function Main({
   limit,
