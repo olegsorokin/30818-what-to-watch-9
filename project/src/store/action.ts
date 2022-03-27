@@ -1,4 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
+
 import { Genre } from '../constants/genres';
 
 const CHANGE_GENRE = 'CHANGE_GENRE';

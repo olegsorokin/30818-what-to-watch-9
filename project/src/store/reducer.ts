@@ -8,7 +8,7 @@ import { Genre } from '../constants/genres';
 type InitialState = {
   genre: Genre,
   films: Film[]
-}
+};
 
 const initialState: InitialState = {
   genre: Genre.ALL_GENRES,
