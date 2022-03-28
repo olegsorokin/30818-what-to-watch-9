@@ -3,56 +3,66 @@ import { Genre as TGenre } from '../types/genre';
 
 export enum Genre {
   ALL_GENRES = 'All genres',
-  COMEDIES = 'Comedies',
+  COMEDIES = 'Comedy',
   CRIME = 'Crime',
   DOCUMENTARY = 'Documentary',
-  DRAMAS = 'Dramas',
+  DRAMAS = 'Drama',
   HORROR = 'Horror',
   KIDS_AND_FAMILY = 'Kids & Family',
   ROMANCE = 'Romance',
   SCI_FI = 'Sci-Fi',
-  THRILLERS = 'Thrillers',
+  THRILLERS = 'Thriller',
 }
 
 export const genres: TGenre[] = [
   {
-    name: Genre.ALL_GENRES,
+    name: 'All genres',
+    type: Genre.ALL_GENRES,
     to: AppRoute.Main,
   },
   {
-    name: Genre.COMEDIES,
+    name: 'Comedies',
+    type: Genre.COMEDIES,
     to: AppRoute.Main,
   },
   {
-    name: Genre.CRIME,
+    name: 'Crime',
+    type: Genre.CRIME,
     to: AppRoute.Main,
   },
   {
-    name: Genre.DOCUMENTARY,
+    name: 'Documentary',
+    type: Genre.DOCUMENTARY,
     to: AppRoute.Main,
   },
   {
-    name: Genre.DRAMAS,
+    name: 'Dramas',
+    type: Genre.DRAMAS,
     to: AppRoute.Main,
   },
   {
-    name: Genre.HORROR,
+    name: 'Horror',
+    type: Genre.HORROR,
     to: AppRoute.Main,
   },
   {
-    name: Genre.KIDS_AND_FAMILY,
+    name: 'Kids & Family',
+    type: Genre.KIDS_AND_FAMILY,
     to: AppRoute.Main,
   },
   {
-    name: Genre.ROMANCE,
+    name: 'Romance',
+    type: Genre.ROMANCE,
     to: AppRoute.Main,
   },
   {
-    name: Genre.SCI_FI,
+    name: 'Sci-Fi',
+    type: Genre.SCI_FI,
     to: AppRoute.Main,
   },
   {
-    name: Genre.THRILLERS,
+    name: 'Thrillers',
+    type: Genre.THRILLERS,
     to: AppRoute.Main,
   },
 ];

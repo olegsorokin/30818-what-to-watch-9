@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 
 import { Logo } from '../../components/logo/logo';
 import { FilmList } from '../../components/film-list/film-list';
 import { Film } from '../../types/film';
 import { IconAdd, IconPlayS } from '../../components/icon';
-import { genres } from '../../constants/genres';
+import { Genre } from '../../constants/genres';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilms } from '../../store/action';
+import { GenresList } from '../../components/genres-list/genres-list';
 
 type Props = {
   limit: number,
   promoFilm: Film,
-  films: Film[]
 }
 
 function Main({
@@ -21,13 +21,20 @@ function Main({
     genre,
     year,
   },
-  films,
 }: Props): JSX.Element {
-  const [activeGenre, setActiveGenre] = useState(genres[0].name);
+  const [activeGenre, setActiveGenre] = useState<Genre>(Genre.ALL_GENRES);
 
-  function onChangeGenre(name: string): void {
+  const { films } = useAppSelector((state) => state);
+
+  const dispatch = useAppDispatch();
+
+  function onChangeGenre(name: Genre): void {
     setActiveGenre(name);
   }
+
+  useEffect(() => {
+    dispatch(fetchFilms(activeGenre));
+  }, [activeGenre]);
 
   return (
     <>
@@ -89,26 +96,9 @@ function Main({
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            {
-              genres.map(({ name, to }) => (
-                <li
-                  key={name}
-                  className={clsx('catalog__genres-item', { 'catalog__genres-item--active': activeGenre === name })}
-                >
-                  <Link
-                    to={to}
-                    className="catalog__genres-link"
-                    onClick={() => onChangeGenre(name)}
-                  >
-                    {name}
-                  </Link>
-                </li>
-              ))
-            }
-          </ul>
+          <GenresList active={activeGenre} onChange={onChangeGenre} />
 
-          <FilmList films={films} />
+          <FilmList films={films} limit={limit} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
