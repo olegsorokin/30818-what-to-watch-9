@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 
 import { Film } from '../../types/film';
 import { FilmCard } from '../film-card/film-card';
+import { ShowMore } from '../show-more/show-more';
 
 const SHOW_MORE_STEP = 8;
 
@@ -13,7 +14,7 @@ type Props = {
 
 function FilmList({ films, limit = Infinity, hasShowMore = false }: Props): JSX.Element {
   const [showingCount, setShowingCount] = useState(limit);
-  const hasShowMoreButton = useMemo(() => showingCount < films.length, [showingCount, films.length]);
+  const hasShowMoreButton = useMemo(() => hasShowMore && showingCount < films.length, [showingCount, films.length]);
 
   const showMore = () => {
     setShowingCount(showingCount + SHOW_MORE_STEP);
@@ -34,12 +35,7 @@ function FilmList({ films, limit = Infinity, hasShowMore = false }: Props): JSX.
         }
       </div>
 
-      {
-        hasShowMore && hasShowMoreButton &&
-          <div className="catalog__more">
-            <button className="catalog__button" type="button" onClick={showMore}>Show more</button>
-          </div>
-      }
+      <ShowMore onClick={showMore} hidden={!hasShowMoreButton} />
     </>
   );
 }
