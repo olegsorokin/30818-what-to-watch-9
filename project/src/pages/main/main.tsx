@@ -98,11 +98,7 @@ function Main({
 
           <GenresList active={activeGenre} onChange={onChangeGenre} />
 
-          <FilmList films={films} limit={limit} />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <FilmList films={films} limit={limit} hasShowMore />
         </section>
 
         <footer className="page-footer">
