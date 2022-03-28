@@ -8,12 +8,12 @@ type Props = {
 const MAX_FILMS = 4;
 
 function SimilarFilms({ genre }: Props): JSX.Element {
-  const similarFilms = films.filter((film) => film.genre === genre).slice(0, MAX_FILMS);
+  const similarFilms = films.filter((film) => film.genre === genre);
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
 
-      <FilmList films={similarFilms} />
+      <FilmList films={similarFilms} limit={MAX_FILMS} />
     </section>
   );
 }
