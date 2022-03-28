@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { Film } from '../../types/film';
 import { FilmCard } from '../film-card/film-card';
@@ -14,11 +14,19 @@ type Props = {
 
 function FilmList({ films, limit = Infinity, hasShowMore = false }: Props): JSX.Element {
   const [showingCount, setShowingCount] = useState(limit);
-  const hasShowMoreButton = useMemo(() => hasShowMore && showingCount < films.length, [showingCount, films.length]);
+  const hasShowMoreButton = useMemo(() => hasShowMore && showingCount < films.length, [showingCount, films]);
 
   const showMore = () => {
     setShowingCount(showingCount + SHOW_MORE_STEP);
   };
+
+  const resetShowingFilms = () => {
+    setShowingCount(limit);
+  };
+
+  useEffect(() => {
+    resetShowingFilms();
+  }, [films]);
 
   return (
     <>

@@ -6,7 +6,7 @@ import { films } from './mocks/films';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
-const LIMIT = 8;
+const LIMIT = 4;
 
 const appSettings = {
   limit: LIMIT,
