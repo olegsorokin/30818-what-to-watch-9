@@ -9,12 +9,11 @@ const SHOW_MORE_STEP = 8;
 type Props = {
   films: Film[],
   limit?: number,
-  hasShowMore?: boolean
 }
 
-function FilmList({ films, limit = Infinity, hasShowMore = false }: Props): JSX.Element {
+function FilmList({ films, limit = Infinity }: Props): JSX.Element {
   const [showingCount, setShowingCount] = useState(limit);
-  const hasShowMoreButton = useMemo(() => hasShowMore && showingCount < films.length, [showingCount, films]);
+  const hasShowMoreButton = useMemo(() => showingCount < films.length, [showingCount, films]);
 
   const showMore = () => {
     setShowingCount(showingCount + SHOW_MORE_STEP);
@@ -43,7 +42,10 @@ function FilmList({ films, limit = Infinity, hasShowMore = false }: Props): JSX.
         }
       </div>
 
-      <ShowMore onClick={showMore} hidden={!hasShowMoreButton} />
+      {
+        !hasShowMoreButton &&
+          <ShowMore onClick={showMore} />
+      }
     </>
   );
 }

@@ -98,7 +98,7 @@ function Main({
 
           <GenresList active={activeGenre} onChange={onChangeGenre} />
 
-          <FilmList films={films} limit={limit} hasShowMore />
+          <FilmList films={films} limit={limit} />
         </section>
 
         <footer className="page-footer">
