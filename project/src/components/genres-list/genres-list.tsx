@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
-import { Genre, genres } from '../../constants/genres';
+import { GenreEnum, genres } from '../../constants/genres';
 
 type Props = {
-  onChange: (genre: Genre) => void,
+  onChange: (genre: GenreEnum) => void,
   active: string
 }
 
