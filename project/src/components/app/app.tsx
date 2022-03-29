@@ -29,7 +29,7 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
         >
           <Route
             index
-            element={<Main limit={limit} promoFilm={promoFilm} films={films} />}
+            element={<Main limit={limit} promoFilm={promoFilm} />}
           />
           <Route
             path={AppRoute.SignIn}

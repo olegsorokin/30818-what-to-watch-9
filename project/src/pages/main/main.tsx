@@ -1,66 +1,18 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 
 import { Logo } from '../../components/logo/logo';
 import { FilmList } from '../../components/film-list/film-list';
 import { Film } from '../../types/film';
-import { AppRoute } from '../../constants/routs';
 import { IconAdd, IconPlayS } from '../../components/icon';
+import { GenreEnum } from '../../constants/genres';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilms } from '../../store/action';
+import { GenresList } from '../../components/genres-list/genres-list';
 
 type Props = {
   limit: number,
   promoFilm: Film,
-  films: Film[]
 }
-
-type Genre = {
-  name: string,
-  to: string,
-}
-
-const genres: Genre[] = [
-  {
-    name: 'All genres',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Comedies',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Crime',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Documentary',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Dramas',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Horror',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Kids & Family',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Romance',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Sci-Fi',
-    to: AppRoute.Main,
-  },
-  {
-    name: 'Thrillers',
-    to: AppRoute.Main,
-  },
-];
 
 function Main({
   limit,
@@ -69,13 +21,20 @@ function Main({
     genre,
     year,
   },
-  films,
 }: Props): JSX.Element {
-  const [activeGenre, setActiveGenre] = useState(genres[0].name);
+  const [activeGenre, setActiveGenre] = useState<GenreEnum>(GenreEnum.ALL_GENRES);
 
-  function onChangeGenre(name: string): void {
+  const { films } = useAppSelector((state) => state);
+
+  const dispatch = useAppDispatch();
+
+  const onChangeGenre = (name: GenreEnum): void => {
     setActiveGenre(name);
-  }
+  };
+
+  useEffect(() => {
+    dispatch(fetchFilms(activeGenre));
+  }, [activeGenre]);
 
   return (
     <>
@@ -137,26 +96,9 @@ function Main({
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            {
-              genres.map(({ name, to }) => (
-                <li
-                  key={name}
-                  className={clsx('catalog__genres-item', { 'catalog__genres-item--active': activeGenre === name })}
-                >
-                  <Link
-                    to={to}
-                    className="catalog__genres-link"
-                    onClick={() => onChangeGenre(name)}
-                  >
-                    {name}
-                  </Link>
-                </li>
-              ))
-            }
-          </ul>
+          <GenresList active={activeGenre} onChange={onChangeGenre} />
 
-          <FilmList films={films} />
+          <FilmList films={films} limit={limit} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
