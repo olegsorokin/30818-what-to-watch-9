@@ -30,7 +30,7 @@ function Main({
 
   const onChangeGenre = (name: GenreEnum): void => {
     setActiveGenre(name);
-  }
+  };
 
   useEffect(() => {
     dispatch(fetchFilms(activeGenre));
