@@ -43,7 +43,7 @@ function FilmList({ films, limit = Infinity }: Props): JSX.Element {
       </div>
 
       {
-        !hasShowMoreButton &&
+        hasShowMoreButton &&
           <ShowMore onClick={showMore} />
       }
     </>
