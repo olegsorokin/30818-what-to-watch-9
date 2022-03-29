@@ -16,13 +16,13 @@ function FilmCard({ film }: Props): JSX.Element {
   const [isHovered, setHovered] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
 
-  function handleMouseEnter() {
+  const handleMouseEnter = (): void => {
     setHovered(true);
-  }
+  };
 
-  function handleMouseLeave() {
+  const handleMouseLeave = (): void => {
     setHovered(false);
-  }
+  };
 
   useEffect(() => {
     if (!isHovered) {

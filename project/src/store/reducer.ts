@@ -3,15 +3,15 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeGenre, fetchFilms } from './action';
 import { films } from '../mocks/films';
 import { Film } from '../types/film';
-import { Genre } from '../constants/genres';
+import { GenreEnum } from '../constants/genres';
 
 type InitialState = {
-  genre: Genre,
+  genre: GenreEnum,
   films: Film[]
 };
 
 const initialState: InitialState = {
-  genre: Genre.ALL_GENRES,
+  genre: GenreEnum.ALL_GENRES,
   films: [],
 };
 
@@ -22,7 +22,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchFilms, (state, action) => {
       switch (action.payload) {
-        case Genre.ALL_GENRES:
+        case GenreEnum.ALL_GENRES:
           state.films = films;
           break;
         default:

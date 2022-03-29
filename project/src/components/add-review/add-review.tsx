@@ -20,17 +20,17 @@ function AddReview({ film }: Props): JSX.Element {
     reviewText: '',
   });
 
-  function onSubmit(event: FormEvent<HTMLFormElement>): void {
+  const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-  }
+  };
 
-  function onChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void {
+  const onChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void => {
     const { name, value } = event.currentTarget;
     setFormData({
       ...formData,
       [name]: value,
     });
-  }
+  };
 
   return (
     <section className="film-card film-card--full">

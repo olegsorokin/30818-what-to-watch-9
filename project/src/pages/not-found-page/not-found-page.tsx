@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { AppRoute } from '../../constants/routs';
 
-function NotFoundPage() {
+function NotFoundPage(): JSX.Element {
   return (
     <>
       <h1>404 Not Found</h1>

@@ -4,7 +4,7 @@ import { Logo } from '../../components/logo/logo';
 import { FilmList } from '../../components/film-list/film-list';
 import { Film } from '../../types/film';
 import { IconAdd, IconPlayS } from '../../components/icon';
-import { Genre } from '../../constants/genres';
+import { GenreEnum } from '../../constants/genres';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilms } from '../../store/action';
 import { GenresList } from '../../components/genres-list/genres-list';
@@ -22,13 +22,13 @@ function Main({
     year,
   },
 }: Props): JSX.Element {
-  const [activeGenre, setActiveGenre] = useState<Genre>(Genre.ALL_GENRES);
+  const [activeGenre, setActiveGenre] = useState<GenreEnum>(GenreEnum.ALL_GENRES);
 
   const { films } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
 
-  function onChangeGenre(name: Genre): void {
+  const onChangeGenre = (name: GenreEnum): void => {
     setActiveGenre(name);
   }
 

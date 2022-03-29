@@ -1,7 +1,7 @@
-import { Genre as GenreEnum } from '../constants/genres';
+import { GenreEnum } from '../constants/genres';
 import { AppRoute } from '../constants/routs';
 
-export type Genre = {
+export type TGenre = {
   name: string,
   type: GenreEnum,
   to: AppRoute,
