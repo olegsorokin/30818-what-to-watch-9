@@ -11,8 +11,8 @@ type Props = {
   limit?: number,
 }
 
-function FilmList({ films, limit }: Props): JSX.Element {
-  const [showingCount, setShowingCount] = useState<number>(limit ?? films.length);
+function FilmList({ films, limit = SHOW_MORE_STEP }: Props): JSX.Element {
+  const [showingCount, setShowingCount] = useState(limit);
   const hasShowMoreButton = showingCount < films.length;
 
   const showMore = () => {
@@ -20,7 +20,7 @@ function FilmList({ films, limit }: Props): JSX.Element {
   };
 
   const resetShowingFilms = () => {
-    setShowingCount(limit ?? films.length);
+    setShowingCount(limit);
   };
 
   useEffect(() => {
