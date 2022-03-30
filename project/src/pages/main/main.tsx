@@ -28,7 +28,7 @@ function Main({
 
   const dispatch = useAppDispatch();
 
-  const onChangeGenre = (name: GenreEnum): void => {
+  const onGenreChange = (name: GenreEnum): void => {
     setActiveGenre(name);
   };
 
@@ -96,13 +96,9 @@ function Main({
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList active={activeGenre} onChange={onChangeGenre} />
+          <GenresList active={activeGenre} onChange={onGenreChange} />
 
           <FilmList films={films} limit={limit} />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <footer className="page-footer">
