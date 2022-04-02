@@ -19,9 +19,9 @@ type Props = {
 }
 
 function App({ limit }: Props): JSX.Element {
-  const { films, isFilmsLoaded, isPromoLoaded } = useAppSelector((state) => state);
+  const { films, isFilmsLoaded, isPromoLoaded, authorizationStatus } = useAppSelector((state) => state);
 
-  if (!isFilmsLoaded || !isPromoLoaded) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || !isFilmsLoaded || !isPromoLoaded) {
     return (
       <LoadingScreen />
     );
