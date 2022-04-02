@@ -12,6 +12,7 @@ import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
 import { reviews } from '../../mocks/reviews';
 import { useAppSelector } from '../../hooks';
+import { LoadingScreen } from '../loading-screen/loading-screen';
 
 type Props = {
   limit: number,
@@ -22,7 +23,7 @@ function App({ limit }: Props): JSX.Element {
 
   if (!isFilmsLoaded || !isPromoLoaded) {
     return (
-      <p>Loading...</p>
+      <LoadingScreen />
     );
   }
 
