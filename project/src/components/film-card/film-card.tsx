@@ -12,7 +12,7 @@ type Props = {
 }
 
 function FilmCard({ film }: Props): JSX.Element {
-  const { poster, title, video } = film;
+  const { name, previewImage, previewVideoLink } = film;
   const [isHovered, setHovered] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
 
@@ -48,18 +48,16 @@ function FilmCard({ film }: Props): JSX.Element {
       <div className="small-film-card__image">
         {
           isPlaying &&
-            <VideoPlayer src={video.src} muted />
+            <VideoPlayer src={previewVideoLink} muted />
         }
         <img
-          src={poster.src}
-          alt={title}
-          width={poster.width}
-          height={poster.height}
+          src={previewImage}
+          alt={name}
         />
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={AppRoute.Film}>
-          {title}
+          {name}
         </Link>
       </h3>
     </article>

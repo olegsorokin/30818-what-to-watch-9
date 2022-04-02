@@ -31,10 +31,11 @@ const tabs = [
 
 function Film({ film, reviews }: Props): JSX.Element {
   const {
-    title,
+    name,
     genre,
-    year,
-    poster: { background, src, width, height },
+    released,
+    backgroundImage,
+    posterImage,
   } = film;
 
   const [active, setActive] = useState<string>(FilmTab.Overview);
@@ -44,7 +45,7 @@ function Film({ film, reviews }: Props): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={background} alt={title} />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -66,9 +67,9 @@ function Film({ film, reviews }: Props): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span> <span className="film-card__year">{year}</span>
+                <span className="film-card__genre">{genre}</span> <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -90,10 +91,8 @@ function Film({ film, reviews }: Props): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src={src}
-                alt={`${title} poster`}
-                width={width}
-                height={height}
+                src={posterImage}
+                alt={`${name} poster`}
               />
             </div>
 

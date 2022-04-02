@@ -10,16 +10,22 @@ import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
-import { Film as TFilm } from '../../types/film';
 import { reviews } from '../../mocks/reviews';
+import { useAppSelector } from '../../hooks';
 
 type Props = {
   limit: number,
-  promoFilm: TFilm,
-  films: TFilm[]
 }
 
-function App({ limit, promoFilm, films }: Props): JSX.Element {
+function App({ limit }: Props): JSX.Element {
+  const { films, isFilmsLoaded, isPromoLoaded } = useAppSelector((state) => state);
+
+  if (!isFilmsLoaded || !isPromoLoaded) {
+    return (
+      <p>Loading...</p>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +35,7 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
         >
           <Route
             index
-            element={<Main limit={limit} promoFilm={promoFilm} />}
+            element={<Main limit={limit} />}
           />
           <Route
             path={AppRoute.SignIn}
@@ -58,7 +64,7 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
           </Route>
           <Route
             path={AppRoute.Player}
-            element={<Player video={films[0].video} />}
+            element={<Player video={films[0]} />}
           />
         </Route>
         <Route

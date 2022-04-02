@@ -6,11 +6,11 @@ type Props = {
 }
 
 function Player({ video }: Props): JSX.Element {
-  const { src, poster } = video;
+  const { videoLink, previewVideoLink } = video;
 
   return (
     <div className="player">
-      <video src={src} className="player__video" poster={poster} />
+      <video src={videoLink} className="player__video" poster={previewVideoLink} />
 
       <button type="button" className="player__exit">Exit</button>
 
