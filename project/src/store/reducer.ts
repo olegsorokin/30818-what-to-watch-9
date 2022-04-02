@@ -1,18 +1,23 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { changeGenre, fetchFilms } from './action';
-import { films } from '../mocks/films';
+import { changeGenre, loadFilms, loadPromo } from './action';
 import { Film } from '../types/film';
 import { GenreEnum } from '../constants/genres';
 
 type InitialState = {
   genre: GenreEnum,
-  films: Film[]
+  films: Film[],
+  promo: Film | null,
+  isFilmsLoaded: boolean,
+  isPromoLoaded: boolean,
 };
 
 const initialState: InitialState = {
   genre: GenreEnum.ALL_GENRES,
   films: [],
+  isFilmsLoaded: false,
+  promo: null,
+  isPromoLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -20,14 +25,13 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
     })
-    .addCase(fetchFilms, (state, action) => {
-      switch (action.payload) {
-        case GenreEnum.ALL_GENRES:
-          state.films = films;
-          break;
-        default:
-          state.films = films.filter((film) => film.genre === action.payload);
-      }
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+      state.isFilmsLoaded = true;
+    })
+    .addCase(loadPromo, (state, action) => {
+      state.promo = action.payload;
+      state.isPromoLoaded = true;
     });
 });
 
