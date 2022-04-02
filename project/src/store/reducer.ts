@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { changeGenre, loadFilms, loadPromo } from './action';
+import { changeGenre, loadFilms, loadPromo, requireAuthorization } from './action';
 import { Film } from '../types/film';
 import { GenreEnum } from '../constants/genres';
 import { AuthorizationStatus } from '../constants/auth';
@@ -35,6 +35,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadPromo, (state, action) => {
       state.promo = action.payload;
       state.isPromoLoaded = true;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 
