@@ -3,6 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeGenre, loadFilms, loadPromo } from './action';
 import { Film } from '../types/film';
 import { GenreEnum } from '../constants/genres';
+import { AuthorizationStatus } from '../constants/auth';
 
 type InitialState = {
   genre: GenreEnum,
@@ -10,6 +11,7 @@ type InitialState = {
   promo: Film | null,
   isFilmsLoaded: boolean,
   isPromoLoaded: boolean,
+  authorizationStatus: AuthorizationStatus,
 };
 
 const initialState: InitialState = {
@@ -18,6 +20,7 @@ const initialState: InitialState = {
   isFilmsLoaded: false,
   promo: null,
   isPromoLoaded: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 const reducer = createReducer(initialState, (builder) => {
