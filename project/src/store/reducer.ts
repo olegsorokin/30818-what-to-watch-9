@@ -3,21 +3,38 @@ import { createReducer } from '@reduxjs/toolkit';
 import { changeGenre, loadFilms, loadPromo } from './action';
 import { Film } from '../types/film';
 import { GenreEnum } from '../constants/genres';
+import { TError } from '../types/error';
 
 type InitialState = {
   genre: GenreEnum,
-  films: Film[],
-  promo: Film | null,
-  isFilmsLoaded: boolean,
-  isPromoLoaded: boolean,
+  films: {
+    data: Film[],
+    isLoading: boolean,
+    isLoaded: boolean,
+    isError: TError | null,
+  },
+  promo: {
+    data: Film | null,
+    isLoading: boolean,
+    isLoaded: boolean,
+    isError: TError | null,
+  },
 };
 
 const initialState: InitialState = {
   genre: GenreEnum.ALL_GENRES,
-  films: [],
-  isFilmsLoaded: false,
-  promo: null,
-  isPromoLoaded: false,
+  films: {
+    data: [],
+    isLoading: false,
+    isLoaded: false,
+    isError: null,
+  },
+  promo: {
+    data: null,
+    isLoading: false,
+    isLoaded: false,
+    isError: null,
+  },
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -26,12 +43,12 @@ const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
     })
     .addCase(loadFilms, (state, action) => {
-      state.films = action.payload;
-      state.isFilmsLoaded = true;
+      state.films.data = action.payload;
+      state.films.isLoaded = true;
     })
     .addCase(loadPromo, (state, action) => {
-      state.promo = action.payload;
-      state.isPromoLoaded = true;
+      state.promo.data = action.payload;
+      state.promo.isLoaded = true;
     });
 });
 
