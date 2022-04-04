@@ -11,13 +11,13 @@ type InitialState = {
     data: Film[],
     isLoading: boolean,
     isLoaded: boolean,
-    isError: TError | null,
+    error: TError | null,
   },
   promo: {
     data: Film | null,
     isLoading: boolean,
     isLoaded: boolean,
-    isError: TError | null,
+    error: TError | null,
   },
 };
 
@@ -27,13 +27,13 @@ const initialState: InitialState = {
     data: [],
     isLoading: false,
     isLoaded: false,
-    isError: null,
+    error: null,
   },
   promo: {
     data: null,
     isLoading: false,
     isLoaded: false,
-    isError: null,
+    error: null,
   },
 };
 
