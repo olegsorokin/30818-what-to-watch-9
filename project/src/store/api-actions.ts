@@ -6,6 +6,9 @@ import { loadFilms, loadPromo, requireAuthorization } from './action';
 import { APIRoute } from '../constants/routs';
 import { AuthorizationStatus } from '../constants/auth';
 import { errorHandle } from '../services/error-handle';
+import { AuthData } from '../types/auth-data';
+import { UserData } from '../types/user-data';
+import { saveToken } from '../services/token';
 
 export const fetchFilms = createAsyncThunk(
   'data/fetchFilms',
@@ -28,6 +31,20 @@ export const checkAuthAction = createAsyncThunk(
   async () => {
     try {
       await api.get(APIRoute.Login);
+      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
+  },
+);
+
+export const login = createAsyncThunk(
+  'user/login',
+  async ({ login: email, password }: AuthData) => {
+    try {
+      const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
+      saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
       errorHandle(error);
