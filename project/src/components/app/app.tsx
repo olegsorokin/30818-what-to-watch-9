@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 
 import { Main } from '../../pages/main/main';
@@ -12,23 +11,15 @@ import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
 import { reviews } from '../../mocks/reviews';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
-import { fetchFilms, fetchPromo } from '../../store/api-actions';
 
 type Props = {
   limit: number,
 }
 
 function App({ limit }: Props): JSX.Element {
-  const dispatch = useAppDispatch();
-
   const { films, promo } = useAppSelector((state) => state);
-
-  useEffect(() => {
-    dispatch(fetchFilms());
-    dispatch(fetchPromo());
-  }, []);
 
   if (!films.isLoaded || !promo.isLoaded) {
     return (
