@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Logo } from '../../components/logo/logo';
 import { useAppDispatch } from '../../hooks';
 import { login } from '../../store/api-actions';
+import { AppRoute } from '../../constants/routs';
 
 function SignIn(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -25,7 +26,10 @@ function SignIn(): JSX.Element {
   const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
     const { userEmail: email, userPassword: password } = formData;
-    dispatch(login({ email, password }));
+    dispatch(login({ email, password }))
+      .then(() => {
+        navigate(AppRoute.Main);
+      });
   };
 
   return (

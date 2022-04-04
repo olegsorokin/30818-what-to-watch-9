@@ -24,4 +24,6 @@ export function errorHandle(error: TError): void {
         break;
     }
   }
+
+  throw error;
 }
