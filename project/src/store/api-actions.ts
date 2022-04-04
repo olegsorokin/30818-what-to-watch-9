@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { api, store } from './index';
 import { Film } from '../types/film';
-import { loadFilms, loadPromo, redirectToRoute, requireAuthorization } from './action';
-import { APIRoute, AppRoute } from '../constants/routs';
+import { loadFilms, loadPromo, requireAuthorization } from './action';
+import { APIRoute } from '../constants/routs';
 import { AuthorizationStatus } from '../constants/auth';
 import { errorHandle } from '../services/error-handle';
 import { AuthData } from '../types/auth-data';
@@ -41,12 +41,11 @@ export const checkAuthAction = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'user/login',
-  async ({ login: email, password }: AuthData) => {
+  async ({ email, password }: AuthData) => {
     try {
       const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
       saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      store.dispatch(redirectToRoute(AppRoute.Main));
     } catch (error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
