@@ -22,10 +22,10 @@ function StarWithBr({ star }: StarWithBrProps): JSX.Element {
 function FilmDetails({ film }: Props): JSX.Element {
   const {
     genre,
-    year,
+    released,
     director,
     starring,
-    duration,
+    runTime,
   } = film;
 
   return (
@@ -52,7 +52,7 @@ function FilmDetails({ film }: Props): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{formatDuration(duration)}</span>
+          <span className="film-card__details-value">{formatDuration(runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
@@ -60,7 +60,7 @@ function FilmDetails({ film }: Props): JSX.Element {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{year}</span>
+          <span className="film-card__details-value">{released}</span>
         </p>
       </div>
     </div>

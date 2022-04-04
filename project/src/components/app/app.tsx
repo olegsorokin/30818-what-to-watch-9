@@ -10,16 +10,23 @@ import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
-import { Film as TFilm } from '../../types/film';
 import { reviews } from '../../mocks/reviews';
+import { useAppSelector } from '../../hooks';
+import { LoadingScreen } from '../loading-screen/loading-screen';
 
 type Props = {
   limit: number,
-  promoFilm: TFilm,
-  films: TFilm[]
 }
 
-function App({ limit, promoFilm, films }: Props): JSX.Element {
+function App({ limit }: Props): JSX.Element {
+  const { films, promo } = useAppSelector((state) => state);
+
+  if (!films.isLoaded || !promo.isLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +36,7 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
         >
           <Route
             index
-            element={<Main limit={limit} promoFilm={promoFilm} />}
+            element={<Main limit={limit} />}
           />
           <Route
             path={AppRoute.SignIn}
@@ -39,7 +46,7 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
             path={AppRoute.MyList}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Unknown}>
-                <MyList films={films} />
+                <MyList films={films.data} />
               </PrivateRoute>
             }
           />
@@ -49,16 +56,16 @@ function App({ limit, promoFilm, films }: Props): JSX.Element {
           >
             <Route
               index
-              element={<Film film={films[0]} reviews={reviews} />}
+              element={<Film film={films.data[0]} reviews={reviews} />}
             />
             <Route
               path={AppRoute.AddReview}
-              element={<AddReview film={films[0]} />}
+              element={<AddReview film={films.data[0]} />}
             />
           </Route>
           <Route
             path={AppRoute.Player}
-            element={<Player video={films[0].video} />}
+            element={<Player video={films.data[0]} />}
           />
         </Route>
         <Route

@@ -1,31 +1,24 @@
 export type Video = {
-  src: string,
-  poster: string,
-};
-
-export type Poster = {
-  src: string,
-  width: number,
-  height: number,
-  background: string,
-};
-
-export type Rating = {
-  score: number,
-  level: string,
-  count: number,
-};
+  videoLink: string,
+  previewVideoLink: string
+}
 
 export type Film = {
   id: number,
-  title: string,
-  genre: string,
-  year: number,
-  video: Video,
-  poster: Poster,
-  rating: Rating,
-  description: string[],
+  name: string,
+  posterImage: string,
+  previewImage: string,
+  backgroundImage: string,
+  backgroundColor: string,
+  videoLink: string,
+  previewVideoLink: string,
+  description: string,
+  rating: number,
+  scoresCount: number,
   director: string,
   starring: string[],
-  duration: number,
+  runTime: number,
+  genre: string,
+  released: number,
+  isFavorite: boolean,
 };

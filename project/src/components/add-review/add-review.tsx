@@ -14,7 +14,7 @@ const STARS_COUNT = 10;
 const STARS_ARRAY = new Array(STARS_COUNT).fill(0).map((_, index) => String(STARS_COUNT - index));
 
 function AddReview({ film }: Props): JSX.Element {
-  const { title, poster: { background, src, width, height } } = film;
+  const { name, posterImage, backgroundImage } = film;
   const [formData, setFormData] = useState({
     rating: String(DEFAULT_RATING),
     reviewText: '',
@@ -25,10 +25,10 @@ function AddReview({ film }: Props): JSX.Element {
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void => {
-    const { name, value } = event.currentTarget;
+    const { name: title, value } = event.currentTarget;
     setFormData({
       ...formData,
-      [name]: value,
+      [title]: value,
     });
   };
 
@@ -36,7 +36,7 @@ function AddReview({ film }: Props): JSX.Element {
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={background} alt={title} />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -47,7 +47,7 @@ function AddReview({ film }: Props): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={AppRoute.Film} className="breadcrumbs__link">{title}</Link>
+                <Link to={AppRoute.Film} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to={AppRoute.AddReview} className="breadcrumbs__link">Add review</Link>
@@ -69,10 +69,8 @@ function AddReview({ film }: Props): JSX.Element {
 
         <div className="film-card__poster film-card__poster--small">
           <img
-            src={src}
-            alt={`${title} poster`}
-            width={width}
-            height={height}
+            src={posterImage}
+            alt={`${name} poster`}
           />
         </div>
       </div>

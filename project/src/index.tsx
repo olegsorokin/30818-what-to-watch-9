@@ -2,16 +2,17 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 
 import { App } from './components/app/app';
-import { films } from './mocks/films';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { fetchFilms, fetchPromo } from './store/api-actions';
 
 const LIMIT = 8;
 
+store.dispatch(fetchFilms());
+store.dispatch(fetchPromo());
+
 const appSettings = {
   limit: LIMIT,
-  promoFilm: films[0],
-  films,
 };
 
 ReactDOM.render(

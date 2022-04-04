@@ -1,46 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Logo } from '../../components/logo/logo';
 import { FilmList } from '../../components/film-list/film-list';
-import { Film } from '../../types/film';
 import { IconAdd, IconPlayS } from '../../components/icon';
 import { GenreEnum } from '../../constants/genres';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilms } from '../../store/action';
+import { useAppSelector } from '../../hooks';
 import { GenresList } from '../../components/genres-list/genres-list';
 
 type Props = {
   limit: number,
-  promoFilm: Film,
 }
 
 function Main({
   limit,
-  promoFilm: {
-    title,
-    genre,
-    year,
-  },
 }: Props): JSX.Element {
   const [activeGenre, setActiveGenre] = useState<GenreEnum>(GenreEnum.ALL_GENRES);
 
-  const { films } = useAppSelector((state) => state);
+  const { films, promo } = useAppSelector((state) => state);
 
-  const dispatch = useAppDispatch();
-
-  const onGenreChange = (name: GenreEnum): void => {
-    setActiveGenre(name);
+  const onGenreChange = (genreName: GenreEnum): void => {
+    setActiveGenre(genreName);
   };
-
-  useEffect(() => {
-    dispatch(fetchFilms(activeGenre));
-  }, [activeGenre]);
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
+          <img src={promo.data?.backgroundImage} alt={promo.data?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -64,17 +50,18 @@ function Main({
           <div className="film-card__info">
             <div className="film-card__poster">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg" alt={`${title} poster`}
+                src={promo.data?.posterImage}
+                alt={`${promo.data?.name} poster`}
                 width="218"
                 height="327"
               />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{promo.data?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{year}</span>
+                <span className="film-card__genre">{promo.data?.genre}</span>
+                <span className="film-card__year">{promo.data?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -98,7 +85,7 @@ function Main({
 
           <GenresList active={activeGenre} onChange={onGenreChange} />
 
-          <FilmList films={films} limit={limit} />
+          <FilmList films={films.data} limit={limit} />
         </section>
 
         <footer className="page-footer">

@@ -13,25 +13,22 @@ function FilmOverview({ film }: Props): JSX.Element {
     description,
     director,
     starring,
-    rating: { score, level, count },
+    scoresCount,
+    rating,
   } = film;
 
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{score}</div>
+        <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{level}</span>
-          <span className="film-rating__count">{count} ratings</span>
+          <span className="film-rating__level">Very good</span>
+          <span className="film-rating__count">{scoresCount} ratings</span>
         </p>
       </div>
 
       <div className="film-card__text">
-        {
-          description.map((item) => (
-            <p key={item}>{item}</p>
-          ))
-        }
+        <p>{description}</p>
 
         <p className="film-card__director"><strong>Director: {director}</strong></p>
 
