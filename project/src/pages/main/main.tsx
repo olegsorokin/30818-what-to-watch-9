@@ -26,7 +26,7 @@ function Main({
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promo?.backgroundImage} alt={promo?.name} />
+          <img src={promo.data?.backgroundImage} alt={promo.data?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -50,18 +50,18 @@ function Main({
           <div className="film-card__info">
             <div className="film-card__poster">
               <img
-                src={promo?.posterImage}
-                alt={`${promo?.name} poster`}
+                src={promo.data?.posterImage}
+                alt={`${promo.data?.name} poster`}
                 width="218"
                 height="327"
               />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promo?.name}</h2>
+              <h2 className="film-card__title">{promo.data?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promo?.genre}</span>
-                <span className="film-card__year">{promo?.released}</span>
+                <span className="film-card__genre">{promo.data?.genre}</span>
+                <span className="film-card__year">{promo.data?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -85,7 +85,7 @@ function Main({
 
           <GenresList active={activeGenre} onChange={onGenreChange} />
 
-          <FilmList films={films} limit={limit} />
+          <FilmList films={films.data} limit={limit} />
         </section>
 
         <footer className="page-footer">

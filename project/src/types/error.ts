@@ -1,1 +1,1 @@
-export type ErrorType = unknown;
+export type TError = unknown;

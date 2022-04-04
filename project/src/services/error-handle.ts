@@ -2,9 +2,9 @@ import request from 'axios';
 import { toast } from 'react-toastify';
 
 import { HttpCode } from '../constants/http';
-import { ErrorType } from '../types/error';
+import { TError } from '../types/error';
 
-export function errorHandle(error: ErrorType): void {
+export function errorHandle(error: TError): void {
   if (!request.isAxiosError(error)) {
     throw error;
   }
