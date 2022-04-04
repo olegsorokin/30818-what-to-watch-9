@@ -45,7 +45,7 @@ function App({ limit }: Props): JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Unknown}>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
                 <MyList films={films.data} />
               </PrivateRoute>
             }
