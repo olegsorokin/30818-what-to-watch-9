@@ -56,7 +56,7 @@ function App({ limit }: Props): JSX.Element {
           >
             <Route
               index
-              element={<Film film={films.data[0]} reviews={reviews} />}
+              element={<Film reviews={reviews} />}
             />
             <Route
               path={AppRoute.AddReview}

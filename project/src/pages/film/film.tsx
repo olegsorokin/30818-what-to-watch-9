@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import { Logo } from '../../components/logo/logo';
 import { AppRoute } from '../../constants/routs';
-import { Film as TFilm } from '../../types/film';
 import { SimilarFilms } from '../../components/similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../../components/icon';
 import { Tabs } from '../../components/tabs';
@@ -12,6 +11,9 @@ import { FilmReviews } from '../../components/film-reviews/film-reviews';
 import { FilmOverview } from '../../components/film-overview/film-overview';
 import { Review } from '../../types/review';
 import { UserBlock } from '../../components/user-block/user-block';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
+import { LoadingScreen } from '../../components/loading-screen/loading-screen';
 
 enum FilmTab {
   Overview = 'Overview',
@@ -20,7 +22,6 @@ enum FilmTab {
 }
 
 type Props = {
-  film: TFilm,
   reviews: Review[]
 }
 
@@ -30,16 +31,33 @@ const tabs = [
   { title: FilmTab.Reviews },
 ];
 
-function Film({ film, reviews }: Props): JSX.Element {
+function Film({ reviews }: Props): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { id } = useParams<string>();
+  const [active, setActive] = useState<string>(FilmTab.Overview);
+
+  const { film, similarFilms } = useAppSelector((state) => state);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchFilm({ filmId: id }));
+      dispatch(fetchSimilarFilms({ filmId: id }));
+    }
+  }, [id]);
+
+  if (!film.data || !similarFilms.data?.length) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   const {
     name,
     genre,
     released,
     backgroundImage,
     posterImage,
-  } = film;
-
-  const [active, setActive] = useState<string>(FilmTab.Overview);
+  } = film.data;
 
   return (
     <>
@@ -91,8 +109,8 @@ function Film({ film, reviews }: Props): JSX.Element {
             <div className="film-card__desc">
               <Tabs tabs={tabs} active={active} onChange={setActive} />
 
-              {active === FilmTab.Overview && <FilmOverview film={film} />}
-              {active === FilmTab.Details && <FilmDetails film={film} />}
+              {active === FilmTab.Overview && <FilmOverview film={film.data} />}
+              {active === FilmTab.Details && <FilmDetails film={film.data} />}
               {active === FilmTab.Reviews && <FilmReviews reviews={reviews} />}
             </div>
           </div>
@@ -100,7 +118,7 @@ function Film({ film, reviews }: Props): JSX.Element {
       </section>
 
       <div className="page-content">
-        <SimilarFilms genre={genre} />
+        <SimilarFilms films={similarFilms.data} />
 
         <footer className="page-footer">
           <Logo isLight />

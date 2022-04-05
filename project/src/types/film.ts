@@ -22,3 +22,7 @@ export type Film = {
   released: number,
   isFavorite: boolean,
 };
+
+export type FilmData = {
+  filmId: string,
+};
