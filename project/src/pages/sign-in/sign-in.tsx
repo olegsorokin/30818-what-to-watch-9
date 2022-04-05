@@ -11,8 +11,8 @@ function SignIn(): JSX.Element {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    userEmail: '',
-    userPassword: '',
+    email: '',
+    password: '',
   });
 
   const onChange = (evt: ChangeEvent<HTMLInputElement>): void => {
@@ -25,7 +25,7 @@ function SignIn(): JSX.Element {
 
   const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
-    const { userEmail: email, userPassword: password } = formData;
+    const { email, password } = formData;
     dispatch(login({ email, password }))
       .then(() => {
         navigate(AppRoute.Main);
@@ -45,26 +45,26 @@ function SignIn(): JSX.Element {
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
-                value={formData.userEmail}
+                value={formData.email}
                 onChange={onChange}
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
-                name="userEmail"
-                id="userEmail"
+                name="email"
+                id="email"
                 required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
               <input
-                value={formData.userPassword}
+                value={formData.password}
                 onChange={onChange}
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
-                name="userPassword"
-                id="userPassword"
+                name="password"
+                id="password"
                 required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>

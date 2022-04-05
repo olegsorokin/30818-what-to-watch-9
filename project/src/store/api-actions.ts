@@ -5,9 +5,9 @@ import { Film } from '../types/film';
 import { loadFilms, loadPromo, requireAuthorization } from './action';
 import { APIRoute } from '../constants/routs';
 import { AuthorizationStatus } from '../constants/auth';
-import { errorHandle } from '../services/error-handle';
-import { AuthData } from '../types/auth-data';
-import { UserData } from '../types/user-data';
+import { handleError } from '../services/handle-error';
+import { Auth } from '../types/auth';
+import { User } from '../types/user';
 import { saveToken } from '../services/token';
 
 export const fetchFilms = createAsyncThunk(
@@ -33,7 +33,7 @@ export const checkAuthAction = createAsyncThunk(
       await api.get(APIRoute.Login);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
-      errorHandle(error);
+      handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
@@ -41,13 +41,13 @@ export const checkAuthAction = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'user/login',
-  async ({ email, password }: AuthData) => {
+  async ({ email, password }: Auth) => {
     try {
-      const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
+      const { data: { token } } = await api.post<User>(APIRoute.Login, { email, password });
       saveToken(token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
-      errorHandle(error);
+      handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
