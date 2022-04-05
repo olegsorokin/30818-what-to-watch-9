@@ -1,6 +1,37 @@
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Logo } from '../../components/logo/logo';
+import { useAppDispatch } from '../../hooks';
+import { login } from '../../store/api-actions';
+import { AppRoute } from '../../constants/routs';
 
 function SignIn(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const onChange = (evt: ChangeEvent<HTMLInputElement>): void => {
+    const { name: title, value } = evt.currentTarget;
+    setFormData({
+      ...formData,
+      [title]: value,
+    });
+  };
+
+  const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
+    evt.preventDefault();
+    const { email, password } = formData;
+    dispatch(login({ email, password }))
+      .then(() => {
+        navigate(AppRoute.Main);
+      });
+  };
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -10,19 +41,31 @@ function SignIn(): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
+        <form onSubmit={onSubmit} action="#" className="sign-in__form">
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
-                className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                id="user-email"
+                value={formData.email}
+                onChange={onChange}
+                className="sign-in__input"
+                type="email"
+                placeholder="Email address"
+                name="email"
+                id="email"
+                required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
               <input
-                className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                id="user-password"
+                value={formData.password}
+                onChange={onChange}
+                className="sign-in__input"
+                type="password"
+                placeholder="Password"
+                name="password"
+                id="password"
+                required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>

@@ -19,9 +19,9 @@ type Props = {
 }
 
 function App({ limit }: Props): JSX.Element {
-  const { films, promo } = useAppSelector((state) => state);
+  const { films, promo, authorizationStatus } = useAppSelector((state) => state);
 
-  if (!films.isLoaded || !promo.isLoaded) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || !films.isLoaded || !promo.isLoaded) {
     return (
       <LoadingScreen />
     );
@@ -45,7 +45,7 @@ function App({ limit }: Props): JSX.Element {
           <Route
             path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Unknown}>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
                 <MyList films={films.data} />
               </PrivateRoute>
             }
