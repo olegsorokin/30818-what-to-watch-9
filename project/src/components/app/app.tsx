@@ -1,4 +1,4 @@
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
 import { Main } from '../../pages/main/main';
 import { SignIn } from '../../pages/sign-in/sign-in';
@@ -13,6 +13,8 @@ import { AuthorizationStatus } from '../../constants/auth';
 import { reviews } from '../../mocks/reviews';
 import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../../browser-history';
 
 type Props = {
   limit: number,
@@ -28,7 +30,7 @@ function App({ limit }: Props): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -73,7 +75,7 @@ function App({ limit }: Props): JSX.Element {
           element={<NotFoundPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

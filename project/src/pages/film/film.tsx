@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Logo } from '../../components/logo/logo';
 import { AppRoute } from '../../constants/routs';
@@ -33,15 +33,22 @@ const tabs = [
 
 function Film({ reviews }: Props): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id } = useParams<string>();
   const [active, setActive] = useState<string>(FilmTab.Overview);
 
   const { film, similarFilms } = useAppSelector((state) => state);
 
+  const initRequests = async (filmId: string) => {
+    await dispatch(fetchFilm({ filmId }));
+    await dispatch(fetchSimilarFilms({ filmId }));
+  };
+
   useEffect(() => {
     if (id) {
-      dispatch(fetchFilm({ filmId: id }));
-      dispatch(fetchSimilarFilms({ filmId: id }));
+      initRequests(id).catch(() => {
+        navigate(AppRoute.Main);
+      });
     }
   }, [id]);
 

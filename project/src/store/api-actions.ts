@@ -58,8 +58,7 @@ export const fetchSimilarFilms = createAsyncThunk(
 
       store.dispatch(loadSimilarFilms({ ...similarFilms, data, ...loadDataState(PromiseState.FULFILLED) }));
     } catch (error) {
-      errorHandle(error);
-      store.dispatch(loadSimilarFilms({ ...similarFilms, error, ...loadDataState(PromiseState.REJECTED) }));
+      handleError(error);
     }
   },
 );
@@ -75,8 +74,7 @@ export const fetchFilm = createAsyncThunk(
 
       store.dispatch(loadFilm({ ...film, data, ...loadDataState(PromiseState.FULFILLED) }));
     } catch (error) {
-      errorHandle(error);
-      store.dispatch(loadFilm({ ...film, error, ...loadDataState(PromiseState.REJECTED) }));
+      handleError(error);
     }
   },
 );
