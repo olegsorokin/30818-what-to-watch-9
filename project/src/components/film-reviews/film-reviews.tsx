@@ -15,7 +15,7 @@ function FilmReviews(): JSX.Element {
     if (id) {
       dispatch(fetchComments({ filmId: id }));
     }
-  }, [id]);
+  }, [dispatch, id]);
 
   const reviewsInCol = Math.ceil(comments.data.length / 2);
 

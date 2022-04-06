@@ -23,7 +23,7 @@ function Film(): JSX.Element {
       dispatch(fetchFilm({ filmId }));
       dispatch(fetchSimilarFilms({ filmId }));
     }
-  }, [filmId]);
+  }, [dispatch, filmId]);
 
   if (!film.data || !similarFilms.data) {
     return (

@@ -27,7 +27,7 @@ function AddReview(): JSX.Element {
     if (filmId) {
       dispatch(fetchFilm({ filmId }));
     }
-  }, [filmId]);
+  }, [dispatch, filmId]);
 
   if (!film.data) {
     return (

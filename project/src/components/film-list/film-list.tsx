@@ -19,13 +19,9 @@ function FilmList({ films, limit = SHOW_MORE_STEP }: Props): JSX.Element {
     setShowingCount(showingCount + SHOW_MORE_STEP);
   };
 
-  const resetShowingFilms = () => {
-    setShowingCount(limit);
-  };
-
   useEffect(() => {
-    resetShowingFilms();
-  }, [films]);
+    setShowingCount(limit);
+  }, [films, limit]);
 
   return (
     <>

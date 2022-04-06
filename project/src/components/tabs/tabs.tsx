@@ -1,11 +1,11 @@
 import { Tab } from './tab';
 
-type Tab = {
+type TTab = {
   title: string,
 }
 
 type Props = {
-  tabs: Tab[],
+  tabs: TTab[],
   active: string,
   onChange: (s: string) => void,
 }

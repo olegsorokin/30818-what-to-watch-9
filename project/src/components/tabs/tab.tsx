@@ -15,7 +15,7 @@ function Tab({ title, isActive, onChange }: Props): JSX.Element {
 
   return (
     <li key={title} className={clsx('film-nav__item', isActive && 'film-nav__item--active')}>
-      <a href="#" onClick={handleClick} className="film-nav__link">{title}</a>
+      <a href="/#" onClick={handleClick} className="film-nav__link">{title}</a>
     </li>
   );
 }

@@ -24,7 +24,7 @@ function UserBlock(): JSX.Element {
           </div>
         </li>
         <li className="user-block__item">
-          <a href="#" className="user-block__link" onClick={handleLogout}>Sign out</a>
+          <a href="/#" className="user-block__link" onClick={handleLogout}>Sign out</a>
         </li>
       </ul>
     );
