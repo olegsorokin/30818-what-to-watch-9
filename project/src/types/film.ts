@@ -1,8 +1,3 @@
-export type Video = {
-  videoLink: string,
-  previewVideoLink: string
-}
-
 export type Film = {
   id: number,
   name: string,

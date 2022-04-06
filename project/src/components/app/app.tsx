@@ -10,7 +10,6 @@ import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { AuthorizationStatus } from '../../constants/auth';
-import { reviews } from '../../mocks/reviews';
 import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
@@ -58,7 +57,7 @@ function App({ limit }: Props): JSX.Element {
           >
             <Route
               index
-              element={<Film reviews={reviews} />}
+              element={<Film />}
             />
             <Route
               path={AppRoute.AddReview}
