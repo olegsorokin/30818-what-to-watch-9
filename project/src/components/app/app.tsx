@@ -15,11 +15,7 @@ import { LoadingScreen } from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
-type Props = {
-  limit: number,
-}
-
-function App({ limit }: Props): JSX.Element {
+function App(): JSX.Element {
   const { films, promo, authorizationStatus } = useAppSelector((state) => state);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || !films.isLoaded || !promo.isLoaded) {

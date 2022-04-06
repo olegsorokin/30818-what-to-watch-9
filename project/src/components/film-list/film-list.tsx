@@ -8,11 +8,10 @@ const SHOW_MORE_STEP = 8;
 
 type Props = {
   films: Film[],
-  limit?: number,
 }
 
-function FilmList({ films, limit = SHOW_MORE_STEP }: Props): JSX.Element {
-  const [showingCount, setShowingCount] = useState(limit);
+function FilmList({ films }: Props): JSX.Element {
+  const [showingCount, setShowingCount] = useState(SHOW_MORE_STEP);
   const hasShowMoreButton = showingCount < films.length;
 
   const showMore = () => {
@@ -20,8 +19,8 @@ function FilmList({ films, limit = SHOW_MORE_STEP }: Props): JSX.Element {
   };
 
   useEffect(() => {
-    setShowingCount(limit);
-  }, [films, limit]);
+    setShowingCount(SHOW_MORE_STEP);
+  }, [films]);
 
   return (
     <>
