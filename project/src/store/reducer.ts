@@ -1,10 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { changeGenre, loadFilm, loadFilms, loadPromo, loadSimilarFilms, requireAuthorization } from './action';
+import {
+  changeGenre,
+  loadComments,
+  loadFilm,
+  loadFilms,
+  loadPromo,
+  loadSimilarFilms,
+  requireAuthorization
+} from './action';
 import { Film } from '../types/film';
 import { GenreEnum } from '../constants/genres';
 import { AuthorizationStatus } from '../constants/auth';
 import { TError } from '../types/error';
+import { Comment } from '../types/comment';
 
 export type InitialState = {
   genre: GenreEnum,
@@ -32,6 +41,12 @@ export type InitialState = {
     isLoading: boolean,
     isLoaded: boolean,
     error?: TError | null,
+  },
+  comments: {
+    data: Comment[],
+    isLoading: boolean,
+    isLoaded: boolean,
+    error: TError | null,
   },
 };
 
@@ -62,6 +77,12 @@ const initialState: InitialState = {
     isLoaded: false,
     error: null,
   },
+  comments: {
+    data: [],
+    isLoading: false,
+    isLoaded: false,
+    error: null,
+  },
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -85,6 +106,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments.data = action.payload;
+      state.comments.isLoaded = true;
     });
 });
 

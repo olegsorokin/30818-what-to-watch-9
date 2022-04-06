@@ -24,7 +24,7 @@ export function handleError(error: TError): void {
         break;
       case HttpCode.NOT_FOUND:
         toast.info(response.data.error);
-        store.dispatch(redirectToRoute(AppRoute.Main));
+        store.dispatch(redirectToRoute(AppRoute.NotFound));
         break;
     }
   }

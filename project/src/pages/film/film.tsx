@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { generatePath, Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Logo } from '../../components/logo/logo';
 import { AppRoute } from '../../constants/routs';
@@ -98,7 +98,9 @@ function Film({ reviews }: Props): JSX.Element {
                   <IconAdd />
                   <span>My list</span>
                 </button>
-                <Link to={AppRoute.AddReview} className="btn film-card__button">Add review</Link>
+                <Link to={generatePath(AppRoute.AddReview, { id: String(id) })} className="btn film-card__button">
+                  Add review
+                </Link>
               </div>
             </div>
           </div>
@@ -118,7 +120,7 @@ function Film({ reviews }: Props): JSX.Element {
 
               {active === FilmTab.Overview && <FilmOverview film={film.data} />}
               {active === FilmTab.Details && <FilmDetails film={film.data} />}
-              {active === FilmTab.Reviews && <FilmReviews reviews={reviews} />}
+              {active === FilmTab.Reviews && <FilmReviews />}
             </div>
           </div>
         </div>
