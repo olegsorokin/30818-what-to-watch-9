@@ -61,7 +61,7 @@ function App({ limit }: Props): JSX.Element {
             />
             <Route
               path={AppRoute.AddReview}
-              element={<AddReview film={films.data[0]} />}
+              element={<AddReview />}
             />
           </Route>
           <Route
