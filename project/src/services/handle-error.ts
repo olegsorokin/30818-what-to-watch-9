@@ -21,7 +21,6 @@ export function handleError(error: TError): void {
         break;
       case HttpCode.UNAUTHORIZED:
         toast.info(response.data.error);
-        store.dispatch(redirectToRoute(AppRoute.SignIn));
         break;
       case HttpCode.NOT_FOUND:
         toast.info(response.data.error);
