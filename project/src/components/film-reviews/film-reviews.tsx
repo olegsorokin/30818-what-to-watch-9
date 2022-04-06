@@ -17,20 +17,20 @@ function FilmReviews(): JSX.Element {
     }
   }, [id]);
 
-  const reviewInCell = Math.ceil(comments.data.length / 2);
+  const reviewsInCol = Math.ceil(comments.data.length / 2);
 
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {
-          comments.data?.slice(0, reviewInCell).map((comment) => (
+          comments.data.slice(0, reviewsInCol).map((comment) => (
             <Review key={comment.id} review={comment} />
           ))
         }
       </div>
       <div className="film-card__reviews-col">
         {
-          comments.data?.slice(reviewInCell).map((comment) => (
+          comments.data.slice(reviewsInCol).map((comment) => (
             <Review key={comment.id} review={comment} />
           ))
         }

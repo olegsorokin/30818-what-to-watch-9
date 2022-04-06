@@ -28,7 +28,11 @@ function AddReview({ film }: Props): JSX.Element {
   const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
     if (id) {
-      dispatch(sendComment({ filmId: id, comment: formData.reviewText, rating: parseInt(formData.rating, 10) }));
+      dispatch(sendComment({
+        filmId: id,
+        comment: formData.reviewText,
+        rating: parseInt(formData.rating, 10),
+      }));
     }
   };
 

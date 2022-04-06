@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { generatePath } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { api, store } from './index';
 import { Comment, CommentData } from '../types/comment';
@@ -21,7 +22,6 @@ import { User } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
 import { loadDataState } from '../utils/common';
 import { PromiseState } from '../constants/promise-state';
-import { toast } from 'react-toastify';
 
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',

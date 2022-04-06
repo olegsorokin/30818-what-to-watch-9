@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { generatePath, Link, useNavigate, useParams } from 'react-router-dom';
+import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { Logo } from '../../components/logo/logo';
 import { AppRoute } from '../../constants/routs';
@@ -29,24 +29,17 @@ const tabs = [
 
 function Film(): JSX.Element {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { id } = useParams<string>();
+  const { id: filmId } = useParams();
   const [active, setActive] = useState<string>(FilmTab.Overview);
 
   const { film, similarFilms, authorizationStatus } = useAppSelector((state) => state);
 
-  const initRequests = async (filmId: string) => {
-    await dispatch(fetchFilm({ filmId }));
-    await dispatch(fetchSimilarFilms({ filmId }));
-  };
-
   useEffect(() => {
-    if (id) {
-      initRequests(id).catch(() => {
-        navigate(AppRoute.Main);
-      });
+    if (filmId) {
+      dispatch(fetchFilm({ filmId }));
+      dispatch(fetchSimilarFilms({ filmId }));
     }
-  }, [id]);
+  }, [filmId]);
 
   if (!film.data || !similarFilms.data?.length) {
     return (
@@ -96,7 +89,7 @@ function Film(): JSX.Element {
                 </button>
                 {
                   authorizationStatus === AuthorizationStatus.Auth &&
-                    <Link to={generatePath(AppRoute.AddReview, { id: String(id) })} className="btn film-card__button">
+                    <Link to={generatePath(AppRoute.AddReview, { id: String(filmId) })} className="btn film-card__button">
                         Add review
                     </Link>
                 }
