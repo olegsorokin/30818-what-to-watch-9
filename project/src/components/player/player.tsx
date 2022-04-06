@@ -1,4 +1,4 @@
-import { Video } from '../../types/film';
+import { Video } from '../../types/video';
 import { IconFullScreen, IconPlayS } from '../icon';
 
 type Props = {

@@ -1,8 +1,3 @@
-export type Video = {
-  videoLink: string,
-  previewVideoLink: string
-}
-
 export type Film = {
   id: number,
   name: string,
@@ -21,4 +16,8 @@ export type Film = {
   genre: string,
   released: number,
   isFavorite: boolean,
+};
+
+export type FilmData = {
+  filmId: string,
 };

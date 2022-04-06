@@ -1,22 +1,22 @@
-import { Review as TReview } from '../../types/review';
+import { Comment } from '../../types/comment';
 import { formatDate } from '../../utils/common';
 
 type Props = {
-  review: TReview
+  review: Comment
 }
 
 function Review({ review }: Props): JSX.Element {
-  const { text, rating, author, date } = review;
+  const { comment, rating, user, date } = review;
 
   return (
     <div className="review">
       <blockquote className="review__quote">
         <p className="review__text">
-          {text}
+          {comment}
         </p>
 
         <footer className="review__details">
-          <cite className="review__author">{author}</cite>
+          <cite className="review__author">{user.name}</cite>
           <time className="review__date" dateTime={date}>
             {formatDate(date)}
           </time>

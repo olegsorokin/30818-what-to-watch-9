@@ -1,27 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { changeGenre, loadFilms, loadPromo, requireAuthorization } from './action';
-import { Film } from '../types/film';
+import {
+  changeGenre,
+  loadComments,
+  loadFilm,
+  loadFilms,
+  loadPromo,
+  loadSimilarFilms,
+  requireAuthorization
+} from './action';
 import { GenreEnum } from '../constants/genres';
 import { AuthorizationStatus } from '../constants/auth';
-import { TError } from '../types/error';
-
-type InitialState = {
-  genre: GenreEnum,
-  authorizationStatus: AuthorizationStatus,
-  films: {
-    data: Film[],
-    isLoading: boolean,
-    isLoaded: boolean,
-    error: TError | null,
-  },
-  promo: {
-    data: Film | null,
-    isLoading: boolean,
-    isLoaded: boolean,
-    error: TError | null,
-  },
-};
+import { InitialState } from '../types/initial-state';
 
 const initialState: InitialState = {
   genre: GenreEnum.ALL_GENRES,
@@ -30,13 +20,26 @@ const initialState: InitialState = {
     data: [],
     isLoading: false,
     isLoaded: false,
-    error: null,
+  },
+  similarFilms: {
+    data: [],
+    isLoading: false,
+    isLoaded: false,
   },
   promo: {
     data: null,
     isLoading: false,
     isLoaded: false,
-    error: null,
+  },
+  film: {
+    data: null,
+    isLoading: false,
+    isLoaded: false,
+  },
+  comments: {
+    data: [],
+    isLoading: false,
+    isLoaded: false,
   },
 };
 
@@ -46,15 +49,22 @@ const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
     })
     .addCase(loadFilms, (state, action) => {
-      state.films.data = action.payload;
-      state.films.isLoaded = true;
+      state.films = action.payload;
+    })
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
     })
     .addCase(loadPromo, (state, action) => {
-      state.promo.data = action.payload;
-      state.promo.isLoaded = true;
+      state.promo = action.payload;
+    })
+    .addCase(loadFilm, (state, action) => {
+      state.film = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
     });
 });
 

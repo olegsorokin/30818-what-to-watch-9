@@ -1,27 +1,24 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { Logo } from '../../components/logo/logo';
 import { AppRoute } from '../../constants/routs';
-import { Film as TFilm } from '../../types/film';
 import { SimilarFilms } from '../../components/similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../../components/icon';
 import { Tabs } from '../../components/tabs';
 import { FilmDetails } from '../../components/film-details/film-details';
 import { FilmReviews } from '../../components/film-reviews/film-reviews';
 import { FilmOverview } from '../../components/film-overview/film-overview';
-import { Review } from '../../types/review';
 import { UserBlock } from '../../components/user-block/user-block';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
+import { LoadingScreen } from '../../components/loading-screen/loading-screen';
+import { AuthorizationStatus } from '../../constants/auth';
 
 enum FilmTab {
   Overview = 'Overview',
   Details = 'Details',
   Reviews = 'Reviews',
-}
-
-type Props = {
-  film: TFilm,
-  reviews: Review[]
 }
 
 const tabs = [
@@ -30,16 +27,33 @@ const tabs = [
   { title: FilmTab.Reviews },
 ];
 
-function Film({ film, reviews }: Props): JSX.Element {
+function Film(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { id: filmId } = useParams();
+  const [active, setActive] = useState<string>(FilmTab.Overview);
+
+  const { film, similarFilms, authorizationStatus } = useAppSelector((state) => state);
+
+  useEffect(() => {
+    if (filmId) {
+      dispatch(fetchFilm({ filmId }));
+      dispatch(fetchSimilarFilms({ filmId }));
+    }
+  }, [filmId]);
+
+  if (!film.data || !similarFilms.data) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   const {
     name,
     genre,
     released,
     backgroundImage,
     posterImage,
-  } = film;
-
-  const [active, setActive] = useState<string>(FilmTab.Overview);
+  } = film.data;
 
   return (
     <>
@@ -73,7 +87,12 @@ function Film({ film, reviews }: Props): JSX.Element {
                   <IconAdd />
                   <span>My list</span>
                 </button>
-                <Link to={AppRoute.AddReview} className="btn film-card__button">Add review</Link>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth &&
+                    <Link to={generatePath(AppRoute.AddReview, { id: String(filmId) })} className="btn film-card__button">
+                        Add review
+                    </Link>
+                }
               </div>
             </div>
           </div>
@@ -91,16 +110,16 @@ function Film({ film, reviews }: Props): JSX.Element {
             <div className="film-card__desc">
               <Tabs tabs={tabs} active={active} onChange={setActive} />
 
-              {active === FilmTab.Overview && <FilmOverview film={film} />}
-              {active === FilmTab.Details && <FilmDetails film={film} />}
-              {active === FilmTab.Reviews && <FilmReviews reviews={reviews} />}
+              {active === FilmTab.Overview && <FilmOverview film={film.data} />}
+              {active === FilmTab.Details && <FilmDetails film={film.data} />}
+              {active === FilmTab.Reviews && <FilmReviews />}
             </div>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <SimilarFilms genre={genre} />
+        <SimilarFilms films={similarFilms.data} />
 
         <footer className="page-footer">
           <Logo isLight />

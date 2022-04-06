@@ -4,11 +4,14 @@ export enum AppRoute {
   MyList = '/mylist',
   Film = '/film/:id',
   AddReview = '/film/:id/review',
-  Player = '/player/:id'
+  Player = '/player/:id',
+  NotFound = '/not-found',
 }
 
 export enum APIRoute {
   Films = '/films',
   Promo = '/promo',
   Login = '/login',
+  Logout = '/logout',
+  Comments = '/comments',
 }
