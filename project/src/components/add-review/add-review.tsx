@@ -25,8 +25,8 @@ function AddReview({ film }: Props): JSX.Element {
     reviewText: '',
   });
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+  const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
+    evt.preventDefault();
     if (id) {
       dispatch(sendComment({ filmId: id, comment: formData.reviewText, rating: parseInt(formData.rating, 10) }));
     }

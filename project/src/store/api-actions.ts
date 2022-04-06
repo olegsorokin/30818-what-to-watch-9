@@ -18,7 +18,7 @@ import { AuthorizationStatus } from '../constants/auth';
 import { handleError } from '../services/handle-error';
 import { Auth } from '../types/auth';
 import { User } from '../types/user';
-import { saveToken } from '../services/token';
+import { dropToken, saveToken } from '../services/token';
 import { loadDataState } from '../utils/common';
 import { PromiseState } from '../constants/promise-state';
 import { toast } from 'react-toastify';
@@ -46,6 +46,19 @@ export const login = createAsyncThunk(
     } catch (error) {
       handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
+  },
+);
+
+export const logoutAction = createAsyncThunk(
+  'user/logout',
+  async () => {
+    try {
+      await api.delete(APIRoute.Logout);
+      dropToken();
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    } catch (error) {
+      handleError(error);
     }
   },
 );
