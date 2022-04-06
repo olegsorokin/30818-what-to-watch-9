@@ -1,35 +1,47 @@
-import { useState, FormEvent, Fragment, ChangeEvent } from 'react';
+import { useState, FormEvent, Fragment, ChangeEvent, useEffect } from 'react';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { Logo } from '../logo/logo';
-import { Film } from '../../types/film';
 import { AppRoute } from '../../constants/routs';
 import { UserBlock } from '../user-block/user-block';
-import { useAppDispatch } from '../../hooks';
-import { sendComment } from '../../store/api-actions';
-
-type Props = {
-  film: Film
-}
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilm, sendComment } from '../../store/api-actions';
+import { LoadingScreen } from '../loading-screen/loading-screen';
 
 const DEFAULT_RATING = 5;
 const STARS_COUNT = 10;
 const STARS_ARRAY = new Array(STARS_COUNT).fill(0).map((_, index) => String(STARS_COUNT - index));
 
-function AddReview({ film }: Props): JSX.Element {
-  const { name, posterImage, backgroundImage } = film;
-  const { id } = useParams();
+function AddReview(): JSX.Element {
+  const { id: filmId } = useParams();
   const dispatch = useAppDispatch();
+
+  const { film } = useAppSelector((state) => state);
+
   const [formData, setFormData] = useState({
     rating: String(DEFAULT_RATING),
     reviewText: '',
   });
 
+  useEffect(() => {
+    if (filmId) {
+      dispatch(fetchFilm({ filmId }));
+    }
+  }, [filmId]);
+
+  if (!film.data) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  const { name, posterImage, backgroundImage } = film.data;
+
   const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
-    if (id) {
+    if (filmId) {
       dispatch(sendComment({
-        filmId: id,
+        filmId,
         comment: formData.reviewText,
         rating: parseInt(formData.rating, 10),
       }));
@@ -59,12 +71,12 @@ function AddReview({ film }: Props): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={generatePath(AppRoute.Film, { id: String(id) })} className="breadcrumbs__link">
+                <Link to={generatePath(AppRoute.Film, { id: String(filmId) })} className="breadcrumbs__link">
                   {name}
                 </Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to={generatePath(AppRoute.AddReview, { id: String(id) })} className="breadcrumbs__link">
+                <Link to={generatePath(AppRoute.AddReview, { id: String(filmId) })} className="breadcrumbs__link">
                   Add review
                 </Link>
               </li>
