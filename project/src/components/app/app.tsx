@@ -37,7 +37,7 @@ function App({ limit }: Props): JSX.Element {
         >
           <Route
             index
-            element={<Main limit={limit} />}
+            element={<Main />}
           />
           <Route
             path={AppRoute.SignIn}

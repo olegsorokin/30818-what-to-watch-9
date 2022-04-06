@@ -1,27 +1,11 @@
-import { useState } from 'react';
-
 import { Logo } from '../../components/logo/logo';
-import { FilmList } from '../../components/film-list/film-list';
 import { IconAdd, IconPlayS } from '../../components/icon';
-import { GenreEnum } from '../../constants/genres';
 import { useAppSelector } from '../../hooks';
-import { GenresList } from '../../components/genres-list/genres-list';
 import { UserBlock } from '../../components/user-block/user-block';
+import { Catalog } from '../../components/catalog/catalog';
 
-type Props = {
-  limit: number,
-}
-
-function Main({
-  limit,
-}: Props): JSX.Element {
-  const [activeGenre, setActiveGenre] = useState<GenreEnum>(GenreEnum.ALL_GENRES);
-
+function Main(): JSX.Element {
   const { films, promo } = useAppSelector((state) => state);
-
-  const onGenreChange = (genreName: GenreEnum): void => {
-    setActiveGenre(genreName);
-  };
 
   return (
     <>
@@ -72,13 +56,7 @@ function Main({
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <GenresList active={activeGenre} onChange={onGenreChange} />
-
-          <FilmList films={films.data} limit={limit} />
-        </section>
+        <Catalog films={films.data} />
 
         <footer className="page-footer">
           <Logo isLight />
