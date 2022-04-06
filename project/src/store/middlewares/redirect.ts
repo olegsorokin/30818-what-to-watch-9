@@ -1,8 +1,8 @@
 import { Middleware } from 'redux';
 
-import { reducer } from '../reducer';
 import browserHistory from '../../browser-history';
-import { REDIRECT_TO_ROUTE } from '../action';
+import { reducer } from '../reducer';
+import { REDIRECT_TO_ROUTE } from '../constants';
 
 type Reducer = ReturnType<typeof reducer>;
 

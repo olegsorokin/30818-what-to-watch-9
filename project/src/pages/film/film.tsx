@@ -41,7 +41,7 @@ function Film(): JSX.Element {
     }
   }, [filmId]);
 
-  if (!film.data || !similarFilms.data?.length) {
+  if (!film.data || !similarFilms.data) {
     return (
       <LoadingScreen />
     );
