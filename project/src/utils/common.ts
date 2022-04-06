@@ -20,19 +20,19 @@ export function formatDuration(minutes: number): string {
   return `${h}h ${m}m`;
 }
 
-type LoadingState = {
+type LoadingState<T> = {
+  data: T,
   isLoading: boolean,
   isLoaded: boolean,
-  error?: null
-}
+};
 
-export function loadDataState(state: PromiseState): LoadingState {
-  switch (state) {
+export function loadData<T>(state: LoadingState<T>, type: PromiseState): LoadingState<T> {
+  switch (type) {
     case PromiseState.PENDING:
-      return { isLoading: true, isLoaded: false, error: null };
+      return { ...state, isLoading: true, isLoaded: false };
     case PromiseState.FULFILLED:
-      return { isLoading: false, isLoaded: true, error: null };
+      return { ...state, isLoading: false, isLoaded: true };
     case PromiseState.REJECTED:
-      return { isLoading: false, isLoaded: false };
+      return { ...state, isLoading: false, isLoaded: true };
   }
 }

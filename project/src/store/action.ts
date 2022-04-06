@@ -1,8 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
 import { GenreEnum } from '../constants/genres';
-import { Film } from '../types/film';
-import { Comment } from '../types/comment';
 import { AuthorizationStatus } from '../constants/auth';
 import { InitialState } from './reducer';
 import { AppRoute } from '../constants/routs';
@@ -17,10 +15,10 @@ const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const REDIRECT_TO_ROUTE = 'REDIRECT_TO_ROUTE';
 
 export const changeGenre = createAction<GenreEnum>(CHANGE_GENRE);
-export const loadFilms = createAction<Film[]>(LOAD_FILMS);
+export const loadFilms = createAction<InitialState['films']>(LOAD_FILMS);
 export const loadSimilarFilms = createAction<InitialState['similarFilms']>(LOAD_SIMILAR_FILMS);
 export const loadFilm = createAction<InitialState['film']>(LOAD_FILM);
-export const loadPromo = createAction<Film>(LOAD_PROMO);
+export const loadPromo = createAction<InitialState['promo']>(LOAD_PROMO);
 export const requireAuthorization = createAction<AuthorizationStatus>(REQUIRE_AUTHORIZATION);
 export const redirectToRoute = createAction<AppRoute | string>(REDIRECT_TO_ROUTE);
-export const loadComments = createAction<Comment[]>(LOAD_COMMENTS);
+export const loadComments = createAction<InitialState['comments']>(LOAD_COMMENTS);

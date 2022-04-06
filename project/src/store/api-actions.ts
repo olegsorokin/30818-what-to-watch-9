@@ -20,7 +20,7 @@ import { handleError } from '../services/handle-error';
 import { Auth } from '../types/auth';
 import { User } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
-import { loadDataState } from '../utils/common';
+import { loadData } from '../utils/common';
 import { PromiseState } from '../constants/promise-state';
 
 export const checkAuthAction = createAsyncThunk(
@@ -66,8 +66,14 @@ export const logoutAction = createAsyncThunk(
 export const fetchFilms = createAsyncThunk(
   'data/fetchFilms',
   async () => {
-    const { data } = await api.get<Film[]>(APIRoute.Films);
-    store.dispatch(loadFilms(data));
+    const films = store.getState().films;
+    try {
+      store.dispatch(loadFilms(loadData({ ...films, data: [] }, PromiseState.PENDING)));
+      const { data } = await api.get<Film[]>(APIRoute.Films);
+      store.dispatch(loadFilms(loadData({ ...films, data }, PromiseState.FULFILLED)));
+    } catch (error) {
+      handleError(error);
+    }
   },
 );
 
@@ -76,11 +82,9 @@ export const fetchSimilarFilms = createAsyncThunk(
   async ({ filmId }: FilmData) => {
     const similarFilms = store.getState().similarFilms;
     try {
-      store.dispatch(loadSimilarFilms({ ...similarFilms, data: [], ...loadDataState(PromiseState.PENDING) }));
-
+      store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, data: [] }, PromiseState.PENDING)));
       const { data } = await api.get<Film[]>(`${APIRoute.Films}/${filmId}/similar`);
-
-      store.dispatch(loadSimilarFilms({ ...similarFilms, data, ...loadDataState(PromiseState.FULFILLED) }));
+      store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, data }, PromiseState.FULFILLED)));
     } catch (error) {
       handleError(error);
     }
@@ -92,11 +96,9 @@ export const fetchFilm = createAsyncThunk(
   async ({ filmId }: FilmData) => {
     const film = store.getState().film;
     try {
-      store.dispatch(loadFilm({ ...film, data: null, ...loadDataState(PromiseState.PENDING) }));
-
+      store.dispatch(loadFilm(loadData({ ...film, data: null }, PromiseState.PENDING)));
       const { data } = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
-
-      store.dispatch(loadFilm({ ...film, data, ...loadDataState(PromiseState.FULFILLED) }));
+      store.dispatch(loadFilm(loadData({ ...film, data }, PromiseState.FULFILLED)));
     } catch (error) {
       handleError(error);
     }
@@ -106,16 +108,28 @@ export const fetchFilm = createAsyncThunk(
 export const fetchPromo = createAsyncThunk(
   'data/fetchPromo',
   async () => {
-    const { data } = await api.get<Film>(APIRoute.Promo);
-    store.dispatch(loadPromo(data));
+    const promo = store.getState().promo;
+    try {
+      store.dispatch(loadPromo(loadData({ ...promo, data: null }, PromiseState.PENDING)));
+      const { data } = await api.get<Film>(APIRoute.Promo);
+      store.dispatch(loadPromo(loadData({ ...promo, data }, PromiseState.FULFILLED)));
+    } catch (error) {
+      handleError(error);
+    }
   },
 );
 
 export const fetchComments = createAsyncThunk(
   'data/fetchComments',
   async ({ filmId }: FilmData) => {
-    const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${filmId}`);
-    store.dispatch(loadComments(data));
+    const comments = store.getState().comments;
+    try {
+      store.dispatch(loadComments(loadData({ ...comments, data: [] }, PromiseState.PENDING)));
+      const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${filmId}`);
+      store.dispatch(loadComments(loadData({ ...comments, data }, PromiseState.FULFILLED)));
+    } catch (error) {
+      handleError(error);
+    }
   },
 );
 
