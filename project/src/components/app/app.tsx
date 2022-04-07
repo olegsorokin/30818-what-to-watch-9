@@ -63,7 +63,7 @@ function App(): JSX.Element {
           </Route>
           <Route
             path={AppRoute.Player}
-            element={<Player video={films.data[0]} />}
+            element={<Player />}
           />
         </Route>
         <Route

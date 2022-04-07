@@ -1,16 +1,34 @@
-import { Video } from '../../types/video';
+import { useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { IconFullScreen, IconPlayS } from '../icon';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { LoadingScreen } from '../loading-screen/loading-screen';
+import { fetchFilm } from '../../store/api-actions';
 
-type Props = {
-  video: Video
-}
+function Player(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { id: filmId } = useParams();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const { film } = useAppSelector(({ FILMS }) => FILMS);
 
-function Player({ video }: Props): JSX.Element {
-  const { videoLink, previewVideoLink } = video;
+  useEffect(() => {
+    if (filmId) {
+      dispatch(fetchFilm({ filmId }));
+    }
+  }, [dispatch, filmId]);
+
+  if (!film.data) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  const { videoLink, previewVideoLink } = film.data;
 
   return (
     <div className="player">
-      <video src={videoLink} className="player__video" poster={previewVideoLink} />
+      <video ref={videoRef} autoPlay src={videoLink} className="player__video" poster={previewVideoLink} />
 
       <button type="button" className="player__exit">Exit</button>
 
