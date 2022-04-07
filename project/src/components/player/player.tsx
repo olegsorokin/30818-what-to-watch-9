@@ -1,16 +1,23 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { IconFullScreen, IconPlayS } from '../icon';
+import { IconFullScreen, IconPause, IconPlayS } from '../icon';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 import { fetchFilm } from '../../store/api-actions';
 
 function Player(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { id: filmId } = useParams();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { id: filmId } = useParams();
   const { film } = useAppSelector(({ FILMS }) => FILMS);
+  const [isPlaying, setPlaying] = useState(true);
+
+  const handlePlayButtonClick = () => {
+    setPlaying(!isPlaying);
+
+    isPlaying ? videoRef.current?.pause() : videoRef.current?.play();
+  };
 
   useEffect(() => {
     if (filmId) {
@@ -42,9 +49,18 @@ function Player(): JSX.Element {
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play">
-            <IconPlayS />
-            <span>Play</span>
+          <button type="button" className="player__play" onClick={handlePlayButtonClick}>
+            {
+              isPlaying ?
+                <>
+                  <IconPause />
+                  <span>Play</span>
+                </> :
+                <>
+                  <IconPlayS />
+                  <span>Pause</span>
+                </>
+            }
           </button>
           <div className="player__name">Transpotting</div>
 
