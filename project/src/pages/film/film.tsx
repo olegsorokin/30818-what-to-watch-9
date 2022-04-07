@@ -16,7 +16,8 @@ function Film(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id: filmId } = useParams();
 
-  const { film, similarFilms, authorizationStatus } = useAppSelector((state) => state);
+  const { film, similarFilms } = useAppSelector(({ FILMS }) => FILMS);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
   useEffect(() => {
     if (filmId) {

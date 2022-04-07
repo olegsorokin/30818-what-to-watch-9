@@ -16,7 +16,7 @@ function AddReview(): JSX.Element {
   const { id: filmId } = useParams();
   const dispatch = useAppDispatch();
 
-  const { film } = useAppSelector((state) => state);
+  const { film } = useAppSelector(({ FILMS }) => FILMS);
 
   const [formData, setFormData] = useState({
     rating: String(DEFAULT_RATING),

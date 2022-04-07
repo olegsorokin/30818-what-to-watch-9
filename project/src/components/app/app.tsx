@@ -13,13 +13,13 @@ import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
-import { isAuthenticated } from '../../store/selectors';
+import { AuthorizationStatus } from '../../constants/auth';
 
 function App(): JSX.Element {
-  const { films, authorizationStatus } = useAppSelector((state) => state);
-  const isAuth = useAppSelector(isAuthenticated);
+  const { films, promo } = useAppSelector(({ FILMS }) => FILMS);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
-  if (isAuth) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || !films.isLoaded || !promo.isLoaded) {
     return (
       <LoadingScreen />
     );

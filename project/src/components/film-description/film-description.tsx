@@ -1,8 +1,9 @@
+import { useState } from 'react';
+
 import { Tabs } from '../tabs';
 import { FilmOverview } from '../film-overview/film-overview';
 import { FilmDetails } from '../film-details/film-details';
 import { FilmReviews } from '../film-reviews/film-reviews';
-import { useState } from 'react';
 import { Film } from '../../types/film';
 
 enum FilmTab {

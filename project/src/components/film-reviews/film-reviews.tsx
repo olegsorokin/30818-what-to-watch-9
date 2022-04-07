@@ -9,7 +9,7 @@ function FilmReviews(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const { comments } = useAppSelector((state) => state);
+  const { comments } = useAppSelector(({ COMMENTS }) => COMMENTS);
 
   useEffect(() => {
     if (id) {

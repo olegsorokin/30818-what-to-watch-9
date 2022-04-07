@@ -8,7 +8,7 @@ import { logoutAction } from '../../store/api-actions';
 
 function UserBlock(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
   const handleLogout = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();

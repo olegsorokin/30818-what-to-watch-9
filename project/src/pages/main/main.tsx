@@ -5,7 +5,7 @@ import { UserBlock } from '../../components/user-block/user-block';
 import { Catalog } from '../../components/catalog/catalog';
 
 function Main(): JSX.Element {
-  const { films, promo } = useAppSelector((state) => state);
+  const { films, promo } = useAppSelector(({ FILMS }) => FILMS);
 
   return (
     <>
