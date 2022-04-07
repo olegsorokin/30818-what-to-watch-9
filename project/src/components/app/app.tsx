@@ -9,16 +9,17 @@ import { Player } from '../player/player';
 import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
-import { AuthorizationStatus } from '../../constants/auth';
 import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
+import { isAuthenticated } from '../../store/selectors';
 
 function App(): JSX.Element {
-  const { films, promo, authorizationStatus } = useAppSelector((state) => state);
+  const { films, authorizationStatus } = useAppSelector((state) => state);
+  const isAuth = useAppSelector(isAuthenticated);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || !films.isLoaded || !promo.isLoaded) {
+  if (isAuth) {
     return (
       <LoadingScreen />
     );
