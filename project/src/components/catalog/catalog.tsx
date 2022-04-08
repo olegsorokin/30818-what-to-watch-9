@@ -7,10 +7,10 @@ import { Film } from '../../types/film';
 
 function filmsByGenre(films: Film[], genre: GenreEnum) {
   if (genre === GenreEnum.ALL_GENRES) {
-    return films.slice();
+    return films;
   }
 
-  return films.slice().filter((film) => film.genre === genre);
+  return films.filter((film) => film.genre === genre);
 }
 
 type Props = {

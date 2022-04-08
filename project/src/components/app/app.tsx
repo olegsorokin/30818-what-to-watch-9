@@ -10,7 +10,7 @@ import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { useAppSelector } from '../../hooks';
-import { LoadingScreen } from '../loading-screen/loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 import { AuthorizationStatus } from '../../constants/auth';

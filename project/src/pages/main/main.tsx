@@ -1,7 +1,7 @@
-import { Logo } from '../../components/logo/logo';
+import Logo from '../../components/logo/logo';
 import { IconAdd, IconPlayS } from '../../components/icon';
 import { useAppSelector } from '../../hooks';
-import { UserBlock } from '../../components/user-block/user-block';
+import UserBlock from '../../components/user-block/user-block';
 import { Catalog } from '../../components/catalog/catalog';
 
 function Main(): JSX.Element {

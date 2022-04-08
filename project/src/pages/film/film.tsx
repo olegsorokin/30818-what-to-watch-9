@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
-import { Logo } from '../../components/logo/logo';
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { AppRoute } from '../../constants/routs';
 import { SimilarFilms } from '../../components/similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../../components/icon';
-import { UserBlock } from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
-import { LoadingScreen } from '../../components/loading-screen/loading-screen';
 import { AuthorizationStatus } from '../../constants/auth';
 import { FilmDescription } from '../../components/film-description/film-description';
 
