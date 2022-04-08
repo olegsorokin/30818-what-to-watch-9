@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
+import FilmCard from '../film-card/film-card';
 import { Film } from '../../types/film';
-import { FilmCard } from '../film-card/film-card';
 import { ShowMore } from '../show-more/show-more';
 
 const SHOW_MORE_STEP = 8;
@@ -14,9 +14,10 @@ function FilmList({ films }: Props): JSX.Element {
   const [showingCount, setShowingCount] = useState(SHOW_MORE_STEP);
   const hasShowMoreButton = showingCount < films.length;
 
-  const showMore = () => {
-    setShowingCount(showingCount + SHOW_MORE_STEP);
-  };
+  const showMore = useCallback(
+    () => setShowingCount((prevCount) => prevCount + SHOW_MORE_STEP),
+    [],
+  );
 
   useEffect(() => {
     setShowingCount(SHOW_MORE_STEP);
