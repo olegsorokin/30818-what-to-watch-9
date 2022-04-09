@@ -17,6 +17,8 @@ import { PromiseState } from '../constants/promise-state';
 import { requireAuthorization } from './user-process/user-process';
 import { loadFilm, loadFilms, loadPromo, loadSimilarFilms } from './films/films';
 import { loadComments } from './comments/comments';
+import { FavoriteData } from '../types/favorite';
+import { loadFavorites } from './favorites/favorites';
 
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
@@ -135,6 +137,31 @@ export const sendComment = createAsyncThunk(
       await api.post(`${APIRoute.Comments}/${filmId}`, { comment, rating });
       toast.success('Comment sent!');
       store.dispatch(redirectToRoute(generatePath(AppRoute.Film, { id: filmId })));
+    } catch (error) {
+      handleError(error);
+    }
+  },
+);
+
+export const addToFavorite = createAsyncThunk(
+  'data/addToFavorite',
+  async ({ filmId, status }: FavoriteData) => {
+    try {
+      await api.post(`${APIRoute.Favorite}/${filmId}/${status}`);
+    } catch (error) {
+      handleError(error);
+    }
+  },
+);
+
+export const fetchFavorite = createAsyncThunk(
+  'data/fetchFavorite',
+  async () => {
+    const { favorite } = store.getState().FAVORITE;
+    try {
+      store.dispatch(loadFavorites(loadData({ ...favorite, data: [] }, PromiseState.PENDING)));
+      const { data } = await api.get(`${APIRoute.Favorite}`);
+      store.dispatch(loadFavorites(loadData({ ...favorite, data }, PromiseState.FULFILLED)));
     } catch (error) {
       handleError(error);
     }

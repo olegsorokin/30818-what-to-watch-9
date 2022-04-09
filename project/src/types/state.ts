@@ -38,6 +38,14 @@ export type CommentsState = {
   },
 }
 
+export type FavoriteState = {
+  favorite: {
+    data: Film[],
+    isLoading: boolean,
+    isLoaded: boolean,
+  }
+}
+
 export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;

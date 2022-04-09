@@ -2,17 +2,27 @@ import { generatePath, useNavigate } from 'react-router-dom';
 
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { IconAdd, IconPlayS } from '../../components/icon';
-import { useAppSelector } from '../../hooks';
+import { IconAdd, IconInList, IconPlayS } from '../../components/icon';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Catalog } from '../../components/catalog/catalog';
 import { AppRoute } from '../../constants/routs';
+import { addToFavorite, fetchPromo } from '../../store/api-actions';
 
 function Main(): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { films, promo } = useAppSelector(({ FILMS }) => FILMS);
 
   const handlePlayButtonClick = () => {
     navigate(generatePath(AppRoute.Player, { id: String(promo.data?.id) }));
+  };
+
+  const handleMyPlaylistButtonClick = async () => {
+    await dispatch(addToFavorite({
+      filmId: Number(promo.data?.id),
+      status: promo.data?.isFavorite ? 0 : 1,
+    }));
+    await dispatch(fetchPromo());
   };
 
   return (
@@ -53,8 +63,12 @@ function Main(): JSX.Element {
                   <IconPlayS />
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <IconAdd />
+                <button className="btn btn--list film-card__button" type="button" onClick={handleMyPlaylistButtonClick}>
+                  {
+                    promo.data?.isFavorite ?
+                      <IconInList /> :
+                      <IconAdd />
+                  }
                   <span>My list</span>
                 </button>
               </div>
