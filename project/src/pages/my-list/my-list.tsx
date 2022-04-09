@@ -1,13 +1,26 @@
+import { useEffect } from 'react';
+
 import Logo from '../../components/logo/logo';
-import { Film } from '../../types/film';
-import { FilmList } from '../../components/film-list/film-list';
 import UserBlock from '../../components/user-block/user-block';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { FilmList } from '../../components/film-list/film-list';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavorite } from '../../store/api-actions';
 
-type Props = {
-  films: Film[]
-}
+function MyList(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { favorite } = useAppSelector(({ FAVORITE }) => FAVORITE);
 
-function MyList({ films }: Props): JSX.Element {
+  useEffect(() => {
+    dispatch(fetchFavorite());
+  }, []);
+
+  if (!favorite.data) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -21,7 +34,7 @@ function MyList({ films }: Props): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmList films={films} />
+        <FilmList films={favorite.data} />
       </section>
 
       <footer className="page-footer">

@@ -6,9 +6,9 @@ import UserBlock from '../../components/user-block/user-block';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { AppRoute } from '../../constants/routs';
 import { SimilarFilms } from '../../components/similar-films/similar-films';
-import { IconAdd, IconPlayS } from '../../components/icon';
+import { IconAdd, IconInList, IconPlayS } from '../../components/icon';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
+import { addToFavorite, fetchFilm, fetchPromo, fetchSimilarFilms } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../constants/auth';
 import { FilmDescription } from '../../components/film-description/film-description';
 
@@ -22,6 +22,14 @@ function Film(): JSX.Element {
 
   const handlePlayButtonClick = () => {
     navigate(generatePath(AppRoute.Player, { id: String(film.data?.id) }));
+  };
+
+  const handleMyPlaylistButtonClick = async () => {
+    await dispatch(addToFavorite({
+      filmId: Number(film.data?.id),
+      status: film.data?.isFavorite ? 0 : 1,
+    }));
+    await dispatch(fetchPromo());
   };
 
   useEffect(() => {
@@ -73,8 +81,12 @@ function Film(): JSX.Element {
                   <IconPlayS />
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <IconAdd />
+                <button className="btn btn--list film-card__button" type="button" onClick={handleMyPlaylistButtonClick}>
+                  {
+                    film.data?.isFavorite ?
+                      <IconInList /> :
+                      <IconAdd />
+                  }
                   <span>My list</span>
                 </button>
                 {
