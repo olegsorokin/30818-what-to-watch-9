@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { generatePath, useNavigate, useParams } from 'react-router-dom';
 
 import { IconFullScreen, IconPause, IconPlayS } from '../icon';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -27,7 +27,7 @@ function Player(): JSX.Element {
 
   const handleExitButtonClick = () => {
     setPlaying(false);
-    navigate(AppRoute.Main);
+    navigate(generatePath(AppRoute.Film, { id: filmId }));
   };
 
   const handleFullscreenButtonClick = () => {
@@ -54,7 +54,9 @@ function Player(): JSX.Element {
       return;
     }
 
-    dispatch(fetchFilm({ filmId }));
+    dispatch(fetchFilm({ filmId })).catch(() => {
+      navigate(AppRoute.Main);
+    });
   }, [dispatch, film.data, promo.data, filmId]);
 
   useEffect(() => {
