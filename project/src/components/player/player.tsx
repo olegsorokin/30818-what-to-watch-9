@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
 
 import { IconFullScreen, IconPause, IconPlayS } from '../icon';
@@ -34,8 +34,8 @@ function Player(): JSX.Element {
     videoRef.current?.requestFullscreen();
   };
 
-  const timeUpdateEventHandler = (evt: any) => {
-    setCurrentTime(Math.floor(evt.target?.currentTime));
+  const timeUpdateEventHandler = (evt: SyntheticEvent<HTMLVideoElement>) => {
+    setCurrentTime(Math.floor(evt.currentTarget.currentTime));
   };
 
   useEffect(() => {
@@ -57,26 +57,27 @@ function Player(): JSX.Element {
     dispatch(fetchFilm({ filmId })).catch(() => {
       navigate(AppRoute.Main);
     });
-  }, [dispatch, film.data, promo.data, filmId]);
+  }, [navigate, dispatch, film.data, promo.data, filmId]);
 
   useEffect(() => {
     isPlaying ? videoRef.current?.play() : videoRef.current?.pause();
   }, [isPlaying]);
 
   useEffect(() => {
-    if (currentFilm && videoRef.current) {
-      videoRef.current.onloadeddata = () => {
-        setLoaded(true);
-        setPlaying(true);
-        setDuration(videoRef.current ? Math.floor(videoRef.current.duration) : 0);
-        videoRef.current?.addEventListener('timeupdate', timeUpdateEventHandler);
-      };
+    if (!videoRef.current) {
+      return;
     }
 
-    return () => {
-      videoRef.current?.removeEventListener('timeupdate', timeUpdateEventHandler);
-    };
-  }, [currentFilm, videoRef.current]);
+    const currentVideo = videoRef.current;
+
+    if (currentFilm && currentVideo) {
+      currentVideo.onloadeddata = () => {
+        setLoaded(true);
+        setPlaying(true);
+        setDuration(currentVideo ? Math.floor(currentVideo.duration) : 0);
+      };
+    }
+  }, [currentFilm]);
 
   return (
     <div className="player">
@@ -89,6 +90,7 @@ function Player(): JSX.Element {
         className="player__video"
         src={currentFilm?.videoLink}
         poster={currentFilm?.previewImage}
+        onTimeUpdate={timeUpdateEventHandler}
       />
 
       <button type="button" className="player__exit" onClick={handleExitButtonClick}>Exit</button>

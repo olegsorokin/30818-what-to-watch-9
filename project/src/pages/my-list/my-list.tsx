@@ -13,7 +13,7 @@ function MyList(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchFavorite());
-  }, []);
+  }, [dispatch]);
 
   if (!favorite.data) {
     return (
