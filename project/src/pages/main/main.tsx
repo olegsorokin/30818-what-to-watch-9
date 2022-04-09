@@ -1,9 +1,9 @@
 import { generatePath, useNavigate } from 'react-router-dom';
 
-import { Logo } from '../../components/logo/logo';
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
 import { IconAdd, IconPlayS } from '../../components/icon';
 import { useAppSelector } from '../../hooks';
-import { UserBlock } from '../../components/user-block/user-block';
 import { Catalog } from '../../components/catalog/catalog';
 import { AppRoute } from '../../constants/routs';
 

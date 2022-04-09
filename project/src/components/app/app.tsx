@@ -10,16 +10,17 @@ import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { useAppSelector } from '../../hooks';
-import { LoadingScreen } from '../loading-screen/loading-screen';
+import LoadingScreen from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
-import { AuthorizationStatus } from '../../constants/auth';
+import { isAppDataLoaded } from '../../store/selectors';
 
 function App(): JSX.Element {
-  const { films, promo } = useAppSelector(({ FILMS }) => FILMS);
+  const { films } = useAppSelector(({ FILMS }) => FILMS);
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const isAppLoaded = useAppSelector(isAppDataLoaded);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || !films.isLoaded || !promo.isLoaded) {
+  if (isAppLoaded) {
     return (
       <LoadingScreen />
     );

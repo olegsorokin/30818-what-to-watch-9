@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import LoadingScreen from '../loading-screen/loading-screen';
 import { IconFullScreen, IconPause, IconPlayS } from '../icon';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { LoadingScreen } from '../loading-screen/loading-screen';
 import { fetchFilm } from '../../store/api-actions';
 import { AppRoute } from '../../constants/routs';
 
