@@ -20,7 +20,7 @@ type Props = {
 function Catalog({ films }: Props) {
   const [activeGenre, setActiveGenre] = useState<GenreEnum>(GenreEnum.ALL_GENRES);
 
-  const onGenreChange = (genreName: GenreEnum): void => {
+  const handleGenreChange = (genreName: GenreEnum): void => {
     setActiveGenre(genreName);
   };
 
@@ -28,7 +28,7 @@ function Catalog({ films }: Props) {
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-      <GenresList active={activeGenre} onChange={onGenreChange} />
+      <GenresList active={activeGenre} onChange={handleGenreChange} />
 
       <FilmList films={filmsByGenre(films, activeGenre)} />
     </section>

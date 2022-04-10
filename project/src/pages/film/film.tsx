@@ -9,9 +9,9 @@ import { SimilarFilms } from '../../components/similar-films/similar-films';
 import { IconPlayS } from '../../components/icon';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
-import { AuthorizationStatus } from '../../constants/auth';
 import { FilmDescription } from '../../components/film-description/film-description';
 import { FavoriteButton } from '../../components/favorite-button/favorite-button';
+import { isStatusAuth } from '../../store/selectors';
 
 function Film(): JSX.Element {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function Film(): JSX.Element {
   const { id: filmId } = useParams();
 
   const { film, similarFilms } = useAppSelector(({ FILMS }) => FILMS);
-  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const isAuth = useAppSelector(isStatusAuth);
 
   const handlePlayButtonClick = () => {
     navigate(generatePath(AppRoute.Player, { id: String(film.data?.id) }));
@@ -76,9 +76,12 @@ function Film(): JSX.Element {
                 </button>
                 <FavoriteButton film={film.data} />
                 {
-                  authorizationStatus === AuthorizationStatus.Auth &&
-                    <Link to={generatePath(AppRoute.AddReview, { id: String(filmId) })} className="btn film-card__button">
-                        Add review
+                  isAuth &&
+                    <Link
+                      to={generatePath(AppRoute.AddReview, { id: String(filmId) })}
+                      className="btn film-card__button"
+                    >
+                      Add review
                     </Link>
                 }
               </div>

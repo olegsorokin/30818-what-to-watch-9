@@ -56,7 +56,7 @@ function AddReview(): JSX.Element {
     });
   };
 
-  const validateReviewText = () => formData.reviewText.length >= MIN_COMMENT_LENGTH && formData.reviewText.length <= MAX_COMMENT_LENGTH;
+  const isReviewTextValid = () => formData.reviewText.length >= MIN_COMMENT_LENGTH && formData.reviewText.length <= MAX_COMMENT_LENGTH;
 
   return (
     <section className="film-card film-card--full">
@@ -137,7 +137,7 @@ function AddReview(): JSX.Element {
               <button
                 className="add-review__btn"
                 type="submit"
-                disabled={isSending || !validateReviewText()}
+                disabled={isSending || !isReviewTextValid()}
               >
                 Post
               </button>

@@ -2,14 +2,15 @@ import { MouseEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AuthorizationStatus } from '../../constants/auth';
 import { AppRoute } from '../../constants/routs';
 import { logoutAction } from '../../store/api-actions';
+import { isStatusAuth } from '../../store/selectors';
 
 function UserBlock(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { authorizationStatus, user } = useAppSelector(({ USER }) => USER);
+  const { user } = useAppSelector(({ USER }) => USER);
+  const isAuth = useAppSelector(isStatusAuth);
 
   const handleLogout = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
@@ -20,7 +21,7 @@ function UserBlock(): JSX.Element {
     navigate(AppRoute.MyList);
   };
 
-  if (authorizationStatus === AuthorizationStatus.Auth) {
+  if (isAuth) {
     return (
       <ul className="user-block">
         <li className="user-block__item">

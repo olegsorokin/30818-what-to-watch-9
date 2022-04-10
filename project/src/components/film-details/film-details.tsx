@@ -2,21 +2,10 @@ import { Fragment } from 'react';
 
 import { Film } from '../../types/film';
 import { formatDuration, isLastItem } from '../../utils/common';
+import { StarWithBr } from '../star-with-br/star-with-br';
 
 type Props = {
   film: Film;
-}
-
-type StarWithBrProps = {
-  star: string;
-}
-
-function StarWithBr({ star }: StarWithBrProps): JSX.Element {
-  return (
-    <Fragment>
-      {`${star}, `}<br />
-    </Fragment>
-  );
 }
 
 function FilmDetails({ film }: Props): JSX.Element {
