@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 
 import { AppRoute } from '../../constants/routs';
@@ -6,6 +6,10 @@ import { Film } from '../../types/film';
 import { VideoPlayer } from '../video-player/video-player';
 
 const PLAYING_DELAY = 1000;
+
+function areEqualFilms(prevProps: Props, nextProps: Props) {
+  return prevProps.film.id === nextProps.film.id;
+}
 
 type Props = {
   film: Film,
@@ -64,4 +68,4 @@ function FilmCard({ film }: Props): JSX.Element {
   );
 }
 
-export { FilmCard };
+export default memo(FilmCard, areEqualFilms);

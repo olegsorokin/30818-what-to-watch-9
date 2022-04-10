@@ -9,20 +9,18 @@ import { Player } from '../player/player';
 import { PrivateRoute } from '../private-route/private-route';
 import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
-import { AuthorizationStatus } from '../../constants/auth';
 import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
+import { isAppDataNotLoaded } from '../../store/selectors';
 
-type Props = {
-  limit: number,
-}
+function App(): JSX.Element {
+  const { films } = useAppSelector(({ FILMS }) => FILMS);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const isAppNotLoaded = useAppSelector(isAppDataNotLoaded);
 
-function App({ limit }: Props): JSX.Element {
-  const { films, promo, authorizationStatus } = useAppSelector((state) => state);
-
-  if (authorizationStatus === AuthorizationStatus.Unknown || !films.isLoaded || !promo.isLoaded) {
+  if (isAppNotLoaded) {
     return (
       <LoadingScreen />
     );
@@ -37,7 +35,7 @@ function App({ limit }: Props): JSX.Element {
         >
           <Route
             index
-            element={<Main limit={limit} />}
+            element={<Main />}
           />
           <Route
             path={AppRoute.SignIn}
@@ -61,7 +59,7 @@ function App({ limit }: Props): JSX.Element {
             />
             <Route
               path={AppRoute.AddReview}
-              element={<AddReview film={films.data[0]} />}
+              element={<AddReview />}
             />
           </Route>
           <Route

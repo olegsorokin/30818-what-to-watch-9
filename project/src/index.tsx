@@ -8,23 +8,15 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import { checkAuthAction, fetchFilms, fetchPromo } from './store/api-actions';
 
-const LIMIT = 8;
-
 store.dispatch(fetchFilms());
 store.dispatch(fetchPromo());
 store.dispatch(checkAuthAction());
-
-const appSettings = {
-  limit: LIMIT,
-};
 
 ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
       <ToastContainer />
-      <App
-        {...appSettings}
-      />
+      <App />
     </Provider>
   </StrictMode>,
   document.getElementById('root'),

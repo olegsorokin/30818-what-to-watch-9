@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -8,7 +8,7 @@ import { logoutAction } from '../../store/api-actions';
 
 function UserBlock(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
 
   const handleLogout = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
@@ -24,7 +24,7 @@ function UserBlock(): JSX.Element {
           </div>
         </li>
         <li className="user-block__item">
-          <a href="#" className="user-block__link" onClick={handleLogout}>Sign out</a>
+          <a href="/#" className="user-block__link" onClick={handleLogout}>Sign out</a>
         </li>
       </ul>
     );
@@ -37,4 +37,4 @@ function UserBlock(): JSX.Element {
   );
 }
 
-export { UserBlock };
+export default memo(UserBlock);

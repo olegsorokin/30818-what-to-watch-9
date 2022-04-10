@@ -9,13 +9,13 @@ function FilmReviews(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const { comments } = useAppSelector((state) => state);
+  const { comments } = useAppSelector(({ COMMENTS }) => COMMENTS);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchComments({ filmId: id }));
     }
-  }, [id]);
+  }, [dispatch, id]);
 
   const reviewsInCol = Math.ceil(comments.data.length / 2);
 

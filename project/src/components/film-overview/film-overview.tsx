@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Film } from '../../types/film';
+import { getRatingLevel } from '../../utils/common';
 
 const MAX_STARS = 3;
 
@@ -22,7 +23,7 @@ function FilmOverview({ film }: Props): JSX.Element {
       <div className="film-rating">
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">Very good</span>
+          <span className="film-rating__level">{getRatingLevel(rating)}</span>
           <span className="film-rating__count">{scoresCount} ratings</span>
         </p>
       </div>

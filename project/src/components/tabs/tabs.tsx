@@ -1,4 +1,4 @@
-import { Tab } from './tab';
+import { Tab as TabItem } from './tab';
 
 type Tab = {
   title: string,
@@ -16,7 +16,7 @@ function Tabs({ tabs, onChange, active }: Props): JSX.Element {
       <ul className="film-nav__list">
         {
           tabs.map(({ title }) => (
-            <Tab key={title} title={title} isActive={active === title} onChange={onChange} />
+            <TabItem key={title} title={title} isActive={active === title} onChange={onChange} />
           ))
         }
       </ul>

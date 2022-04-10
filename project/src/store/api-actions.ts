@@ -5,15 +5,7 @@ import { toast } from 'react-toastify';
 import { api, store } from './index';
 import { Comment, CommentData } from '../types/comment';
 import { Film, FilmData } from '../types/film';
-import {
-  loadComments,
-  loadFilm,
-  loadFilms,
-  loadPromo,
-  loadSimilarFilms,
-  redirectToRoute,
-  requireAuthorization
-} from './action';
+import { redirectToRoute } from './action';
 import { APIRoute, AppRoute } from '../constants/routs';
 import { AuthorizationStatus } from '../constants/auth';
 import { handleError } from '../services/handle-error';
@@ -22,6 +14,9 @@ import { User } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
 import { loadData } from '../utils/common';
 import { PromiseState } from '../constants/promise-state';
+import { requireAuthorization } from './user-process/user-process';
+import { loadFilm, loadFilms, loadPromo, loadSimilarFilms } from './films/films';
+import { loadComments } from './comments/comments';
 
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
@@ -66,7 +61,7 @@ export const logoutAction = createAsyncThunk(
 export const fetchFilms = createAsyncThunk(
   'data/fetchFilms',
   async () => {
-    const films = store.getState().films;
+    const { films } = store.getState().FILMS;
     try {
       store.dispatch(loadFilms(loadData({ ...films, data: [] }, PromiseState.PENDING)));
       const { data } = await api.get<Film[]>(APIRoute.Films);
@@ -80,7 +75,7 @@ export const fetchFilms = createAsyncThunk(
 export const fetchSimilarFilms = createAsyncThunk(
   'data/fetchSimilarFilms',
   async ({ filmId }: FilmData) => {
-    const similarFilms = store.getState().similarFilms;
+    const { similarFilms } = store.getState().FILMS;
     try {
       store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, data: [] }, PromiseState.PENDING)));
       const { data } = await api.get<Film[]>(`${APIRoute.Films}/${filmId}/similar`);
@@ -94,7 +89,7 @@ export const fetchSimilarFilms = createAsyncThunk(
 export const fetchFilm = createAsyncThunk(
   'data/fetchFilm',
   async ({ filmId }: FilmData) => {
-    const film = store.getState().film;
+    const { film } = store.getState().FILMS;
     try {
       store.dispatch(loadFilm(loadData({ ...film, data: null }, PromiseState.PENDING)));
       const { data } = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
@@ -108,7 +103,7 @@ export const fetchFilm = createAsyncThunk(
 export const fetchPromo = createAsyncThunk(
   'data/fetchPromo',
   async () => {
-    const promo = store.getState().promo;
+    const { promo } = store.getState().FILMS;
     try {
       store.dispatch(loadPromo(loadData({ ...promo, data: null }, PromiseState.PENDING)));
       const { data } = await api.get<Film>(APIRoute.Promo);
@@ -122,7 +117,7 @@ export const fetchPromo = createAsyncThunk(
 export const fetchComments = createAsyncThunk(
   'data/fetchComments',
   async ({ filmId }: FilmData) => {
-    const comments = store.getState().comments;
+    const { comments } = store.getState().COMMENTS;
     try {
       store.dispatch(loadComments(loadData({ ...comments, data: [] }, PromiseState.PENDING)));
       const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${filmId}`);

@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom';
-import clsx from 'clsx';
-
 import { GenreEnum, genres } from '../../constants/genres';
+import { GenresItem } from '../genres-item/genres-item';
 
 type Props = {
   onChange: (genre: GenreEnum) => void,
@@ -12,19 +10,8 @@ function GenresList({ onChange, active }: Props): JSX.Element {
   return (
     <ul className="catalog__genres-list">
       {
-        genres.map(({ name, type, to }) => (
-          <li
-            key={name}
-            className={clsx('catalog__genres-item', { 'catalog__genres-item--active': active === name })}
-          >
-            <Link
-              to={to}
-              className="catalog__genres-link"
-              onClick={() => onChange(type)}
-            >
-              {name}
-            </Link>
-          </li>
+        genres.map((genre) => (
+          <GenresItem key={genre.name} active={active} genre={genre} onChange={onChange} />
         ))
       }
     </ul>
