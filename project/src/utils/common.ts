@@ -69,3 +69,5 @@ export const getCurrentTime = (seconds: number): string => {
 
   return h === 0 ? `${formatTime(m)}:${formatTime(s)}` : `${formatTime(h)}:${formatTime(m)}:${formatTime(s)}`;
 };
+
+export const formatFractionDigits = (value: number, digits = 1) => value.toFixed(digits);
