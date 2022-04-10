@@ -34,7 +34,7 @@ function Player(): JSX.Element {
     videoRef.current?.requestFullscreen();
   };
 
-  const timeUpdateEventHandler = (evt: SyntheticEvent<HTMLVideoElement>) => {
+  const handleTimeUpdateEvent = (evt: SyntheticEvent<HTMLVideoElement>) => {
     setCurrentTime(Math.floor(evt.currentTarget.currentTime));
   };
 
@@ -90,7 +90,7 @@ function Player(): JSX.Element {
         className="player__video"
         src={currentFilm?.videoLink}
         poster={currentFilm?.previewImage}
-        onTimeUpdate={timeUpdateEventHandler}
+        onTimeUpdate={handleTimeUpdateEvent}
       />
 
       <button type="button" className="player__exit" onClick={handleExitButtonClick}>Exit</button>

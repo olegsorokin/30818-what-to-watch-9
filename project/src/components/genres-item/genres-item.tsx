@@ -11,7 +11,7 @@ type Props = {
 }
 
 function GenresItem({ genre, onChange, active }: Props): JSX.Element {
-  const handleClick = (evt: SyntheticEvent): void => {
+  const handleAnchorClick = (evt: SyntheticEvent): void => {
     evt.preventDefault();
     onChange(genre.type);
   };
@@ -23,7 +23,7 @@ function GenresItem({ genre, onChange, active }: Props): JSX.Element {
       <a
         href="/#"
         className="catalog__genres-link"
-        onClick={handleClick}
+        onClick={handleAnchorClick}
       >
         {genre.name}
       </a>
