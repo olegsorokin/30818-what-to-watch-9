@@ -1,4 +1,4 @@
-import { useState, FormEvent, Fragment, ChangeEvent, useEffect, BaseSyntheticEvent, useRef } from 'react';
+import { useState, FormEvent, Fragment, ChangeEvent, useEffect } from 'react';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
 import Logo from '../logo/logo';
@@ -15,7 +15,6 @@ const STARS_COUNT = 10;
 const STARS_ARRAY = new Array(STARS_COUNT).fill(0).map((_, index) => String(STARS_COUNT - index));
 
 function AddReview(): JSX.Element {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { id: filmId } = useParams();
   const dispatch = useAppDispatch();
   const [isSending, setSending] = useState(false);
@@ -62,9 +61,7 @@ function AddReview(): JSX.Element {
     });
   };
 
-  const checkValidity = (evt: BaseSyntheticEvent) => {
-    evt.target.reportValidity();
-  };
+  const validateReviewText = () => formData.reviewText.length >= MIN_COMMENT_LENGTH && formData.reviewText.length <= MAX_COMMENT_LENGTH;
 
   return (
     <section className="film-card film-card--full">
@@ -130,11 +127,7 @@ function AddReview(): JSX.Element {
 
           <div className="add-review__text">
             <textarea
-              ref={textareaRef}
               className="add-review__textarea"
-              style={{
-                color: textareaRef.current?.validity.tooShort || textareaRef.current?.validity.tooLong ? 'red' : 'black',
-              }}
               name="reviewText"
               id="reviewText"
               placeholder="Review text"
@@ -142,12 +135,17 @@ function AddReview(): JSX.Element {
               onChange={onChange}
               minLength={MIN_COMMENT_LENGTH}
               maxLength={MAX_COMMENT_LENGTH}
-              onInput={checkValidity}
               disabled={isSending}
               required
             />
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" disabled={isSending}>Post</button>
+              <button
+                className="add-review__btn"
+                type="submit"
+                disabled={isSending || !validateReviewText()}
+              >
+                Post
+              </button>
             </div>
           </div>
         </form>
