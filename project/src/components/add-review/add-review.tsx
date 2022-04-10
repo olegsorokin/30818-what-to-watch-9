@@ -7,12 +7,7 @@ import { AppRoute } from '../../constants/routs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, sendComment } from '../../store/api-actions';
 import { LoadingScreen } from '../loading-screen/loading-screen';
-
-const MIN_COMMENT_LENGTH = 50;
-const MAX_COMMENT_LENGTH = 400;
-const DEFAULT_RATING = 5;
-const STARS_COUNT = 10;
-const STARS_ARRAY = new Array(STARS_COUNT).fill(0).map((_, index) => String(STARS_COUNT - index));
+import { DEFAULT_RATING, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, STARS_ARRAY } from '../../constants/review';
 
 function AddReview(): JSX.Element {
   const { id: filmId } = useParams();
@@ -40,7 +35,7 @@ function AddReview(): JSX.Element {
 
   const { name, posterImage, backgroundImage } = film.data;
 
-  const onSubmit = async (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (filmId) {
       setSending(true);
@@ -53,8 +48,8 @@ function AddReview(): JSX.Element {
     }
   };
 
-  const onChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void => {
-    const { name: title, value } = event.currentTarget;
+  const handleFieldChangeEvent = (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void => {
+    const { name: title, value } = evt.currentTarget;
     setFormData({
       ...formData,
       [title]: value,
@@ -102,7 +97,7 @@ function AddReview(): JSX.Element {
       </div>
 
       <div className="add-review">
-        <form onSubmit={onSubmit} className="add-review__form">
+        <form onSubmit={handleFormSubmit} className="add-review__form">
           <div className="rating">
             <div className="rating__stars">
               {
@@ -116,7 +111,7 @@ function AddReview(): JSX.Element {
                       name="rating"
                       value={item}
                       checked={item === formData.rating}
-                      onChange={onChange}
+                      onChange={handleFieldChangeEvent}
                     />
                     <label className="rating__label" htmlFor={`star-${item}`}>Rating {item}</label>
                   </Fragment>
@@ -132,7 +127,7 @@ function AddReview(): JSX.Element {
               id="reviewText"
               placeholder="Review text"
               value={formData.reviewText}
-              onChange={onChange}
+              onChange={handleFieldChangeEvent}
               minLength={MIN_COMMENT_LENGTH}
               maxLength={MAX_COMMENT_LENGTH}
               disabled={isSending}

@@ -15,7 +15,7 @@ function SignIn(): JSX.Element {
     password: '',
   });
 
-  const onChange = (evt: ChangeEvent<HTMLInputElement>): void => {
+  const handleFieldChangeEvent = (evt: ChangeEvent<HTMLInputElement>): void => {
     const { name: title, value } = evt.currentTarget;
     setFormData({
       ...formData,
@@ -23,7 +23,7 @@ function SignIn(): JSX.Element {
     });
   };
 
-  const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
     const { email, password } = formData;
     dispatch(login({ email, password }))
@@ -41,12 +41,12 @@ function SignIn(): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form onSubmit={onSubmit} action="#" className="sign-in__form">
+        <form onSubmit={handleFormSubmit} action="#" className="sign-in__form">
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
                 value={formData.email}
-                onChange={onChange}
+                onChange={handleFieldChangeEvent}
                 className="sign-in__input"
                 type="email"
                 placeholder="Email address"
@@ -59,7 +59,7 @@ function SignIn(): JSX.Element {
             <div className="sign-in__field">
               <input
                 value={formData.password}
-                onChange={onChange}
+                onChange={handleFieldChangeEvent}
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
