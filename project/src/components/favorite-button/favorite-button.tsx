@@ -4,7 +4,7 @@ import { addToFavorite, fetchPromo } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 
 type Props = {
-  film: Film
+  film: Film;
 }
 
 function FavoriteButton({ film }: Props): JSX.Element {

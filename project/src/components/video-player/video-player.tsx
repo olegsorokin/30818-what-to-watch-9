@@ -1,9 +1,9 @@
 type Props = {
-  src: string,
-  poster?: string,
-  width?: string,
-  height?: string,
-  muted?: boolean,
+  src: string;
+  poster?: string;
+  width?: string;
+  height?: string;
+  muted?: boolean;
 }
 
 function VideoPlayer({ src, poster = '', width = '100%', height = '100%', muted = false }: Props): JSX.Element {

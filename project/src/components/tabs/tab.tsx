@@ -2,9 +2,9 @@ import { SyntheticEvent } from 'react';
 import clsx from 'clsx';
 
 type Props = {
-  title: string,
-  isActive: boolean,
-  onChange: (value: string) => void
+  title: string;
+  isActive: boolean;
+  onChange: (value: string) => void;
 }
 
 function Tab({ title, isActive, onChange }: Props): JSX.Element {

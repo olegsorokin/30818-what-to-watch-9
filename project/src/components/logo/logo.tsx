@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { AppRoute } from '../../constants/routs';
 
 type Props = {
-  isLight?: boolean
+  isLight?: boolean;
 }
 
 function Logo({ isLight = false }: Props): JSX.Element {

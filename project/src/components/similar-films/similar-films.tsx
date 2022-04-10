@@ -2,7 +2,7 @@ import { Film } from '../../types/film';
 import { FilmList } from '../film-list/film-list';
 
 type Props = {
-  films: Film[]
+  films: Film[];
 }
 
 const MAX_FILMS = 4;

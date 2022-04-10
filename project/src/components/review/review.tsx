@@ -2,7 +2,7 @@ import { Comment } from '../../types/comment';
 import { formatDate } from '../../utils/common';
 
 type Props = {
-  review: Comment
+  review: Comment;
 }
 
 function Review({ review }: Props): JSX.Element {

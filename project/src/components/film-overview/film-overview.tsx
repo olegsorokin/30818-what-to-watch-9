@@ -6,7 +6,7 @@ import { getRatingLevel } from '../../utils/common';
 const MAX_STARS = 3;
 
 type Props = {
-  film: Film
+  film: Film;
 }
 
 function FilmOverview({ film }: Props): JSX.Element {

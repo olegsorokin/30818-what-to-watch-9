@@ -24,9 +24,9 @@ export function formatDuration(minutes: number): string {
 }
 
 type LoadingState<T> = {
-  data: T,
-  isLoading: boolean,
-  isLoaded: boolean,
+  data: T;
+  isLoading: boolean;
+  isLoaded: boolean;
 };
 
 export function loadData<T>(state: LoadingState<T>, type: PromiseState): LoadingState<T> {

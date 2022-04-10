@@ -5,9 +5,9 @@ import { GenreEnum } from '../../constants/genres';
 import { TGenre } from '../../types/genre';
 
 type Props = {
-  genre: TGenre,
-  onChange: (genre: GenreEnum) => void,
-  active: string,
+  genre: TGenre;
+  onChange: (genre: GenreEnum) => void;
+  active: string;
 }
 
 function GenresItem({ genre, onChange, active }: Props): JSX.Element {

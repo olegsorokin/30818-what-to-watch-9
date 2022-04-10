@@ -12,7 +12,7 @@ function areEqualFilms(prevProps: Props, nextProps: Props) {
 }
 
 type Props = {
-  film: Film,
+  film: Film;
 }
 
 function FilmCard({ film }: Props): JSX.Element {
