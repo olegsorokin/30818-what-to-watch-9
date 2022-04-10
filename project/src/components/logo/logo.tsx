@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
@@ -20,4 +19,4 @@ function Logo({ isLight = false }: Props): JSX.Element {
   );
 }
 
-export default memo(Logo);
+export { Logo };

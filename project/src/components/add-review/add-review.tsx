@@ -1,8 +1,8 @@
 import { useState, FormEvent, Fragment, ChangeEvent, useEffect } from 'react';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
-import Logo from '../logo/logo';
-import UserBlock from '../user-block/user-block';
+import { Logo } from '../logo/logo';
+import { UserBlock } from '../user-block/user-block';
 import { AppRoute } from '../../constants/routs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, sendComment } from '../../store/api-actions';

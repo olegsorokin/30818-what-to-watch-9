@@ -13,13 +13,13 @@ import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
-import { isAppDataNotLoaded } from '../../store/selectors';
+import { isAppDataLoaded } from '../../store/selectors';
 
 function App(): JSX.Element {
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
-  const isAppNotLoaded = useAppSelector(isAppDataNotLoaded);
+  const isAppLoaded = useAppSelector(isAppDataLoaded);
 
-  if (isAppNotLoaded) {
+  if (!isAppLoaded) {
     return (
       <LoadingScreen />
     );

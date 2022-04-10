@@ -1,4 +1,4 @@
-import { memo, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -42,4 +42,4 @@ function UserBlock(): JSX.Element {
   );
 }
 
-export default memo(UserBlock);
+export { UserBlock };
