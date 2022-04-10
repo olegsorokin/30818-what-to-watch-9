@@ -1,5 +1,5 @@
 import { Comment } from '../../types/comment';
-import { formatDate } from '../../utils/common';
+import { formatDate, formatFractionDigits } from '../../utils/common';
 
 type Props = {
   review: Comment;
@@ -23,7 +23,7 @@ function Review({ review }: Props): JSX.Element {
         </footer>
       </blockquote>
 
-      <div className="review__rating">{rating}</div>
+      <div className="review__rating">{formatFractionDigits(rating)}</div>
     </div>
   );
 }
