@@ -6,7 +6,7 @@ import UserBlock from '../user-block/user-block';
 import { AppRoute } from '../../constants/routs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, sendComment } from '../../store/api-actions';
-import LoadingScreen from '../loading-screen/loading-screen';
+import { LoadingScreen } from '../loading-screen/loading-screen';
 
 const DEFAULT_RATING = 5;
 const STARS_COUNT = 10;

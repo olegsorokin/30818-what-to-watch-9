@@ -3,7 +3,7 @@ import { generatePath, Link, useParams } from 'react-router-dom';
 
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { LoadingScreen } from '../../components/loading-screen/loading-screen';
 import { AppRoute } from '../../constants/routs';
 import { SimilarFilms } from '../../components/similar-films/similar-films';
 import { IconAdd, IconPlayS } from '../../components/icon';
