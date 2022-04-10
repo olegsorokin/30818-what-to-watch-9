@@ -140,6 +140,7 @@ export const sendComment = createAsyncThunk(
       toast.success('Comment sent!');
       store.dispatch(redirectToRoute(generatePath(AppRoute.Film, { id: filmId })));
     } catch (error) {
+      toast.error('Comment not sent!');
       handleError(error);
     }
   },

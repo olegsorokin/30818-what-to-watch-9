@@ -18,6 +18,7 @@ function AddReview(): JSX.Element {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { id: filmId } = useParams();
   const dispatch = useAppDispatch();
+  const [isSending, setSending] = useState(false);
 
   const { film } = useAppSelector(({ FILMS }) => FILMS);
 
@@ -40,14 +41,16 @@ function AddReview(): JSX.Element {
 
   const { name, posterImage, backgroundImage } = film.data;
 
-  const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
+  const onSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (filmId) {
-      dispatch(sendComment({
+      setSending(true);
+      await dispatch(sendComment({
         filmId,
         comment: formData.reviewText,
         rating: parseInt(formData.rating, 10),
       }));
+      setSending(false);
     }
   };
 
@@ -109,6 +112,7 @@ function AddReview(): JSX.Element {
                 STARS_ARRAY.map((item) => (
                   <Fragment key={`star-${item}`}>
                     <input
+                      disabled={isSending}
                       className="rating__input"
                       id={`star-${item}`}
                       type="radio"
@@ -139,10 +143,11 @@ function AddReview(): JSX.Element {
               minLength={MIN_COMMENT_LENGTH}
               maxLength={MAX_COMMENT_LENGTH}
               onInput={checkValidity}
+              disabled={isSending}
               required
             />
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" type="submit" disabled={isSending}>Post</button>
             </div>
           </div>
         </form>
