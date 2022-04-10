@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { GenresList } from '../genres-list/genres-list';
 import { FilmList } from '../film-list/film-list';
@@ -20,9 +20,9 @@ type Props = {
 function Catalog({ films }: Props) {
   const [activeGenre, setActiveGenre] = useState<GenreEnum>(GenreEnum.ALL_GENRES);
 
-  const onGenreChange = (genreName: GenreEnum): void => {
+  const onGenreChange = useCallback((genreName: GenreEnum): void => {
     setActiveGenre(genreName);
-  };
+  }, []);
 
   return (
     <section className="catalog">

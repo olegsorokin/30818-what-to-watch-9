@@ -1,4 +1,5 @@
 import { PromiseState } from '../constants/promise-state';
+import { RatingLevel } from '../constants/rating-level';
 
 export function formatDate(date: string): string {
   return new Date(date).toLocaleDateString('en',
@@ -37,15 +38,6 @@ export function loadData<T>(state: LoadingState<T>, type: PromiseState): Loading
     case PromiseState.REJECTED:
       return { ...state, isLoading: false, isLoaded: true };
   }
-}
-
-enum RatingLevel {
-  UNKNOWN = 'Unknown',
-  BAD = 'Bad',
-  NORMAL = 'Normal',
-  GOOD = 'Good',
-  VERY_GOOD = 'Very good',
-  AWESOME = 'Awesome',
 }
 
 export const getRatingLevel = (rating: number): string => {
