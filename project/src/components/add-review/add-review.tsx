@@ -1,4 +1,4 @@
-import { useState, FormEvent, Fragment, ChangeEvent, useEffect } from 'react';
+import { useState, FormEvent, Fragment, ChangeEvent, useEffect, BaseSyntheticEvent, useRef } from 'react';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
 import Logo from '../logo/logo';
@@ -8,11 +8,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, sendComment } from '../../store/api-actions';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 400;
 const DEFAULT_RATING = 5;
 const STARS_COUNT = 10;
 const STARS_ARRAY = new Array(STARS_COUNT).fill(0).map((_, index) => String(STARS_COUNT - index));
 
 function AddReview(): JSX.Element {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { id: filmId } = useParams();
   const dispatch = useAppDispatch();
 
@@ -54,6 +57,10 @@ function AddReview(): JSX.Element {
       ...formData,
       [title]: value,
     });
+  };
+
+  const checkValidity = (evt: BaseSyntheticEvent) => {
+    evt.target.reportValidity();
   };
 
   return (
@@ -119,12 +126,19 @@ function AddReview(): JSX.Element {
 
           <div className="add-review__text">
             <textarea
+              ref={textareaRef}
               className="add-review__textarea"
+              style={{
+                color: textareaRef.current?.validity.tooShort || textareaRef.current?.validity.tooLong ? 'red' : 'black',
+              }}
               name="reviewText"
               id="reviewText"
               placeholder="Review text"
               value={formData.reviewText}
               onChange={onChange}
+              minLength={MIN_COMMENT_LENGTH}
+              maxLength={MAX_COMMENT_LENGTH}
+              onInput={checkValidity}
               required
             />
             <div className="add-review__submit">
