@@ -8,7 +8,7 @@ import { logoutAction } from '../../store/api-actions';
 
 function UserBlock(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const { authorizationStatus, user } = useAppSelector(({ USER }) => USER);
 
   const handleLogout = (evt: MouseEvent<HTMLElement>): void => {
     evt.preventDefault();
@@ -20,7 +20,7 @@ function UserBlock(): JSX.Element {
       <ul className="user-block">
         <li className="user-block__item">
           <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+            <img src={user?.avatarUrl} alt="User avatar" width="63" height="63" />
           </div>
         </li>
         <li className="user-block__item">

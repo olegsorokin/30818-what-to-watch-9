@@ -19,7 +19,7 @@ const tabs = [
 ];
 
 type Props = {
-  film: Film
+  film: Film;
 }
 
 function FilmDescription({ film }: Props): JSX.Element {

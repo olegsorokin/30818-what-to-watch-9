@@ -14,7 +14,7 @@ import { User } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
 import { loadData } from '../utils/common';
 import { PromiseState } from '../constants/promise-state';
-import { requireAuthorization } from './user-process/user-process';
+import { loadUser, requireAuthorization } from './user-process/user-process';
 import { loadFilm, loadFilms, loadPromo, loadSimilarFilms } from './films/films';
 import { loadComments } from './comments/comments';
 import { FavoriteData } from '../types/favorite';
@@ -24,7 +24,8 @@ export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
     try {
-      await api.get(APIRoute.Login);
+      const { data } = await api.get(APIRoute.Login);
+      store.dispatch(loadUser(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
       handleError(error);
@@ -37,9 +38,10 @@ export const login = createAsyncThunk(
   'user/login',
   async ({ email, password }: Auth) => {
     try {
-      const { data: { token } } = await api.post<User>(APIRoute.Login, { email, password });
-      saveToken(token);
+      const { data } = await api.post<User>(APIRoute.Login, { email, password });
+      saveToken(data.token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(loadUser(data));
     } catch (error) {
       handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));

@@ -1,4 +1,4 @@
 export type FavoriteData = {
-  status: number,
-  filmId: number,
+  status: number;
+  filmId: number;
 };
