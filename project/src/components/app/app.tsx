@@ -38,7 +38,11 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.SignIn}
-            element={<SignIn />}
+            element={
+              <PrivateRoute authorizationStatus={authorizationStatus} isGuestOnly>
+                <SignIn />
+              </PrivateRoute>
+            }
           />
           <Route
             path={AppRoute.MyList}
