@@ -2,40 +2,50 @@ import { AuthorizationStatus } from '../constants/auth';
 import { store } from '../store';
 import { Film } from './film';
 import { Comment } from './comment';
+import { User } from './user';
 
 export type UserProcessState = {
-  authorizationStatus: AuthorizationStatus
+  authorizationStatus: AuthorizationStatus;
+  user: User | null;
 };
 
 export type FilmsState = {
   films: {
-    data: Film[],
-    isLoading: boolean,
-    isLoaded: boolean,
-  },
+    data: Film[];
+    isLoading: boolean;
+    isLoaded: boolean;
+  };
   film: {
-    data: Film | null,
-    isLoading: boolean,
-    isLoaded: boolean,
-  },
+    data: Film | null;
+    isLoading: boolean;
+    isLoaded: boolean;
+  };
   similarFilms: {
-    data: Film[],
-    isLoading: boolean,
-    isLoaded: boolean,
-  },
+    data: Film[];
+    isLoading: boolean;
+    isLoaded: boolean;
+  };
   promo: {
-    data: Film | null,
-    isLoading: boolean,
-    isLoaded: boolean,
-  },
+    data: Film | null;
+    isLoading: boolean;
+    isLoaded: boolean;
+  };
 };
 
 export type CommentsState = {
   comments: {
-    data: Comment[],
-    isLoading: boolean,
-    isLoaded: boolean,
-  },
+    data: Comment[];
+    isLoading: boolean;
+    isLoaded: boolean;
+  };
+}
+
+export type FavoriteState = {
+  favorite: {
+    data: Film[];
+    isLoading: boolean;
+    isLoaded: boolean;
+  }
 }
 
 export type State = ReturnType<typeof store.getState>;

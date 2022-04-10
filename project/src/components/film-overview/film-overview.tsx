@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { Film } from '../../types/film';
-import { getRatingLevel } from '../../utils/common';
+import { formatFractionDigits, getRatingLevel } from '../../utils/common';
 
 const MAX_STARS = 3;
 
 type Props = {
-  film: Film
+  film: Film;
 }
 
 function FilmOverview({ film }: Props): JSX.Element {
@@ -21,7 +21,7 @@ function FilmOverview({ film }: Props): JSX.Element {
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{rating}</div>
+        <div className="film-rating__score">{formatFractionDigits(rating)}</div>
         <p className="film-rating__meta">
           <span className="film-rating__level">{getRatingLevel(rating)}</span>
           <span className="film-rating__count">{scoresCount} ratings</span>

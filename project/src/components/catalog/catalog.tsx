@@ -14,7 +14,7 @@ function filmsByGenre(films: Film[], genre: GenreEnum) {
 }
 
 type Props = {
-  films: Film[],
+  films: Film[];
 };
 
 function Catalog({ films }: Props) {

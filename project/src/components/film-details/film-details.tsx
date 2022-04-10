@@ -4,11 +4,11 @@ import { Film } from '../../types/film';
 import { formatDuration, isLastItem } from '../../utils/common';
 
 type Props = {
-  film: Film
+  film: Film;
 }
 
 type StarWithBrProps = {
-  star: string
+  star: string;
 }
 
 function StarWithBr({ star }: StarWithBrProps): JSX.Element {

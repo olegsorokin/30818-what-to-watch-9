@@ -12,7 +12,7 @@ function areEqualFilms(prevProps: Props, nextProps: Props) {
 }
 
 type Props = {
-  film: Film,
+  film: Film;
 }
 
 function FilmCard({ film }: Props): JSX.Element {
@@ -52,7 +52,7 @@ function FilmCard({ film }: Props): JSX.Element {
       <div className="small-film-card__image">
         {
           isPlaying &&
-            <VideoPlayer src={previewVideoLink} muted />
+            <VideoPlayer src={previewVideoLink} poster={previewImage} muted />
         }
         <img
           src={previewImage}

@@ -7,7 +7,7 @@ import { ShowMore } from '../show-more/show-more';
 const SHOW_MORE_STEP = 8;
 
 type Props = {
-  films: Film[],
+  films: Film[];
 }
 
 function FilmList({ films }: Props): JSX.Element {

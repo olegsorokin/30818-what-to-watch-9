@@ -2,8 +2,8 @@ import { GenreEnum, genres } from '../../constants/genres';
 import { GenresItem } from '../genres-item/genres-item';
 
 type Props = {
-  onChange: (genre: GenreEnum) => void,
-  active: string
+  onChange: (genre: GenreEnum) => void;
+  active: string;
 }
 
 function GenresList({ onChange, active }: Props): JSX.Element {

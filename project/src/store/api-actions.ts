@@ -14,15 +14,18 @@ import { User } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
 import { loadData } from '../utils/common';
 import { PromiseState } from '../constants/promise-state';
-import { requireAuthorization } from './user-process/user-process';
+import { loadUser, requireAuthorization } from './user-process/user-process';
 import { loadFilm, loadFilms, loadPromo, loadSimilarFilms } from './films/films';
 import { loadComments } from './comments/comments';
+import { FavoriteData } from '../types/favorite';
+import { loadFavorites } from './favorites/favorites';
 
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
     try {
-      await api.get(APIRoute.Login);
+      const { data } = await api.get(APIRoute.Login);
+      store.dispatch(loadUser(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
       handleError(error);
@@ -35,9 +38,10 @@ export const login = createAsyncThunk(
   'user/login',
   async ({ email, password }: Auth) => {
     try {
-      const { data: { token } } = await api.post<User>(APIRoute.Login, { email, password });
-      saveToken(token);
+      const { data } = await api.post<User>(APIRoute.Login, { email, password });
+      saveToken(data.token);
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      store.dispatch(loadUser(data));
     } catch (error) {
       handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -135,6 +139,32 @@ export const sendComment = createAsyncThunk(
       await api.post(`${APIRoute.Comments}/${filmId}`, { comment, rating });
       toast.success('Comment sent!');
       store.dispatch(redirectToRoute(generatePath(AppRoute.Film, { id: filmId })));
+    } catch (error) {
+      toast.error('Comment not sent!');
+      handleError(error);
+    }
+  },
+);
+
+export const addToFavorite = createAsyncThunk(
+  'data/addToFavorite',
+  async ({ filmId, status }: FavoriteData) => {
+    try {
+      await api.post(`${APIRoute.Favorite}/${filmId}/${status}`);
+    } catch (error) {
+      handleError(error);
+    }
+  },
+);
+
+export const fetchFavorite = createAsyncThunk(
+  'data/fetchFavorite',
+  async () => {
+    const { favorite } = store.getState().FAVORITE;
+    try {
+      store.dispatch(loadFavorites(loadData({ ...favorite, data: [] }, PromiseState.PENDING)));
+      const { data } = await api.get(`${APIRoute.Favorite}`);
+      store.dispatch(loadFavorites(loadData({ ...favorite, data }, PromiseState.FULFILLED)));
     } catch (error) {
       handleError(error);
     }

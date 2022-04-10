@@ -13,14 +13,13 @@ import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
-import { isAppDataNotLoaded } from '../../store/selectors';
+import { isAppDataLoaded } from '../../store/selectors';
 
 function App(): JSX.Element {
-  const { films } = useAppSelector(({ FILMS }) => FILMS);
   const { authorizationStatus } = useAppSelector(({ USER }) => USER);
-  const isAppNotLoaded = useAppSelector(isAppDataNotLoaded);
+  const isAppLoaded = useAppSelector(isAppDataLoaded);
 
-  if (isAppNotLoaded) {
+  if (!isAppLoaded) {
     return (
       <LoadingScreen />
     );
@@ -39,13 +38,17 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.SignIn}
-            element={<SignIn />}
+            element={
+              <PrivateRoute authorizationStatus={authorizationStatus} isGuestOnly>
+                <SignIn />
+              </PrivateRoute>
+            }
           />
           <Route
             path={AppRoute.MyList}
             element={
               <PrivateRoute authorizationStatus={authorizationStatus}>
-                <MyList films={films.data} />
+                <MyList />
               </PrivateRoute>
             }
           />
@@ -59,12 +62,16 @@ function App(): JSX.Element {
             />
             <Route
               path={AppRoute.AddReview}
-              element={<AddReview />}
+              element={
+                <PrivateRoute authorizationStatus={authorizationStatus}>
+                  <AddReview />
+                </PrivateRoute>
+              }
             />
           </Route>
           <Route
             path={AppRoute.Player}
-            element={<Player video={films.data[0]} />}
+            element={<Player />}
           />
         </Route>
         <Route

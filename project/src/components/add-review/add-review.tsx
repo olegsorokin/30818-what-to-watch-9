@@ -1,20 +1,18 @@
 import { useState, FormEvent, Fragment, ChangeEvent, useEffect } from 'react';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
-import Logo from '../logo/logo';
-import UserBlock from '../user-block/user-block';
+import { Logo } from '../logo/logo';
+import { UserBlock } from '../user-block/user-block';
 import { AppRoute } from '../../constants/routs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, sendComment } from '../../store/api-actions';
 import { LoadingScreen } from '../loading-screen/loading-screen';
-
-const DEFAULT_RATING = 5;
-const STARS_COUNT = 10;
-const STARS_ARRAY = new Array(STARS_COUNT).fill(0).map((_, index) => String(STARS_COUNT - index));
+import { DEFAULT_RATING, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, STARS_ARRAY } from '../../constants/review';
 
 function AddReview(): JSX.Element {
   const { id: filmId } = useParams();
   const dispatch = useAppDispatch();
+  const [isSending, setSending] = useState(false);
 
   const { film } = useAppSelector(({ FILMS }) => FILMS);
 
@@ -37,24 +35,28 @@ function AddReview(): JSX.Element {
 
   const { name, posterImage, backgroundImage } = film.data;
 
-  const onSubmit = (evt: FormEvent<HTMLFormElement>): void => {
+  const handleFormSubmit = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (filmId) {
-      dispatch(sendComment({
+      setSending(true);
+      await dispatch(sendComment({
         filmId,
         comment: formData.reviewText,
         rating: parseInt(formData.rating, 10),
       }));
+      setSending(false);
     }
   };
 
-  const onChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void => {
-    const { name: title, value } = event.currentTarget;
+  const handleFieldChangeEvent = (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>): void => {
+    const { name: title, value } = evt.currentTarget;
     setFormData({
       ...formData,
       [title]: value,
     });
   };
+
+  const validateReviewText = () => formData.reviewText.length >= MIN_COMMENT_LENGTH && formData.reviewText.length <= MAX_COMMENT_LENGTH;
 
   return (
     <section className="film-card film-card--full">
@@ -95,20 +97,21 @@ function AddReview(): JSX.Element {
       </div>
 
       <div className="add-review">
-        <form onSubmit={onSubmit} className="add-review__form">
+        <form onSubmit={handleFormSubmit} className="add-review__form">
           <div className="rating">
             <div className="rating__stars">
               {
                 STARS_ARRAY.map((item) => (
                   <Fragment key={`star-${item}`}>
                     <input
+                      disabled={isSending}
                       className="rating__input"
                       id={`star-${item}`}
                       type="radio"
                       name="rating"
                       value={item}
                       checked={item === formData.rating}
-                      onChange={onChange}
+                      onChange={handleFieldChangeEvent}
                     />
                     <label className="rating__label" htmlFor={`star-${item}`}>Rating {item}</label>
                   </Fragment>
@@ -124,11 +127,20 @@ function AddReview(): JSX.Element {
               id="reviewText"
               placeholder="Review text"
               value={formData.reviewText}
-              onChange={onChange}
+              onChange={handleFieldChangeEvent}
+              minLength={MIN_COMMENT_LENGTH}
+              maxLength={MAX_COMMENT_LENGTH}
+              disabled={isSending}
               required
             />
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button
+                className="add-review__btn"
+                type="submit"
+                disabled={isSending || !validateReviewText()}
+              >
+                Post
+              </button>
             </div>
           </div>
         </form>

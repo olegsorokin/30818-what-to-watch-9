@@ -1,13 +1,13 @@
 import { Tab as TabItem } from './tab';
 
 type Tab = {
-  title: string,
+  title: string;
 }
 
 type Props = {
-  tabs: Tab[],
-  active: string,
-  onChange: (s: string) => void,
+  tabs: Tab[];
+  active: string;
+  onChange: (s: string) => void;
 }
 
 function Tabs({ tabs, onChange, active }: Props): JSX.Element {

@@ -1,11 +1,20 @@
-import Logo from '../../components/logo/logo';
-import { IconAdd, IconPlayS } from '../../components/icon';
+import { generatePath, useNavigate } from 'react-router-dom';
+
+import { Logo } from '../../components/logo/logo';
+import { UserBlock } from '../../components/user-block/user-block';
+import { IconPlayS } from '../../components/icon';
 import { useAppSelector } from '../../hooks';
-import UserBlock from '../../components/user-block/user-block';
 import { Catalog } from '../../components/catalog/catalog';
+import { AppRoute } from '../../constants/routs';
+import { FavoriteButton } from '../../components/favorite-button/favorite-button';
 
 function Main(): JSX.Element {
+  const navigate = useNavigate();
   const { films, promo } = useAppSelector(({ FILMS }) => FILMS);
+
+  const handlePlayButtonClick = () => {
+    navigate(generatePath(AppRoute.Player, { id: String(promo.data?.id) }));
+  };
 
   return (
     <>
@@ -41,14 +50,14 @@ function Main(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={handlePlayButtonClick}>
                   <IconPlayS />
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <IconAdd />
-                  <span>My list</span>
-                </button>
+                {
+                  promo.data &&
+                    <FavoriteButton film={promo.data} />
+                }
               </div>
             </div>
           </div>

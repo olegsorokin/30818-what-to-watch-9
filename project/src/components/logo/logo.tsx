@@ -1,11 +1,10 @@
-import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 import { AppRoute } from '../../constants/routs';
 
 type Props = {
-  isLight?: boolean
+  isLight?: boolean;
 }
 
 function Logo({ isLight = false }: Props): JSX.Element {
@@ -20,4 +19,4 @@ function Logo({ isLight = false }: Props): JSX.Element {
   );
 }
 
-export default memo(Logo);
+export { Logo };
