@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
-import { Logo } from '../../components/logo/logo';
-import { UserBlock } from '../../components/user-block/user-block';
-import { LoadingScreen } from '../../components/loading-screen/loading-screen';
-import { FilmList } from '../../components/film-list/film-list';
+import { Logo } from '../logo/logo';
+import { UserBlock } from '../user-block/user-block';
+import { LoadingScreen } from '../loading-screen/loading-screen';
+import { FilmList } from '../film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavorite } from '../../store/api-actions';
 

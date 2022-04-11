@@ -3,6 +3,7 @@ import { store } from '../store';
 import { Film } from './film';
 import { Comment } from './comment';
 import { User } from './user';
+import { Genre } from './genre';
 
 export type UserProcessState = {
   authorizationStatus: AuthorizationStatus;
@@ -30,6 +31,7 @@ export type FilmsState = {
     isLoading: boolean;
     isLoaded: boolean;
   };
+  genres: Genre[];
 };
 
 export type CommentsState = {

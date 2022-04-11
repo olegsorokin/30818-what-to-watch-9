@@ -2,11 +2,13 @@ import { useState } from 'react';
 
 import { GenresList } from '../genres-list/genres-list';
 import { FilmList } from '../film-list/film-list';
-import { GenreEnum } from '../../constants/genres';
 import { Film } from '../../types/film';
+import { Genre } from '../../types/genre';
+import { useAppSelector } from '../../hooks';
+import { ALL_GENRES } from '../../constants/genre';
 
-function filmsByGenre(films: Film[], genre: GenreEnum) {
-  if (genre === GenreEnum.ALL_GENRES) {
+function filterFilmsByGenre(films: Film[], genre: Genre) {
+  if (genre === ALL_GENRES) {
     return films;
   }
 
@@ -18,9 +20,10 @@ type Props = {
 };
 
 function Catalog({ films }: Props) {
-  const [activeGenre, setActiveGenre] = useState<GenreEnum>(GenreEnum.ALL_GENRES);
+  const { genres } = useAppSelector(({ FILMS }) => FILMS);
+  const [activeGenre, setActiveGenre] = useState<Genre>(genres[0]);
 
-  const handleGenreChange = (genreName: GenreEnum): void => {
+  const handleGenreChange = (genreName: Genre): void => {
     setActiveGenre(genreName);
   };
 
@@ -30,7 +33,7 @@ function Catalog({ films }: Props) {
 
       <GenresList active={activeGenre} onChange={handleGenreChange} />
 
-      <FilmList films={filmsByGenre(films, activeGenre)} />
+      <FilmList films={filterFilmsByGenre(films, activeGenre)} />
     </section>
   );
 }

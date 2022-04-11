@@ -1,5 +1,8 @@
+import { ALL_GENRES, MAX_GENRES } from '../constants/genre';
 import { PromiseState } from '../constants/promise-state';
 import { RatingLevel } from '../constants/rating-level';
+import { Film } from '../types/film';
+import { Genre } from '../types/genre';
 
 export function formatDate(date: string): string {
   return new Date(date).toLocaleDateString('en',
@@ -18,9 +21,9 @@ export function isLastItem(length: number, index: number): boolean {
 const formatTime = (number: number) => `0${number}`.slice(-2);
 
 export function formatDuration(minutes: number): string {
-  const h = Math.floor(minutes / 60);
-  const m = formatTime(minutes % 60);
-  return `${h}h ${m}m`;
+  const hours = Math.floor(minutes / 60);
+  const mim = formatTime(minutes % 60);
+  return `${hours}h ${mim}m`;
 }
 
 type LoadingState<T> = {
@@ -38,6 +41,13 @@ export function loadData<T>(state: LoadingState<T>, type: PromiseState): Loading
     case PromiseState.REJECTED:
       return { ...state, isLoading: false, isLoaded: true };
   }
+}
+
+export function createGenresList(films: Film[]): Genre[] {
+  const uniqueGenres = new Set<Genre>();
+  films.forEach((film) => uniqueGenres.add(film.genre));
+  const sortedGenres = [...uniqueGenres].slice(0, MAX_GENRES).sort();
+  return [ALL_GENRES, ...sortedGenres];
 }
 
 export const getRatingLevel = (rating: number): string => {
@@ -63,11 +73,11 @@ export const getRatingLevel = (rating: number): string => {
 export const getProgress = (duration: number, currentTime: number) => Math.round(currentTime / (duration / 100));
 
 export const getCurrentTime = (seconds: number): string => {
-  const h = Math.floor(seconds / 60 / 60);
-  const m = Math.floor(seconds / 60) % 60;
-  const s = seconds % 60;
+  const hours = Math.floor(seconds / 60 / 60);
+  const minutes = Math.floor(seconds / 60) % 60;
+  const sec = seconds % 60;
 
-  return h === 0 ? `${formatTime(m)}:${formatTime(s)}` : `${formatTime(h)}:${formatTime(m)}:${formatTime(s)}`;
+  return hours === 0 ? `${formatTime(minutes)}:${formatTime(sec)}` : `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(sec)}`;
 };
 
 export const formatFractionDigits = (value: number, digits = 1) => value.toFixed(digits);

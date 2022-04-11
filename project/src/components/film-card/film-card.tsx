@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import { generatePath, Link } from 'react-router-dom';
+import { generatePath, Link, useNavigate } from 'react-router-dom';
 
 import { AppRoute } from '../../constants/routs';
 import { Film } from '../../types/film';
@@ -16,6 +16,7 @@ type Props = {
 }
 
 function FilmCard({ film }: Props): JSX.Element {
+  const navigate = useNavigate();
   const { id, name, previewImage, previewVideoLink } = film;
   const [isHovered, setHovered] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
@@ -26,6 +27,10 @@ function FilmCard({ film }: Props): JSX.Element {
 
   const handleMouseLeave = (): void => {
     setHovered(false);
+  };
+
+  const handleImageClickEvent = () => {
+    navigate(generatePath(AppRoute.Film, { id: String(id) }));
   };
 
   useEffect(() => {
@@ -48,6 +53,8 @@ function FilmCard({ film }: Props): JSX.Element {
       className="small-film-card catalog__films-card"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      style={{ cursor: 'pointer' }}
+      onClick={handleImageClickEvent}
     >
       <div className="small-film-card__image">
         {

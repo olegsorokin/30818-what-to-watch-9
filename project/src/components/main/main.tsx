@@ -1,20 +1,35 @@
+import { useEffect } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 
-import { Logo } from '../../components/logo/logo';
-import { UserBlock } from '../../components/user-block/user-block';
-import { IconPlayS } from '../../components/icon';
-import { useAppSelector } from '../../hooks';
-import { Catalog } from '../../components/catalog/catalog';
+import { Logo } from '../logo/logo';
+import { UserBlock } from '../user-block/user-block';
+import { IconPlayS } from '../icon';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Catalog } from '../catalog/catalog';
 import { AppRoute } from '../../constants/routs';
-import { FavoriteButton } from '../../components/favorite-button/favorite-button';
+import { FavoriteButton } from '../favorite-button/favorite-button';
+import { fetchFilms, fetchPromo } from '../../store/api-actions';
+import { LoadingScreen } from '../loading-screen/loading-screen';
 
 function Main(): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { films, promo } = useAppSelector(({ FILMS }) => FILMS);
 
   const handlePlayButtonClick = () => {
     navigate(generatePath(AppRoute.Player, { id: String(promo.data?.id) }));
   };
+
+  useEffect(() => {
+    dispatch(fetchFilms());
+    dispatch(fetchPromo());
+  }, [dispatch]);
+
+  if (!films.isLoaded || !promo.isLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <>
@@ -56,7 +71,7 @@ function Main(): JSX.Element {
                 </button>
                 {
                   promo.data &&
-                    <FavoriteButton film={promo.data} />
+                    <FavoriteButton film={promo.data} isPromo />
                 }
               </div>
             </div>
