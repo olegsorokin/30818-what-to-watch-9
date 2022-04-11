@@ -143,7 +143,6 @@ export const sendComment = createAsyncThunk(
     try {
       await api.post(`${APIRoute.Comments}/${filmId}`, { comment, rating });
       toast.success('Comment sent!');
-      store.dispatch(redirectToRoute(generatePath(AppRoute.Film, { id: filmId })));
     } catch (error) {
       toast.error('Comment not sent!');
       handleError(error);

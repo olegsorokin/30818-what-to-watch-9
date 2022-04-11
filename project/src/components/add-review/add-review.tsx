@@ -1,5 +1,5 @@
 import { useState, FormEvent, Fragment, ChangeEvent, useEffect } from 'react';
-import { generatePath, Link, useParams } from 'react-router-dom';
+import { generatePath, Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Logo } from '../logo/logo';
 import { UserBlock } from '../user-block/user-block';
@@ -18,6 +18,7 @@ import {
 function AddReview(): JSX.Element {
   const { id: filmId } = useParams();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [isSending, setSending] = useState(false);
 
   const { film } = useAppSelector(({ FILMS }) => FILMS);
@@ -51,6 +52,7 @@ function AddReview(): JSX.Element {
         rating: parseInt(formData.rating, 10),
       }));
       setSending(false);
+      navigate(generatePath(AppRoute.Film, { id: filmId }));
     }
   };
 
