@@ -21,9 +21,9 @@ export function isLastItem(length: number, index: number): boolean {
 const formatTime = (number: number) => `0${number}`.slice(-2);
 
 export function formatDuration(minutes: number): string {
-  const h = Math.floor(minutes / 60);
-  const m = formatTime(minutes % 60);
-  return `${h}h ${m}m`;
+  const hours = Math.floor(minutes / 60);
+  const mim = formatTime(minutes % 60);
+  return `${hours}h ${mim}m`;
 }
 
 type LoadingState<T> = {
@@ -73,11 +73,11 @@ export const getRatingLevel = (rating: number): string => {
 export const getProgress = (duration: number, currentTime: number) => Math.round(currentTime / (duration / 100));
 
 export const getCurrentTime = (seconds: number): string => {
-  const h = Math.floor(seconds / 60 / 60);
-  const m = Math.floor(seconds / 60) % 60;
-  const s = seconds % 60;
+  const hours = Math.floor(seconds / 60 / 60);
+  const minutes = Math.floor(seconds / 60) % 60;
+  const sec = seconds % 60;
 
-  return h === 0 ? `${formatTime(m)}:${formatTime(s)}` : `${formatTime(h)}:${formatTime(m)}:${formatTime(s)}`;
+  return hours === 0 ? `${formatTime(minutes)}:${formatTime(sec)}` : `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(sec)}`;
 };
 
 export const formatFractionDigits = (value: number, digits = 1) => value.toFixed(digits);
