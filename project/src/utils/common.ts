@@ -1,5 +1,8 @@
+import { ALL_GENRES, MAX_GENRES } from '../constants/genre';
 import { PromiseState } from '../constants/promise-state';
 import { RatingLevel } from '../constants/rating-level';
+import { Film } from '../types/film';
+import { Genre } from '../types/genre';
 
 export function formatDate(date: string): string {
   return new Date(date).toLocaleDateString('en',
@@ -38,6 +41,13 @@ export function loadData<T>(state: LoadingState<T>, type: PromiseState): Loading
     case PromiseState.REJECTED:
       return { ...state, isLoading: false, isLoaded: true };
   }
+}
+
+export function createGenresList(films: Film[]): Genre[] {
+  const uniqueGenres = new Set<Genre>();
+  films.forEach((film) => uniqueGenres.add(film.genre));
+  const sortedGenres = [...uniqueGenres].slice(0, MAX_GENRES).sort();
+  return [ALL_GENRES, ...sortedGenres];
 }
 
 export const getRatingLevel = (rating: number): string => {

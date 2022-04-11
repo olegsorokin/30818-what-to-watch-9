@@ -1,31 +1,30 @@
 import { SyntheticEvent } from 'react';
 import clsx from 'clsx';
 
-import { GenreEnum } from '../../constants/genres';
-import { TGenre } from '../../types/genre';
+import { Genre } from '../../types/genre';
 
 type Props = {
-  genre: TGenre;
-  onChange: (genre: GenreEnum) => void;
+  genre: Genre;
+  onChange: (genre: Genre) => void;
   active: string;
 }
 
 function GenresItem({ genre, onChange, active }: Props): JSX.Element {
   const handleAnchorClick = (evt: SyntheticEvent): void => {
     evt.preventDefault();
-    onChange(genre.type);
+    onChange(genre);
   };
 
   return (
     <li
-      className={clsx('catalog__genres-item', { 'catalog__genres-item--active': active === genre.type })}
+      className={clsx('catalog__genres-item', { 'catalog__genres-item--active': active === genre })}
     >
       <a
         href="/#"
         className="catalog__genres-link"
         onClick={handleAnchorClick}
       >
-        {genre.name}
+        {genre}
       </a>
     </li>
   );

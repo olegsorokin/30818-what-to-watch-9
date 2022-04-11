@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { generatePath, useNavigate } from 'react-router-dom';
 
 import { Logo } from '../../components/logo/logo';
@@ -7,7 +8,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Catalog } from '../../components/catalog/catalog';
 import { AppRoute } from '../../constants/routs';
 import { FavoriteButton } from '../../components/favorite-button/favorite-button';
-import { useEffect } from 'react';
 import { fetchFilms, fetchPromo } from '../../store/api-actions';
 import { LoadingScreen } from '../../components/loading-screen/loading-screen';
 

@@ -15,7 +15,7 @@ import { dropToken, saveToken } from '../services/token';
 import { loadData } from '../utils/common';
 import { PromiseState } from '../constants/promise-state';
 import { loadUser, requireAuthorization } from './user-process/user-process';
-import { loadFilm, loadFilms, loadPromo, loadSimilarFilms } from './films/films';
+import { loadFilm, loadFilms, loadPromo, loadSimilarFilms, loafGenres } from './films/films';
 import { loadComments } from './comments/comments';
 import { FavoriteData } from '../types/favorite';
 import { loadFavorites } from './favorites/favorites';
@@ -69,6 +69,7 @@ export const fetchFilms = createAsyncThunk(
       store.dispatch(loadFilms(loadData({ ...films, data: [] }, PromiseState.PENDING)));
       const { data } = await api.get<Film[]>(APIRoute.Films);
       store.dispatch(loadFilms(loadData({ ...films, data }, PromiseState.FULFILLED)));
+      store.dispatch(loafGenres(data));
     } catch (error) {
       handleError(error);
     }
