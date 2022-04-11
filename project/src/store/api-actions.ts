@@ -1,12 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { generatePath } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { api, store } from './index';
 import { Comment, CommentData } from '../types/comment';
 import { Film, FilmData } from '../types/film';
-import { redirectToRoute } from './action';
-import { APIRoute, AppRoute } from '../constants/routs';
+import { APIRoute } from '../constants/routs';
 import { AuthorizationStatus } from '../constants/auth';
 import { handleError } from '../services/handle-error';
 import { Auth } from '../types/auth';
