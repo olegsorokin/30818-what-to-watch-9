@@ -4,7 +4,6 @@ import { GenresList } from '../genres-list/genres-list';
 import { FilmList } from '../film-list/film-list';
 import { Film } from '../../types/film';
 import { Genre } from '../../types/genre';
-import { useAppSelector } from '../../hooks';
 import { ALL_GENRES } from '../../constants/genre';
 
 function filterFilmsByGenre(films: Film[], genre: Genre) {
@@ -20,8 +19,7 @@ type Props = {
 };
 
 function Catalog({ films }: Props) {
-  const { genres } = useAppSelector(({ FILMS }) => FILMS);
-  const [activeGenre, setActiveGenre] = useState<Genre>(genres[0]);
+  const [activeGenre, setActiveGenre] = useState<Genre>(ALL_GENRES);
 
   const handleGenreChange = (genreName: Genre): void => {
     setActiveGenre(genreName);

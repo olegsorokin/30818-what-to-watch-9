@@ -6,7 +6,7 @@ import { createGenresList } from '../../utils/common';
 
 const initialState: FilmsState = {
   films: {
-    data: [],
+    items: [],
     isLoading: false,
     isLoaded: false,
   },
@@ -16,7 +16,7 @@ const initialState: FilmsState = {
     isLoaded: false,
   },
   similarFilms: {
-    data: [],
+    items: [],
     isLoading: false,
     isLoaded: false,
   },
@@ -29,7 +29,7 @@ const initialState: FilmsState = {
 };
 
 export const films = createSlice({
-  name: NameSpace.FILMS,
+  name: NameSpace.Films,
   initialState,
   reducers: {
     loadFilms: (state, action) => {

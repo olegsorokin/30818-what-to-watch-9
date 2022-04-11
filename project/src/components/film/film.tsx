@@ -12,13 +12,15 @@ import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
 import { FilmDescription } from '../film-description/film-description';
 import { FavoriteButton } from '../favorite-button/favorite-button';
 import { isStatusAuth } from '../../store/selectors';
+import { film as filmSelector, similarFilms as similarFilmsSelector } from '../../store/selectors';
 
 function Film(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { id: filmId } = useParams();
 
-  const { film, similarFilms } = useAppSelector(({ FILMS }) => FILMS);
+  const film = useAppSelector(filmSelector);
+  const similarFilms = useAppSelector(similarFilmsSelector);
   const isAuth = useAppSelector(isStatusAuth);
 
   const handlePlayButtonClick = () => {
@@ -105,7 +107,7 @@ function Film(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <SimilarFilms films={similarFilms.data} />
+        <SimilarFilms films={similarFilms.items} />
 
         <footer className="page-footer">
           <Logo isLight />

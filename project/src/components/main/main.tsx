@@ -10,11 +10,13 @@ import { AppRoute } from '../../constants/routs';
 import { FavoriteButton } from '../favorite-button/favorite-button';
 import { fetchFilms, fetchPromo } from '../../store/api-actions';
 import { LoadingScreen } from '../loading-screen/loading-screen';
+import { films as filmsSelector, promo as promoSelector } from '../../store/selectors';
 
 function Main(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { films, promo } = useAppSelector(({ FILMS }) => FILMS);
+  const films = useAppSelector(filmsSelector);
+  const promo = useAppSelector(promoSelector);
 
   const handlePlayButtonClick = () => {
     navigate(generatePath(AppRoute.Player, { id: String(promo.data?.id) }));
@@ -80,7 +82,7 @@ function Main(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <Catalog films={films.data} />
+        <Catalog films={films.items} />
 
         <footer className="page-footer">
           <Logo isLight />

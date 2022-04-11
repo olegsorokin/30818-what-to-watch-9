@@ -5,14 +5,14 @@ import { FavoriteState } from '../../types/state';
 
 const initialState: FavoriteState = {
   favorite: {
-    data: [],
+    items: [],
     isLoading: false,
     isLoaded: false,
   },
 };
 
 export const favorites = createSlice({
-  name: NameSpace.FAVORITE,
+  name: NameSpace.Favorite,
   initialState,
   reducers: {
     loadFavorites: (state, action) => {

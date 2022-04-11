@@ -78,7 +78,7 @@ function SignIn(): JSX.Element {
                 placeholder="Password"
                 name="password"
                 id="password"
-                pattern="(?=.*\d)(?=.*[a-z]).{2,}"
+                pattern="(?=.*\d)(?=.*[a-z-A-Z]).{2,}"
                 required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
