@@ -6,10 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { App } from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { checkAuthAction, fetchFilms, fetchPromo } from './store/api-actions';
+import { checkAuthAction } from './store/api-actions';
 
-store.dispatch(fetchFilms());
-store.dispatch(fetchPromo());
 store.dispatch(checkAuthAction());
 
 ReactDOM.render(

@@ -3,18 +3,33 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { Logo } from '../../components/logo/logo';
 import { UserBlock } from '../../components/user-block/user-block';
 import { IconPlayS } from '../../components/icon';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Catalog } from '../../components/catalog/catalog';
 import { AppRoute } from '../../constants/routs';
 import { FavoriteButton } from '../../components/favorite-button/favorite-button';
+import { useEffect } from 'react';
+import { fetchFilms, fetchPromo } from '../../store/api-actions';
+import { LoadingScreen } from '../../components/loading-screen/loading-screen';
 
 function Main(): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { films, promo } = useAppSelector(({ FILMS }) => FILMS);
 
   const handlePlayButtonClick = () => {
     navigate(generatePath(AppRoute.Player, { id: String(promo.data?.id) }));
   };
+
+  useEffect(() => {
+    dispatch(fetchFilms());
+    dispatch(fetchPromo());
+  }, [dispatch]);
+
+  if (!films.isLoaded || !promo.isLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <>
