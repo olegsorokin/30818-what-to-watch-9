@@ -28,7 +28,6 @@ export const checkAuthAction = createAsyncThunk(
       store.dispatch(loadUser(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
-      handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
