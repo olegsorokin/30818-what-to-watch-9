@@ -6,7 +6,7 @@ import { createGenresList } from '../../utils/common';
 
 const initialState: FilmsState = {
   films: {
-    data: [],
+    items: [],
     isLoading: false,
     isLoaded: false,
   },
@@ -16,7 +16,7 @@ const initialState: FilmsState = {
     isLoaded: false,
   },
   similarFilms: {
-    data: [],
+    items: [],
     isLoading: false,
     isLoaded: false,
   },

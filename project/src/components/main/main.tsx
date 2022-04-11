@@ -82,7 +82,7 @@ function Main(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <Catalog films={films.data} />
+        <Catalog films={films.items} />
 
         <footer className="page-footer">
           <Logo isLight />

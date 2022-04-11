@@ -27,7 +27,8 @@ export function formatDuration(minutes: number): string {
 }
 
 type LoadingState<T> = {
-  data: T;
+  items?: T,
+  data?: T,
   isLoading: boolean;
   isLoaded: boolean;
 };

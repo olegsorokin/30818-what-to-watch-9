@@ -107,7 +107,7 @@ function Film(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <SimilarFilms films={similarFilms.data} />
+        <SimilarFilms films={similarFilms.items} />
 
         <footer className="page-footer">
           <Logo isLight />

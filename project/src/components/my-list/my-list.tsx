@@ -16,7 +16,7 @@ function MyList(): JSX.Element {
     dispatch(fetchFavorite());
   }, [dispatch]);
 
-  if (!favorite.data) {
+  if (!favorite.items) {
     return (
       <LoadingScreen />
     );
@@ -35,7 +35,7 @@ function MyList(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmList films={favorite.data} />
+        <FilmList films={favorite.items} />
       </section>
 
       <footer className="page-footer">

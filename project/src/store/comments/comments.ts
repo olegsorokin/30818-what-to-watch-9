@@ -5,7 +5,7 @@ import { NameSpace } from '../../constants/name-space';
 
 const initialState: CommentsState = {
   comments: {
-    data: [],
+    items: [],
     isLoading: false,
     isLoaded: false,
   },

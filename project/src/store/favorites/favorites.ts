@@ -5,7 +5,7 @@ import { FavoriteState } from '../../types/state';
 
 const initialState: FavoriteState = {
   favorite: {
-    data: [],
+    items: [],
     isLoading: false,
     isLoaded: false,
   },

@@ -64,9 +64,9 @@ export const fetchFilms = createAsyncThunk(
   async () => {
     const { films } = store.getState().FILMS;
     try {
-      store.dispatch(loadFilms(loadData({ ...films, data: [] }, PromiseState.Pending)));
+      store.dispatch(loadFilms(loadData({ ...films, items: [] }, PromiseState.Pending)));
       const { data } = await api.get<Film[]>(APIRoute.Films);
-      store.dispatch(loadFilms(loadData({ ...films, data }, PromiseState.Fulfilled)));
+      store.dispatch(loadFilms(loadData({ ...films, items: data }, PromiseState.Fulfilled)));
       store.dispatch(loafGenres(data));
     } catch (error) {
       store.dispatch(loadFilms(loadData(films, PromiseState.Rejected)));
@@ -80,9 +80,9 @@ export const fetchSimilarFilms = createAsyncThunk(
   async ({ filmId }: FilmData) => {
     const { similarFilms } = store.getState().FILMS;
     try {
-      store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, data: [] }, PromiseState.Pending)));
+      store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, items: [] }, PromiseState.Pending)));
       const { data } = await api.get<Film[]>(`${APIRoute.Films}/${filmId}/similar`);
-      store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, data }, PromiseState.Fulfilled)));
+      store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, items: data }, PromiseState.Fulfilled)));
     } catch (error) {
       store.dispatch(loadSimilarFilms(loadData(similarFilms, PromiseState.Rejected)));
       handleError(error);
@@ -125,9 +125,9 @@ export const fetchComments = createAsyncThunk(
   async ({ filmId }: FilmData) => {
     const { comments } = store.getState().COMMENTS;
     try {
-      store.dispatch(loadComments(loadData({ ...comments, data: [] }, PromiseState.Pending)));
+      store.dispatch(loadComments(loadData({ ...comments, items: [] }, PromiseState.Pending)));
       const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${filmId}`);
-      store.dispatch(loadComments(loadData({ ...comments, data }, PromiseState.Fulfilled)));
+      store.dispatch(loadComments(loadData({ ...comments, items: data }, PromiseState.Fulfilled)));
     } catch (error) {
       store.dispatch(loadComments(loadData(comments, PromiseState.Rejected)));
       handleError(error);
@@ -171,9 +171,9 @@ export const fetchFavorite = createAsyncThunk(
   async () => {
     const { favorite } = store.getState().FAVORITE;
     try {
-      store.dispatch(loadFavorites(loadData({ ...favorite, data: [] }, PromiseState.Pending)));
+      store.dispatch(loadFavorites(loadData({ ...favorite, items: [] }, PromiseState.Pending)));
       const { data } = await api.get(`${APIRoute.Favorite}`);
-      store.dispatch(loadFavorites(loadData({ ...favorite, data }, PromiseState.Fulfilled)));
+      store.dispatch(loadFavorites(loadData({ ...favorite, items: data }, PromiseState.Fulfilled)));
     } catch (error) {
       store.dispatch(loadFavorites(loadData(favorite, PromiseState.Rejected)));
       handleError(error);
