@@ -148,9 +148,15 @@ export const sendComment = createAsyncThunk(
 
 export const addToFavorite = createAsyncThunk(
   'data/addToFavorite',
-  async ({ filmId, status }: FavoriteData) => {
+  async ({ filmId, status, isPromo }: FavoriteData) => {
+    const { film, promo } = store.getState().FILMS;
     try {
-      await api.post(`${APIRoute.Favorite}/${filmId}/${status}`);
+      const { data } = await api.post(`${APIRoute.Favorite}/${filmId}/${status}`);
+      if (isPromo) {
+        store.dispatch(loadPromo(loadData({ ...promo, data }, PromiseState.FULFILLED)));
+      } else {
+        store.dispatch(loadFilm(loadData({ ...film, data }, PromiseState.FULFILLED)));
+      }
     } catch (error) {
       handleError(error);
     }

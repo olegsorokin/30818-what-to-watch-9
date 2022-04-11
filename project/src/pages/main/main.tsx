@@ -71,7 +71,7 @@ function Main(): JSX.Element {
                 </button>
                 {
                   promo.data &&
-                    <FavoriteButton film={promo.data} />
+                    <FavoriteButton film={promo.data} isPromo />
                 }
               </div>
             </div>
