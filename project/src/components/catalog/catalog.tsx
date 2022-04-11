@@ -7,7 +7,7 @@ import { Genre } from '../../types/genre';
 import { useAppSelector } from '../../hooks';
 import { ALL_GENRES } from '../../constants/genre';
 
-function filmsByGenre(films: Film[], genre: Genre) {
+function filterFilmsByGenre(films: Film[], genre: Genre) {
   if (genre === ALL_GENRES) {
     return films;
   }
@@ -33,7 +33,7 @@ function Catalog({ films }: Props) {
 
       <GenresList active={activeGenre} onChange={handleGenreChange} />
 
-      <FilmList films={filmsByGenre(films, activeGenre)} />
+      <FilmList films={filterFilmsByGenre(films, activeGenre)} />
     </section>
   );
 }
