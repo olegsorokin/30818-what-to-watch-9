@@ -7,7 +7,13 @@ import { AppRoute } from '../../constants/routs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, sendComment } from '../../store/api-actions';
 import { LoadingScreen } from '../loading-screen/loading-screen';
-import { DEFAULT_RATING, MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, STARS_ARRAY } from '../../constants/review';
+import {
+  DEFAULT_RATING,
+  MAX_COMMENT_LENGTH,
+  MAX_RATING,
+  MIN_COMMENT_LENGTH,
+  STARS_ARRAY
+} from '../../constants/review';
 
 function AddReview(): JSX.Element {
   const { id: filmId } = useParams();
@@ -56,7 +62,13 @@ function AddReview(): JSX.Element {
     });
   };
 
-  const isReviewTextValid = () => formData.reviewText.length >= MIN_COMMENT_LENGTH && formData.reviewText.length <= MAX_COMMENT_LENGTH;
+  const isReviewTextValid = () => {
+    const rating = parseInt(formData.rating, 10);
+    return rating > 0 &&
+      rating <= MAX_RATING &&
+      formData.reviewText.length >= MIN_COMMENT_LENGTH &&
+      formData.reviewText.length <= MAX_COMMENT_LENGTH;
+  };
 
   return (
     <section className="film-card film-card--full">
@@ -112,6 +124,7 @@ function AddReview(): JSX.Element {
                       value={item}
                       checked={item === formData.rating}
                       onChange={handleFieldChangeEvent}
+                      required
                     />
                     <label className="rating__label" htmlFor={`star-${item}`}>Rating {item}</label>
                   </Fragment>
