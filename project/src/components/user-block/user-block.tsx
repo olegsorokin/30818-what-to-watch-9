@@ -4,12 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute } from '../../constants/routs';
 import { logoutAction } from '../../store/api-actions';
-import { isStatusAuth } from '../../store/selectors';
+import { isStatusAuth, user as userSelector } from '../../store/selectors';
 
 function UserBlock(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector(({ USER }) => USER);
+  const user = useAppSelector(userSelector);
   const isAuth = useAppSelector(isStatusAuth);
 
   const handleLogout = (evt: MouseEvent<HTMLElement>): void => {

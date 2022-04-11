@@ -1,6 +1,7 @@
 import { GenresItem } from '../genres-item/genres-item';
 import { useAppSelector } from '../../hooks';
 import { Genre } from '../../types/genre';
+import { genres as genresSelector } from '../../store/selectors';
 
 type Props = {
   onChange: (genre: Genre) => void;
@@ -8,7 +9,7 @@ type Props = {
 }
 
 function GenresList({ onChange, active }: Props): JSX.Element {
-  const { genres } = useAppSelector(({ FILMS }) => FILMS);
+  const genres = useAppSelector(genresSelector);
 
   return (
     <ul className="catalog__genres-list">

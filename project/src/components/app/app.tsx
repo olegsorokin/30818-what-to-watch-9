@@ -13,10 +13,10 @@ import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
-import { isAppDataLoaded } from '../../store/selectors';
+import { isAppDataLoaded, authorizationStatus as authorizationStatusSelector } from '../../store/selectors';
 
 function App(): JSX.Element {
-  const { authorizationStatus } = useAppSelector(({ USER }) => USER);
+  const authorizationStatus = useAppSelector(authorizationStatusSelector);
   const isAppLoaded = useAppSelector(isAppDataLoaded);
 
   if (!isAppLoaded) {

@@ -7,8 +7,8 @@ import { comments } from './comments/comments';
 import { userProcess } from './user-process/user-process';
 
 export const rootReducer = combineReducers({
-  [NameSpace.FILMS]: films.reducer,
-  [NameSpace.FAVORITE]: favorites.reducer,
-  [NameSpace.COMMENTS]: comments.reducer,
-  [NameSpace.USER]: userProcess.reducer,
+  [NameSpace.Films]: films.reducer,
+  [NameSpace.Favorite]: favorites.reducer,
+  [NameSpace.Comments]: comments.reducer,
+  [NameSpace.User]: userProcess.reducer,
 });

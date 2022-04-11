@@ -12,7 +12,7 @@ export type UserProcessState = {
 
 export type FilmsState = {
   films: {
-    data: Film[];
+    items: Film[];
     isLoading: boolean;
     isLoaded: boolean;
   };
@@ -22,7 +22,7 @@ export type FilmsState = {
     isLoaded: boolean;
   };
   similarFilms: {
-    data: Film[];
+    items: Film[];
     isLoading: boolean;
     isLoaded: boolean;
   };
@@ -36,7 +36,7 @@ export type FilmsState = {
 
 export type CommentsState = {
   comments: {
-    data: Comment[];
+    items: Comment[];
     isLoading: boolean;
     isLoaded: boolean;
   };
@@ -44,7 +44,7 @@ export type CommentsState = {
 
 export type FavoriteState = {
   favorite: {
-    data: Film[];
+    items: Film[];
     isLoading: boolean;
     isLoaded: boolean;
   }
