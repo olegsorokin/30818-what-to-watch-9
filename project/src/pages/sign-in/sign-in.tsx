@@ -1,12 +1,15 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Logo } from '../../components/logo/logo';
 import { useAppDispatch } from '../../hooks';
 import { login } from '../../store/api-actions';
 import { AppRoute } from '../../constants/routs';
+import clsx from 'clsx';
 
 function SignIn(): JSX.Element {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -32,6 +35,8 @@ function SignIn(): JSX.Element {
       });
   };
 
+  const isFormDataValid = () => emailRef.current?.validity.valid && passwordRef.current?.validity.valid;
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -42,9 +47,16 @@ function SignIn(): JSX.Element {
 
       <div className="sign-in user-page__content">
         <form onSubmit={handleFormSubmit} action="#" className="sign-in__form">
+          {
+            !isFormDataValid() &&
+              <div className="sign-in__message">
+                <p>Please enter a valid email address</p>
+              </div>
+          }
           <div className="sign-in__fields">
-            <div className="sign-in__field">
+            <div className={clsx('sign-in__fields', { 'sign-in__field--error': !emailRef.current?.validity.valid })}>
               <input
+                ref={emailRef}
                 value={formData.email}
                 onChange={handleFieldChangeEvent}
                 className="sign-in__input"
@@ -56,8 +68,9 @@ function SignIn(): JSX.Element {
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
-            <div className="sign-in__field">
+            <div className={clsx('sign-in__fields', { 'sign-in__field--error': !passwordRef.current?.validity.valid })}>
               <input
+                ref={passwordRef}
                 value={formData.password}
                 onChange={handleFieldChangeEvent}
                 className="sign-in__input"
