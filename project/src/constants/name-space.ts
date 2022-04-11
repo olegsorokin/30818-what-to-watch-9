@@ -1,6 +1,6 @@
 export enum NameSpace {
-  FILMS = 'FILMS',
-  FAVORITE = 'FAVORITE',
-  COMMENTS = 'COMMENTS',
-  USER = 'USER',
+  Films = 'FILMS',
+  Favorite = 'FAVORITE',
+  Comments = 'COMMENTS',
+  User = 'USER',
 }
