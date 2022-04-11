@@ -1,13 +1,13 @@
 import { Outlet, Route, Routes } from 'react-router-dom';
 
-import { Main } from '../../pages/main/main';
-import { SignIn } from '../../pages/sign-in/sign-in';
-import { MyList } from '../../pages/my-list/my-list';
-import { Film } from '../../pages/film/film';
+import { Main } from '../main/main';
+import { SignIn } from '../sign-in/sign-in';
+import { MyList } from '../my-list/my-list';
+import { Film } from '../film/film';
 import { AddReview } from '../add-review/add-review';
 import { Player } from '../player/player';
 import { PrivateRoute } from '../private-route/private-route';
-import { NotFoundPage } from '../../pages/not-found-page/not-found-page';
+import { NotFoundPage } from '../not-found-page/not-found-page';
 import { AppRoute } from '../../constants/routs';
 import { useAppSelector } from '../../hooks';
 import { LoadingScreen } from '../loading-screen/loading-screen';

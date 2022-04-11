@@ -1,21 +1,22 @@
 import { Film } from '../../types/film';
 import { IconAdd, IconInList } from '../icon';
-import { addToFavorite, fetchPromo } from '../../store/api-actions';
+import { addToFavorite } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks';
 
 type Props = {
   film: Film;
+  isPromo?: boolean;
 }
 
-function FavoriteButton({ film }: Props): JSX.Element {
+function FavoriteButton({ film, isPromo = false }: Props): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleMyPlaylistButtonClick = async () => {
     await dispatch(addToFavorite({
       filmId: Number(film.id),
       status: film.isFavorite ? 0 : 1,
+      isPromo,
     }));
-    await dispatch(fetchPromo());
   };
 
   return (

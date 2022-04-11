@@ -15,7 +15,7 @@ import { dropToken, saveToken } from '../services/token';
 import { loadData } from '../utils/common';
 import { PromiseState } from '../constants/promise-state';
 import { loadUser, requireAuthorization } from './user-process/user-process';
-import { loadFilm, loadFilms, loadPromo, loadSimilarFilms } from './films/films';
+import { loadFilm, loadFilms, loadPromo, loadSimilarFilms, loafGenres } from './films/films';
 import { loadComments } from './comments/comments';
 import { FavoriteData } from '../types/favorite';
 import { loadFavorites } from './favorites/favorites';
@@ -28,7 +28,6 @@ export const checkAuthAction = createAsyncThunk(
       store.dispatch(loadUser(data));
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
-      handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
@@ -43,8 +42,8 @@ export const login = createAsyncThunk(
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(loadUser(data));
     } catch (error) {
-      handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      handleError(error);
     }
   },
 );
@@ -63,21 +62,23 @@ export const logoutAction = createAsyncThunk(
 );
 
 export const fetchFilms = createAsyncThunk(
-  'data/fetchFilms',
+  'films/fetchFilms',
   async () => {
     const { films } = store.getState().FILMS;
     try {
       store.dispatch(loadFilms(loadData({ ...films, data: [] }, PromiseState.PENDING)));
       const { data } = await api.get<Film[]>(APIRoute.Films);
       store.dispatch(loadFilms(loadData({ ...films, data }, PromiseState.FULFILLED)));
+      store.dispatch(loafGenres(data));
     } catch (error) {
+      store.dispatch(loadFilms(loadData(films, PromiseState.REJECTED)));
       handleError(error);
     }
   },
 );
 
 export const fetchSimilarFilms = createAsyncThunk(
-  'data/fetchSimilarFilms',
+  'films/fetchSimilarFilms',
   async ({ filmId }: FilmData) => {
     const { similarFilms } = store.getState().FILMS;
     try {
@@ -85,13 +86,14 @@ export const fetchSimilarFilms = createAsyncThunk(
       const { data } = await api.get<Film[]>(`${APIRoute.Films}/${filmId}/similar`);
       store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadSimilarFilms(loadData(similarFilms, PromiseState.REJECTED)));
       handleError(error);
     }
   },
 );
 
 export const fetchFilm = createAsyncThunk(
-  'data/fetchFilm',
+  'films/fetchFilm',
   async ({ filmId }: FilmData) => {
     const { film } = store.getState().FILMS;
     try {
@@ -99,13 +101,14 @@ export const fetchFilm = createAsyncThunk(
       const { data } = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
       store.dispatch(loadFilm(loadData({ ...film, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadFilm(loadData(film, PromiseState.REJECTED)));
       handleError(error);
     }
   },
 );
 
 export const fetchPromo = createAsyncThunk(
-  'data/fetchPromo',
+  'films/fetchPromo',
   async () => {
     const { promo } = store.getState().FILMS;
     try {
@@ -113,13 +116,14 @@ export const fetchPromo = createAsyncThunk(
       const { data } = await api.get<Film>(APIRoute.Promo);
       store.dispatch(loadPromo(loadData({ ...promo, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadPromo(loadData(promo, PromiseState.REJECTED)));
       handleError(error);
     }
   },
 );
 
 export const fetchComments = createAsyncThunk(
-  'data/fetchComments',
+  'comments/fetchComments',
   async ({ filmId }: FilmData) => {
     const { comments } = store.getState().COMMENTS;
     try {
@@ -127,13 +131,14 @@ export const fetchComments = createAsyncThunk(
       const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${filmId}`);
       store.dispatch(loadComments(loadData({ ...comments, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadComments(loadData(comments, PromiseState.REJECTED)));
       handleError(error);
     }
   },
 );
 
 export const sendComment = createAsyncThunk(
-  'data/sendComment',
+  'comments/sendComment',
   async ({ filmId, comment, rating }: CommentData) => {
     try {
       await api.post(`${APIRoute.Comments}/${filmId}`, { comment, rating });
@@ -147,18 +152,25 @@ export const sendComment = createAsyncThunk(
 );
 
 export const addToFavorite = createAsyncThunk(
-  'data/addToFavorite',
-  async ({ filmId, status }: FavoriteData) => {
+  'favorite/addToFavorite',
+  async ({ filmId, status, isPromo }: FavoriteData) => {
+    const { film, promo } = store.getState().FILMS;
     try {
-      await api.post(`${APIRoute.Favorite}/${filmId}/${status}`);
+      const { data } = await api.post(`${APIRoute.Favorite}/${filmId}/${status}`);
+      if (isPromo) {
+        store.dispatch(loadPromo(loadData({ ...promo, data }, PromiseState.FULFILLED)));
+      } else {
+        store.dispatch(loadFilm(loadData({ ...film, data }, PromiseState.FULFILLED)));
+      }
     } catch (error) {
+      store.dispatch(loadFilm(loadData(film, PromiseState.REJECTED)));
       handleError(error);
     }
   },
 );
 
 export const fetchFavorite = createAsyncThunk(
-  'data/fetchFavorite',
+  'favorite/fetchFavorite',
   async () => {
     const { favorite } = store.getState().FAVORITE;
     try {
@@ -166,6 +178,7 @@ export const fetchFavorite = createAsyncThunk(
       const { data } = await api.get(`${APIRoute.Favorite}`);
       store.dispatch(loadFavorites(loadData({ ...favorite, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadFavorites(loadData(favorite, PromiseState.REJECTED)));
       handleError(error);
     }
   },
