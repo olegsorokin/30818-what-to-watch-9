@@ -73,7 +73,6 @@ function Player(): JSX.Element {
     if (currentFilm && currentVideo) {
       currentVideo.onloadeddata = () => {
         setLoaded(true);
-        setPlaying(true);
         setDuration(currentVideo ? Math.floor(currentVideo.duration) : 0);
       };
     }
