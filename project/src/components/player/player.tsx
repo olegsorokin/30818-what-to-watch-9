@@ -73,6 +73,7 @@ function Player(): JSX.Element {
     if (currentFilm && currentVideo) {
       currentVideo.onloadeddata = () => {
         setLoaded(true);
+        setPlaying(true);
         setDuration(currentVideo ? Math.floor(currentVideo.duration) : 0);
       };
     }
@@ -90,6 +91,7 @@ function Player(): JSX.Element {
         src={currentFilm?.videoLink}
         poster={currentFilm?.previewImage}
         onTimeUpdate={handleTimeUpdateEvent}
+        muted
       />
 
       <button type="button" className="player__exit" onClick={handleExitButtonClick}>Exit</button>
