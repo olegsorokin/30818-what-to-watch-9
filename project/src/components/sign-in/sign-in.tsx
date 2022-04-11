@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Logo } from '../../components/logo/logo';
+import { Logo } from '../logo/logo';
 import { useAppDispatch } from '../../hooks';
 import { login } from '../../store/api-actions';
 import { AppRoute } from '../../constants/routs';

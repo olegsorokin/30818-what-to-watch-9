@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { generatePath, Link, useNavigate, useParams } from 'react-router-dom';
 
-import { Logo } from '../../components/logo/logo';
-import { UserBlock } from '../../components/user-block/user-block';
-import { LoadingScreen } from '../../components/loading-screen/loading-screen';
+import { Logo } from '../logo/logo';
+import { UserBlock } from '../user-block/user-block';
+import { LoadingScreen } from '../loading-screen/loading-screen';
 import { AppRoute } from '../../constants/routs';
-import { SimilarFilms } from '../../components/similar-films/similar-films';
-import { IconPlayS } from '../../components/icon';
+import { SimilarFilms } from '../similar-films/similar-films';
+import { IconPlayS } from '../icon';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilm, fetchSimilarFilms } from '../../store/api-actions';
-import { FilmDescription } from '../../components/film-description/film-description';
-import { FavoriteButton } from '../../components/favorite-button/favorite-button';
+import { FilmDescription } from '../film-description/film-description';
+import { FavoriteButton } from '../favorite-button/favorite-button';
 import { isStatusAuth } from '../../store/selectors';
 
 function Film(): JSX.Element {
