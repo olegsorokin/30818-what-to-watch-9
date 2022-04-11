@@ -26,4 +26,6 @@ export function handleError(error: Error): void {
         break;
     }
   }
+
+  toast.error('Something went wrong!');
 }

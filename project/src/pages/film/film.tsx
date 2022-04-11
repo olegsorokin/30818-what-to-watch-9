@@ -32,26 +32,18 @@ function Film(): JSX.Element {
     }
   }, [dispatch, filmId]);
 
-  if (!film.data || !similarFilms.data) {
+  if (!film.isLoaded || !similarFilms.isLoaded) {
     return (
       <LoadingScreen />
     );
   }
-
-  const {
-    name,
-    genre,
-    released,
-    backgroundImage,
-    posterImage,
-  } = film.data;
 
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={backgroundImage} alt={name} />
+            <img src={film.data?.backgroundImage} alt={film.data?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -64,9 +56,12 @@ function Film(): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{name}</h2>
+              <h2 className="film-card__title">{film.data?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span> <span className="film-card__year">{released}</span>
+                <span className="film-card__genre">{film.data?.genre}</span>
+                <span className="film-card__year">
+                  {film.data?.released}
+                </span>
               </p>
 
               <div className="film-card__buttons">
@@ -74,7 +69,10 @@ function Film(): JSX.Element {
                   <IconPlayS />
                   <span>Play</span>
                 </button>
-                <FavoriteButton film={film.data} />
+                {
+                  film.data &&
+                    <FavoriteButton film={film.data} />
+                }
                 {
                   isAuth &&
                     <Link
@@ -93,12 +91,15 @@ function Film(): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src={posterImage}
-                alt={`${name} poster`}
+                src={film.data?.posterImage}
+                alt={`${film.data?.name} poster`}
               />
             </div>
 
-            <FilmDescription film={film.data} />
+            {
+              film.data &&
+                <FilmDescription film={film.data} />
+            }
           </div>
         </div>
       </section>

@@ -42,8 +42,8 @@ export const login = createAsyncThunk(
       store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
       store.dispatch(loadUser(data));
     } catch (error) {
-      handleError(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      handleError(error);
     }
   },
 );
@@ -71,6 +71,7 @@ export const fetchFilms = createAsyncThunk(
       store.dispatch(loadFilms(loadData({ ...films, data }, PromiseState.FULFILLED)));
       store.dispatch(loafGenres(data));
     } catch (error) {
+      store.dispatch(loadFilms(loadData(films, PromiseState.REJECTED)));
       handleError(error);
     }
   },
@@ -85,6 +86,7 @@ export const fetchSimilarFilms = createAsyncThunk(
       const { data } = await api.get<Film[]>(`${APIRoute.Films}/${filmId}/similar`);
       store.dispatch(loadSimilarFilms(loadData({ ...similarFilms, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadSimilarFilms(loadData(similarFilms, PromiseState.REJECTED)));
       handleError(error);
     }
   },
@@ -99,6 +101,7 @@ export const fetchFilm = createAsyncThunk(
       const { data } = await api.get<Film>(`${APIRoute.Films}/${filmId}`);
       store.dispatch(loadFilm(loadData({ ...film, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadFilm(loadData(film, PromiseState.REJECTED)));
       handleError(error);
     }
   },
@@ -113,6 +116,7 @@ export const fetchPromo = createAsyncThunk(
       const { data } = await api.get<Film>(APIRoute.Promo);
       store.dispatch(loadPromo(loadData({ ...promo, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadPromo(loadData(promo, PromiseState.REJECTED)));
       handleError(error);
     }
   },
@@ -127,6 +131,7 @@ export const fetchComments = createAsyncThunk(
       const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${filmId}`);
       store.dispatch(loadComments(loadData({ ...comments, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadComments(loadData(comments, PromiseState.REJECTED)));
       handleError(error);
     }
   },
@@ -158,6 +163,7 @@ export const addToFavorite = createAsyncThunk(
         store.dispatch(loadFilm(loadData({ ...film, data }, PromiseState.FULFILLED)));
       }
     } catch (error) {
+      store.dispatch(loadFilm(loadData(film, PromiseState.REJECTED)));
       handleError(error);
     }
   },
@@ -172,6 +178,7 @@ export const fetchFavorite = createAsyncThunk(
       const { data } = await api.get(`${APIRoute.Favorite}`);
       store.dispatch(loadFavorites(loadData({ ...favorite, data }, PromiseState.FULFILLED)));
     } catch (error) {
+      store.dispatch(loadFavorites(loadData(favorite, PromiseState.REJECTED)));
       handleError(error);
     }
   },
