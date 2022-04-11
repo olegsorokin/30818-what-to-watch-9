@@ -62,7 +62,7 @@ export const logoutAction = createAsyncThunk(
 );
 
 export const fetchFilms = createAsyncThunk(
-  'data/fetchFilms',
+  'films/fetchFilms',
   async () => {
     const { films } = store.getState().FILMS;
     try {
@@ -78,7 +78,7 @@ export const fetchFilms = createAsyncThunk(
 );
 
 export const fetchSimilarFilms = createAsyncThunk(
-  'data/fetchSimilarFilms',
+  'films/fetchSimilarFilms',
   async ({ filmId }: FilmData) => {
     const { similarFilms } = store.getState().FILMS;
     try {
@@ -93,7 +93,7 @@ export const fetchSimilarFilms = createAsyncThunk(
 );
 
 export const fetchFilm = createAsyncThunk(
-  'data/fetchFilm',
+  'films/fetchFilm',
   async ({ filmId }: FilmData) => {
     const { film } = store.getState().FILMS;
     try {
@@ -108,7 +108,7 @@ export const fetchFilm = createAsyncThunk(
 );
 
 export const fetchPromo = createAsyncThunk(
-  'data/fetchPromo',
+  'films/fetchPromo',
   async () => {
     const { promo } = store.getState().FILMS;
     try {
@@ -123,7 +123,7 @@ export const fetchPromo = createAsyncThunk(
 );
 
 export const fetchComments = createAsyncThunk(
-  'data/fetchComments',
+  'comments/fetchComments',
   async ({ filmId }: FilmData) => {
     const { comments } = store.getState().COMMENTS;
     try {
@@ -138,7 +138,7 @@ export const fetchComments = createAsyncThunk(
 );
 
 export const sendComment = createAsyncThunk(
-  'data/sendComment',
+  'comments/sendComment',
   async ({ filmId, comment, rating }: CommentData) => {
     try {
       await api.post(`${APIRoute.Comments}/${filmId}`, { comment, rating });
@@ -152,7 +152,7 @@ export const sendComment = createAsyncThunk(
 );
 
 export const addToFavorite = createAsyncThunk(
-  'data/addToFavorite',
+  'favorite/addToFavorite',
   async ({ filmId, status, isPromo }: FavoriteData) => {
     const { film, promo } = store.getState().FILMS;
     try {
@@ -170,7 +170,7 @@ export const addToFavorite = createAsyncThunk(
 );
 
 export const fetchFavorite = createAsyncThunk(
-  'data/fetchFavorite',
+  'favorite/fetchFavorite',
   async () => {
     const { favorite } = store.getState().FAVORITE;
     try {
