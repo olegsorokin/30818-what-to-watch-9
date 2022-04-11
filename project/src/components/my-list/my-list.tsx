@@ -6,10 +6,11 @@ import { LoadingScreen } from '../loading-screen/loading-screen';
 import { FilmList } from '../film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavorite } from '../../store/api-actions';
+import { favorite as favoriteSelector } from '../../store/selectors';
 
 function MyList(): JSX.Element {
   const dispatch = useAppDispatch();
-  const { favorite } = useAppSelector(({ FAVORITE }) => FAVORITE);
+  const favorite = useAppSelector(favoriteSelector);
 
   useEffect(() => {
     dispatch(fetchFavorite());

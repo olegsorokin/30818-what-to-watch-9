@@ -14,6 +14,7 @@ import {
   MIN_COMMENT_LENGTH,
   STARS_ARRAY
 } from '../../constants/review';
+import { film as filmSelector } from '../../store/selectors';
 
 function AddReview(): JSX.Element {
   const { id: filmId } = useParams();
@@ -21,7 +22,7 @@ function AddReview(): JSX.Element {
   const navigate = useNavigate();
   const [isSending, setSending] = useState(false);
 
-  const { film } = useAppSelector(({ FILMS }) => FILMS);
+  const film = useAppSelector(filmSelector);
 
   const [formData, setFormData] = useState({
     rating: String(DEFAULT_RATING),

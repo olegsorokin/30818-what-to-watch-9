@@ -4,12 +4,13 @@ import { useParams } from 'react-router-dom';
 import { Review } from '../review/review';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchComments } from '../../store/api-actions';
+import { comments as commentsSelector } from '../../store/selectors';
 
 function FilmReviews(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const { comments } = useAppSelector(({ COMMENTS }) => COMMENTS);
+  const comments = useAppSelector(commentsSelector);
 
   useEffect(() => {
     if (id) {

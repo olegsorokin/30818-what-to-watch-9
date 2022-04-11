@@ -8,13 +8,15 @@ import { AppRoute } from '../../constants/routs';
 import { getCurrentTime, getProgress } from '../../utils/common';
 import { VideoSpinner } from '../video-spinner/video-spinner';
 import { Film } from '../../types/film';
+import { film as filmSelector, promo as promoSelector } from '../../store/selectors';
 
 function Player(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const { id: filmId } = useParams<string>();
-  const { film, promo } = useAppSelector(({ FILMS }) => FILMS);
+  const film = useAppSelector(filmSelector);
+  const promo = useAppSelector(promoSelector);
   const [currentFilm, setCurrentFilm] = useState<Film | null>(null);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setPlaying] = useState(false);
